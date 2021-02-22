@@ -87,6 +87,7 @@ bool SCHOOL::restore(ifstream &file)
 	address = temp;
 
 	// students
+	students.clear();
 	fileGetNumber(file, mapSize);
 	for (size_t i = 0; i < mapSize; i++) {
 		getline(file, currKey);
@@ -96,6 +97,7 @@ bool SCHOOL::restore(ifstream &file)
 	}
 
 	// teachers
+	teachers.clear();
 	fileGetNumber(file, mapSize);
 	for (size_t i = 0; i < mapSize; i++) {
 		getline(file, currKey);
@@ -105,6 +107,7 @@ bool SCHOOL::restore(ifstream &file)
 	}
 
 	// teams
+	teams.clear();
 	fileGetNumber(file, mapSize);
 	for (size_t i = 0; i < mapSize; i++) {
 		fileGetNumber(file, ucurrKey);
