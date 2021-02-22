@@ -2,39 +2,36 @@
 
 #include "structures.h"
 
+#include <iostream>
+
 using namespace std;
 
 bool fileGetNumber(ifstream &file, size_t &x, char delimiter = '\n')
 {
-	size_t out = 0;
 	string raw;
 
-	if (!getline(file, raw, delimiter)) return false;
+	getline(file, raw, delimiter);
 
 	for (size_t i = 0; i < raw.size(); i++) {
-		if (raw[i] < '0' or raw[i] > '9') return false;
-		out += raw[i] - '0';
+		if (raw[i] < '0' or raw[i] > '9') throw runtime_error("Non-digit character encountered");
 	}
 
-	x = out;
+	x = stoull(raw);
 
 	return true;
 }
 
 bool fileGetNumber(ifstream &file, unsigned &x, char delimiter = '\n')
 {
-	unsigned out = 0;
 	string raw;
 
-	if (!getline(file, raw, delimiter)) return false;
+	getline(file, raw, delimiter);
 
 	for (size_t i = 0; i < raw.size(); i++) {
-		if (raw[i] < '0' or raw[i] > '9') return false;
-		out *= 10;
-		out += raw[i] - '0';
+		if (raw[i] < '0' or raw[i] > '9') throw runtime_error("Non-digit character encountered");
 	}
 
-	x = out;
+	x = stoul(raw);
 
 	return true;
 }
@@ -45,17 +42,27 @@ bool restoreSchools(vector<SCHOOL> &schools, string filename)
 	size_t schoolsSize;
 	SCHOOL currSchool;
 
+	file.exceptions(ifstream::failbit | ifstream::badbit);
+
 	if (!file.good()) return false;
 
 	schools.clear();
 
-	if (!fileGetNumber(file, schoolsSize)) return false;
+	try {
+		if (!fileGetNumber(file, schoolsSize)) return false;
 
-	schools.reserve(schoolsSize);
+		schools.reserve(schoolsSize);
 
-	for (size_t i = 0; i < schoolsSize; i++) {
-		if (!currSchool.restore(file)) return false;
-		schools.push_back(currSchool);
+		for (size_t i = 0; i < schoolsSize; i++) {
+			if (!currSchool.restore(file)) return false;
+			schools.push_back(currSchool);
+		}
+	}
+	catch (exception &e) {
+		cout << "Unable to restore from file due to exception" << endl;
+		cerr << "Master restore encountered exception: " << e.what() << endl;
+
+		return false;
 	}
 
 	return true;
@@ -70,38 +77,38 @@ bool SCHOOL::restore(ifstream &file)
 	TEAM currTeam;
 	size_t ucurrKey;
 
-	if (!getline(file, temp)) return false;
+	getline(file, temp);
 	name = temp;
 
-	if (!getline(file, temp)) return false;
+	getline(file, temp);
 	city = temp;
 
-	if (!getline(file, temp)) return false;
+	getline(file, temp);
 	address = temp;
 
 	// students
-	if (!fileGetNumber(file, mapSize)) return false;
+	fileGetNumber(file, mapSize);
 	for (size_t i = 0; i < mapSize; i++) {
-		if (!getline(file, currKey)) return false;
-		if (!currStudent.restore(file)) return false;
+		getline(file, currKey);
+		currStudent.restore(file);
 
 		students.insert({currKey, currStudent});
 	}
 
 	// teachers
-	if (!fileGetNumber(file, mapSize)) return false;
+	fileGetNumber(file, mapSize);
 	for (size_t i = 0; i < mapSize; i++) {
-		if (!getline(file, currKey)) return false;
-		if (!currTeacher.restore(file)) return false;
+		getline(file, currKey);
+		currTeacher.restore(file);
 
 		teachers.insert({currKey, currTeacher});
 	}
 
 	// teams
-	if (!fileGetNumber(file, mapSize)) return false;
+	fileGetNumber(file, mapSize);
 	for (size_t i = 0; i < mapSize; i++) {
-		if (!fileGetNumber(file, ucurrKey)) return false;
-		if (!currTeam.restore(file)) return false;
+		fileGetNumber(file, ucurrKey);
+		currTeam.restore(file);
 
 		teams.insert({ucurrKey, currTeam});
 	}
@@ -114,19 +121,19 @@ bool STUDENT::restore(ifstream &file)
 	string stemp;
 	unsigned utemp;
 
-	if (!getline(file, stemp, ' ')) return false;
+	getline(file, stemp, ' ');
 	firstName = stemp;
 
-	if (!getline(file, stemp)) return false;
+	getline(file, stemp);
 	lastName = stemp;
 
-	if (!getline(file, stemp)) return false;
+	getline(file, stemp);
 	email = stemp;
 
-	if (!fileGetNumber(file, utemp, ' ')) return false;
+	fileGetNumber(file, utemp, ' ');
 	grade = utemp;
 
-	if (!getline(file, stemp)) return false;
+	getline(file, stemp);
 	classLetter = stemp[0];
 
 	return true;
@@ -137,19 +144,19 @@ bool TEACHER::restore(ifstream &file)
 	string stemp;
 	size_t vectorSize, utemp;
 
-	if (!getline(file, stemp, ' ')) return false;
+	getline(file, stemp, ' ');
 	firstName = stemp;
 
-	if (!getline(file, stemp)) return false;
+	getline(file, stemp);
 	lastName = stemp;
 
-	if (!getline(file, stemp)) return false;
+	getline(file, stemp);
 	email = stemp;
 
-	if (!fileGetNumber(file, vectorSize)) return false;
+	fileGetNumber(file, vectorSize);
 	teamIDs.clear();
 	for (size_t i = 0; i < vectorSize; i++) {
-		if (!fileGetNumber(file, utemp)) return false;
+		fileGetNumber(file, utemp);
 		teamIDs.push_back(utemp);
 	}
 
@@ -161,19 +168,19 @@ bool TEAM::restore(ifstream &file)
 	string stemp;
 	size_t vectorSize;
 
-	if (!getline(file, stemp)) return false;
+	getline(file, stemp);
 	name = stemp;
 
-	if (!getline(file, stemp)) return false;
+	getline(file, stemp);
 	description = stemp;
 
-	if (!getline(file, stemp)) return false;
+	getline(file, stemp);
 	setupDate = stemp;
 
-	if (!fileGetNumber(file, vectorSize)) return false;
+	fileGetNumber(file, vectorSize);
 	memberUsernames.clear();
 	for (size_t i = 0; i < vectorSize; i++) {
-		if (!getline(file, stemp)) return false;
+		getline(file, stemp);
 		memberUsernames.push_back(stemp);
 	}
 
