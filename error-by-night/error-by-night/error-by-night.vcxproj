@@ -139,9 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="error-by-night.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="file_io.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="file_io.h" />
     <ClInclude Include="structures.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
