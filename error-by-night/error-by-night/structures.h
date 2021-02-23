@@ -12,6 +12,7 @@ struct STUDENT {
 	char classLetter;
 
 	bool restore(std::ifstream &file);
+	void store(std::ofstream &file) const;
 };
 
 struct TEAM_MEMBER {
@@ -33,6 +34,7 @@ struct TEACHER {
 	std::vector<int> teamIDs;
 
 	bool restore(std::ifstream &file);
+	void store(std::ofstream &file) const;
 };
 
 struct TEAM {
@@ -48,6 +50,7 @@ struct TEAM {
 	STATUS status;
 
 	bool restore(std::ifstream &file);
+	void store(std::ofstream &file) const;
 };
 
 struct SCHOOL {
@@ -59,4 +62,5 @@ struct SCHOOL {
 	std::unordered_map<size_t, TEAM> teams;
 
 	bool restore(std::ifstream &file);
+	void store(std::ofstream &file) const;
 };

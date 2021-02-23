@@ -139,8 +139,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="file_output.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="file_io.cpp" />
+    <ClCompile Include="file_input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="file_io.h" />

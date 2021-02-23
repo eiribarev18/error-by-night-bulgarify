@@ -1,5 +1,4 @@
 #include "file_io.h"
-
 #include "structures.h"
 
 #include <iostream>
@@ -25,7 +24,7 @@ bool fileGetUnsignedNumber(ifstream &file, T &x, char delimiter = '\n', unsigned
 	return true;
 }
 
-bool restoreSchools(vector<SCHOOL> &schools, string filename)
+bool restoreSchools(vector<SCHOOL> &schools, const string &filename)
 {
 	ifstream file(filename);
 	size_t schoolsSize;
