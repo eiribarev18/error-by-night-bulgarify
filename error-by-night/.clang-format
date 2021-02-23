@@ -3,6 +3,7 @@ BasedOnStyle: Microsoft
 AllowShortBlocksOnASingleLine: 'true'
 AllowShortIfStatementsOnASingleLine: WithoutElse
 BreakBeforeBraces: Stroustrup
+ColumnLimit: '0'
 IncludeBlocks: Regroup
 IndentCaseLabels: 'true'
 KeepEmptyLinesAtTheStartOfBlocks: 'false'

@@ -14,6 +14,18 @@ struct STUDENT {
 	bool restore(std::ifstream &file);
 };
 
+struct TEAM_MEMBER {
+	enum ROLE {
+		SCRUM_MASTER,
+		QA_ENGINEER,
+		DEV_BACKEND,
+		DEV_FRONTEND
+	};
+
+	std::string username;
+	ROLE role;
+};
+
 struct TEACHER {
 	std::string firstName;
 	std::string lastName;
@@ -27,7 +39,7 @@ struct TEAM {
 	std::string name;
 	std::string description;
 	std::string setupDate;
-	std::vector<std::string> memberUsernames;
+	std::vector<TEAM_MEMBER> members;
 
 	bool restore(std::ifstream &file);
 };
