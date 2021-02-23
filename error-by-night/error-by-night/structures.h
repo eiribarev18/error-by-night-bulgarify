@@ -36,10 +36,16 @@ struct TEACHER {
 };
 
 struct TEAM {
+	enum STATUS {
+		ACTIVE,
+		ARCHIVED
+	};
+
 	std::string name;
 	std::string description;
 	std::string setupDate;
 	std::vector<TEAM_MEMBER> members;
+	STATUS status;
 
 	bool restore(std::ifstream &file);
 };

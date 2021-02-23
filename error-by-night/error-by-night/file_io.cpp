@@ -8,7 +8,7 @@ using namespace std;
 
 // T must be an unsigned integer type
 template <typename T>
-bool fileGetUnsignedNumber(ifstream &file, T &x, char delimiter = '\n')
+bool fileGetUnsignedNumber(ifstream &file, T &x, char delimiter = '\n', unsigned long long maxValue = -1)
 {
 	string raw;
 
@@ -19,6 +19,8 @@ bool fileGetUnsignedNumber(ifstream &file, T &x, char delimiter = '\n')
 	}
 
 	x = (T)stoull(raw);
+
+	if (x > maxValue) throw out_of_range("Number " + to_string(x) + " is larger than maxValue=" + to_string(maxValue));
 
 	return true;
 }
@@ -172,10 +174,12 @@ bool TEAM::restore(ifstream &file)
 	members.clear();
 	for (size_t i = 0; i < vectorSize; i++) {
 		getline(file, currMember.username, ' ');
-		fileGetUnsignedNumber(file, currMember.role);
+		fileGetUnsignedNumber(file, currMember.role, '\n', 3);
 
 		members.push_back(currMember);
 	}
+
+	fileGetUnsignedNumber(file, status, '\n', 1);
 
 	return true;
 }
