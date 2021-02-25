@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="data_queries.cpp" />
     <ClCompile Include="file_output.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="file_input.cpp" />

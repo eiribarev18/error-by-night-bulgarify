@@ -51,6 +51,8 @@ struct TEAM {
 
 	bool restore(std::ifstream &file);
 	void store(std::ofstream &file) const;
+
+	std::vector<std::string> getMembers() const;
 };
 
 struct SCHOOL {
@@ -63,4 +65,6 @@ struct SCHOOL {
 
 	bool restore(std::ifstream &file);
 	void store(std::ofstream &file) const;
+
+	std::vector<std::string> getTeachersWithoutTeam() const;
 };

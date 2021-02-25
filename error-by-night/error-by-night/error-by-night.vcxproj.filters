@@ -24,6 +24,9 @@
     <ClCompile Include="file_output.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="data_queries.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="structures.h">

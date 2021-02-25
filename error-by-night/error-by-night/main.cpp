@@ -10,5 +10,6 @@ int main()
 	vector<SCHOOL> schools;
 
 	restoreSchools(schools, "backup.txt");
-	storeSchools(schools, "backup.txt");
+
+	//storeSchools(schools, "backup.txt");
 }
