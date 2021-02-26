@@ -70,4 +70,8 @@ struct SCHOOL {
 
 	bool addStudent(const STUDENT &student, const std::string &username);
 	bool deleteStudent(const std::string &username);
+	bool addTeacher(const TEACHER &teacher, const std::string &username);
+	bool deleteTeacher(const std::string &username);
+	bool addTeam(const TEAM &team, size_t id);
+	bool deleteTeam(size_t id);
 };

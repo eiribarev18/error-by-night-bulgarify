@@ -39,3 +39,23 @@ bool SCHOOL::deleteStudent(const string &username)
 {
 	return students.erase(username);
 }
+
+bool SCHOOL::addTeacher(const TEACHER &teacher, const string &username)
+{
+	return teachers.insert({username, teacher}).second;
+}
+
+bool SCHOOL::deleteTeacher(const string &username)
+{
+	return teachers.erase(username);
+}
+
+bool SCHOOL::addTeam(const TEAM &team, size_t id)
+{
+	return teams.insert({id, team}).second;
+}
+
+bool SCHOOL::deleteTeam(size_t id)
+{
+	return teams.erase(id);
+}
