@@ -29,3 +29,13 @@ bool deleteSchool(vector<SCHOOL> &schools, const string &name)
 
 	return true;
 }
+
+bool SCHOOL::addStudent(const STUDENT &student, const string &username)
+{
+	return students.insert({username, student}).second;
+}
+
+bool SCHOOL::deleteStudent(const string &username)
+{
+	return students.erase(username);
+}

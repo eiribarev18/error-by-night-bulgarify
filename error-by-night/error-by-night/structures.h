@@ -67,4 +67,7 @@ struct SCHOOL {
 	void store(std::ofstream &file) const;
 
 	std::vector<std::string> getTeachersWithoutTeam() const;
+
+	bool addStudent(const STUDENT &student, const std::string &username);
+	bool deleteStudent(const std::string &username);
 };
