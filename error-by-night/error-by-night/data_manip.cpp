@@ -59,3 +59,13 @@ bool SCHOOL::deleteTeam(size_t id)
 {
 	return teams.erase(id);
 }
+
+bool SCHOOL::addProject(const PROJECT &project, const string &id)
+{
+	return projects.insert({id, project}).second;
+}
+
+bool SCHOOL::deleteProject(const string &id)
+{
+	return projects.erase(id);
+}

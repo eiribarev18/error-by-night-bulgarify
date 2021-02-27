@@ -19,7 +19,7 @@ bool fileGetUnsignedNumber(ifstream &file, T &x, char delimiter = '\n', unsigned
 
 	x = (T)stoull(raw);
 
-	if (x > maxValue) throw out_of_range("Number " + to_string(x) + " is larger than maxValue=" + to_string(maxValue));
+	if ((unsigned long long)x > maxValue) throw out_of_range("Number " + to_string((unsigned long long)x) + " is larger than maxValue=" + to_string(maxValue));
 
 	return true;
 }
@@ -63,6 +63,7 @@ bool SCHOOL::restore(ifstream &file)
 	STUDENT currStudent;
 	TEACHER currTeacher;
 	TEAM currTeam;
+	PROJECT currProject;
 	size_t ucurrKey;
 
 	getline(file, temp);
@@ -102,6 +103,16 @@ bool SCHOOL::restore(ifstream &file)
 		currTeam.restore(file);
 
 		teams.insert({ucurrKey, currTeam});
+	}
+
+	// projects
+	projects.clear();
+	fileGetUnsignedNumber(file, mapSize);
+	for (size_t i = 0; i < mapSize; i++) {
+		getline(file, currKey);
+		currProject.restore(file);
+
+		projects.insert({currKey, currProject});
 	}
 
 	return true;
@@ -179,6 +190,27 @@ bool TEAM::restore(ifstream &file)
 	}
 
 	fileGetUnsignedNumber(file, status, '\n', 1);
+	getline(file, project);
+
+	return true;
+}
+
+bool PROJECT::restore(ifstream &file)
+{
+	size_t vectorSize, utemp;
+
+	getline(file, name);
+	getline(file, description, '|');
+	file.ignore();
+	fileGetUnsignedNumber(file, status, '\n', 1);
+
+	fileGetUnsignedNumber(file, vectorSize);
+	teams.clear();
+	for (size_t i = 0; i < vectorSize; i++) {
+		fileGetUnsignedNumber(file, utemp);
+
+		teams.push_back(utemp);
+	}
 
 	return true;
 }

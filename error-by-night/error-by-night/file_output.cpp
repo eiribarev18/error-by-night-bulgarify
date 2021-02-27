@@ -54,6 +54,13 @@ void SCHOOL::store(ofstream &file) const
 		file << it->first << '\n';
 		it->second.store(file);
 	}
+
+	// projects
+	file << projects.size() << '\n';
+	for (auto it = projects.begin(); it != projects.end(); it++) {
+		file << it->first << '\n';
+		it->second.store(file);
+	}
 }
 
 void STUDENT::store(ofstream &file) const
@@ -85,5 +92,18 @@ void TEAM::store(ofstream &file) const
 		file << it->username << ' ' << it->role << '\n';
 	}
 
-	file << status << '\n';
+	file << (unsigned)status << '\n'
+		 << project << '\n';
+}
+
+void PROJECT::store(ofstream &file) const
+{
+	file << name << '\n'
+		 << description << "|\n"
+		 << (unsigned)status << '\n';
+
+	file << teams.size() << '\n';
+	for (auto it = teams.begin(); it != teams.end(); it++) {
+		file << *it << '\n';
+	}
 }
