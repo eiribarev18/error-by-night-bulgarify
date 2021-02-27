@@ -66,14 +66,9 @@ bool SCHOOL::restore(ifstream &file)
 	PROJECT currProject;
 	size_t ucurrKey;
 
-	getline(file, temp);
-	name = temp;
-
-	getline(file, temp);
-	city = temp;
-
-	getline(file, temp);
-	address = temp;
+	getline(file, name);
+	getline(file, city);
+	getline(file, address);
 
 	// students
 	students.clear();
@@ -121,19 +116,11 @@ bool SCHOOL::restore(ifstream &file)
 bool STUDENT::restore(ifstream &file)
 {
 	string stemp;
-	unsigned utemp;
 
-	getline(file, stemp, ' ');
-	firstName = stemp;
-
-	getline(file, stemp);
-	lastName = stemp;
-
-	getline(file, stemp);
-	email = stemp;
-
-	fileGetUnsignedNumber(file, utemp, ' ');
-	grade = utemp;
+	getline(file, firstName, ' ');
+	getline(file, lastName);
+	getline(file, email);
+	fileGetUnsignedNumber(file, grade, ' ');
 
 	getline(file, stemp);
 	classLetter = stemp[0];
@@ -143,17 +130,11 @@ bool STUDENT::restore(ifstream &file)
 
 bool TEACHER::restore(ifstream &file)
 {
-	string stemp;
 	size_t vectorSize, utemp;
 
-	getline(file, stemp, ' ');
-	firstName = stemp;
-
-	getline(file, stemp);
-	lastName = stemp;
-
-	getline(file, stemp);
-	email = stemp;
+	getline(file, firstName, ' ');
+	getline(file, lastName);
+	getline(file, email);
 
 	fileGetUnsignedNumber(file, vectorSize);
 	teamIDs.clear();
@@ -167,18 +148,12 @@ bool TEACHER::restore(ifstream &file)
 
 bool TEAM::restore(ifstream &file)
 {
-	string stemp;
 	size_t vectorSize;
 	TEAM_MEMBER currMember;
 
-	getline(file, stemp);
-	name = stemp;
-
-	getline(file, stemp);
-	description = stemp;
-
-	getline(file, stemp);
-	setupDate = stemp;
+	getline(file, name);
+	getline(file, description);
+	getline(file, setupDate);
 
 	fileGetUnsignedNumber(file, vectorSize);
 	members.clear();
