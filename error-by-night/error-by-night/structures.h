@@ -1,4 +1,5 @@
 #pragma once
+
 #include <fstream>
 #include <string>
 #include <unordered_map>
@@ -20,6 +21,19 @@ struct STUDENT {
 	void store(std::ofstream &file) const;
 };
 
+struct TEACHER {
+	std::string firstName;
+	std::string lastName;
+	std::string email;
+	std::vector<size_t> teamIDs;
+
+	bool restore(std::ifstream &file);
+	void store(std::ofstream &file) const;
+
+	bool addTeam(size_t id);
+	bool deleteTeam(size_t id);
+};
+
 struct TEAM_MEMBER {
 	enum ROLE {
 		SCRUM_MASTER,
@@ -30,16 +44,6 @@ struct TEAM_MEMBER {
 
 	std::string username;
 	ROLE role;
-};
-
-struct TEACHER {
-	std::string firstName;
-	std::string lastName;
-	std::string email;
-	std::vector<int> teamIDs;
-
-	bool restore(std::ifstream &file);
-	void store(std::ofstream &file) const;
 };
 
 struct TEAM {
@@ -54,6 +58,9 @@ struct TEAM {
 	void store(std::ofstream &file) const;
 
 	std::vector<std::string> getMembers() const;
+
+	bool addMember(const TEAM_MEMBER &member);
+	bool deleteMember(const std::string &username);
 };
 
 struct PROJECT {
@@ -64,6 +71,9 @@ struct PROJECT {
 
 	bool restore(std::ifstream &file);
 	void store(std::ofstream &file) const;
+
+	bool addTeam(size_t id);
+	bool deleteTeam(size_t id);
 };
 
 struct SCHOOL {
