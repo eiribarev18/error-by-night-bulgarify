@@ -25,13 +25,10 @@ struct TEACHER {
 	std::string firstName;
 	std::string lastName;
 	std::string email;
-	std::vector<size_t> teamIDs;
+	std::vector<size_t> teams;
 
 	bool restore(std::ifstream &file);
 	void store(std::ofstream &file) const;
-
-	bool addTeam(size_t id);
-	bool deleteTeam(size_t id);
 };
 
 struct TEAM_MEMBER {
@@ -58,9 +55,6 @@ struct TEAM {
 	void store(std::ofstream &file) const;
 
 	std::vector<std::string> getMembers() const;
-
-	bool addMember(const TEAM_MEMBER &member);
-	bool deleteMember(const std::string &username);
 };
 
 struct PROJECT {
@@ -71,9 +65,6 @@ struct PROJECT {
 
 	bool restore(std::ifstream &file);
 	void store(std::ofstream &file) const;
-
-	bool addTeam(size_t id);
-	bool deleteTeam(size_t id);
 };
 
 struct SCHOOL {
@@ -89,13 +80,6 @@ struct SCHOOL {
 	void store(std::ofstream &file) const;
 
 	std::vector<std::string> getTeachersWithoutTeam() const;
-
-	bool addStudent(const STUDENT &student, const std::string &username);
-	bool deleteStudent(const std::string &username);
-	bool addTeacher(const TEACHER &teacher, const std::string &username);
-	bool deleteTeacher(const std::string &username);
-	bool addTeam(const TEAM &team, size_t id);
-	bool deleteTeam(size_t id);
-	bool addProject(const PROJECT &project, const std::string &id);
-	bool deleteProject(const std::string &id);
 };
+
+bool operator==(const TEAM_MEMBER &lhs, const TEAM_MEMBER &rhs);

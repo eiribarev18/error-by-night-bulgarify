@@ -44,7 +44,7 @@ bool restoreSchools(vector<SCHOOL> &schools, const string &filename)
 
 		for (size_t i = 0; i < schoolsSize; i++) {
 			if (!currSchool.restore(file)) return false;
-			addSchool(schools, currSchool);
+			addElement(schools, currSchool);
 		}
 	}
 	catch (exception &e) {
@@ -78,7 +78,7 @@ bool SCHOOL::restore(ifstream &file)
 		getline(file, currKey);
 		currStudent.restore(file);
 
-		addStudent(currStudent, currKey);
+		addElement(students, currKey, currStudent);
 	}
 
 	// teachers
@@ -88,7 +88,7 @@ bool SCHOOL::restore(ifstream &file)
 		getline(file, currKey);
 		currTeacher.restore(file);
 
-		addTeacher(currTeacher, currKey);
+		addElement(teachers, currKey, currTeacher);
 	}
 
 	// teams
@@ -98,7 +98,7 @@ bool SCHOOL::restore(ifstream &file)
 		fileGetUnsignedNumber(file, ucurrKey);
 		currTeam.restore(file);
 
-		addTeam(currTeam, ucurrKey);
+		addElement(teams, ucurrKey, currTeam);
 	}
 
 	// projects
@@ -108,7 +108,7 @@ bool SCHOOL::restore(ifstream &file)
 		getline(file, currKey);
 		currProject.restore(file);
 
-		addProject(currProject, currKey);
+		addElement(projects, currKey, currProject);
 	}
 
 	return true;
@@ -138,11 +138,11 @@ bool TEACHER::restore(ifstream &file)
 	getline(file, email);
 
 	fileGetUnsignedNumber(file, vectorSize);
-	teamIDs.clear();
+	teams.clear();
 	for (size_t i = 0; i < vectorSize; i++) {
 		fileGetUnsignedNumber(file, utemp);
 
-		addTeam(utemp);
+		addElement(teams, utemp);
 	}
 
 	return true;
@@ -163,7 +163,7 @@ bool TEAM::restore(ifstream &file)
 		getline(file, currMember.username, ' ');
 		fileGetUnsignedNumber(file, currMember.role, '\n', 3);
 
-		addMember(currMember);
+		addElement(members, currMember);
 	}
 
 	fileGetUnsignedNumber(file, status, '\n', 1);
@@ -186,7 +186,7 @@ bool PROJECT::restore(ifstream &file)
 	for (size_t i = 0; i < vectorSize; i++) {
 		fileGetUnsignedNumber(file, utemp);
 
-		addTeam(utemp);
+		addElement(teams, utemp);
 	}
 
 	return true;

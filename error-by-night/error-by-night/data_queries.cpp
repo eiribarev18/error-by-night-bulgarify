@@ -7,7 +7,7 @@ vector<string> SCHOOL::getTeachersWithoutTeam() const
 	vector<string> out;
 
 	for (auto it = teachers.begin(); it != teachers.end(); it++) {
-		if (it->second.teamIDs.empty()) out.push_back(it->first);
+		if (it->second.teams.empty()) out.push_back(it->first);
 	}
 
 	return out;

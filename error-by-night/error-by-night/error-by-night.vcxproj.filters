@@ -30,6 +30,9 @@
     <ClCompile Include="data_manip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="operators.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="structures.h">

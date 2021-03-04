@@ -75,8 +75,8 @@ void TEACHER::store(ofstream &file) const
 	file << firstName << ' ' << lastName << '\n'
 		 << email << '\n';
 
-	file << teamIDs.size() << '\n';
-	for (auto it = teamIDs.begin(); it != teamIDs.end(); it++) {
+	file << teams.size() << '\n';
+	for (auto it = teams.begin(); it != teams.end(); it++) {
 		file << *it << '\n';
 	}
 }
