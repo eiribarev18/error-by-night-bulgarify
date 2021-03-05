@@ -1,3 +1,4 @@
+#include "console_io.h"
 #include "data_manip.h"
 #include "file_io.h"
 #include "structures.h"
@@ -10,7 +11,5 @@ int main()
 {
 	vector<SCHOOL> schools;
 
-	restoreSchools(schools, "backup.txt");
-
-	//storeSchools(schools, "backup.txt");
+	menuDriverMain(schools);
 }

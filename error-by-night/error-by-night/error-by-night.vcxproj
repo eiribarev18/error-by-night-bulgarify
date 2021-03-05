@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="console_io.cpp" />
     <ClCompile Include="data_manip.cpp" />
     <ClCompile Include="data_queries.cpp" />
     <ClCompile Include="file_output.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="operators.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="console_io.h" />
     <ClInclude Include="data_manip.h" />
     <ClInclude Include="file_io.h" />
     <ClInclude Include="structures.h" />

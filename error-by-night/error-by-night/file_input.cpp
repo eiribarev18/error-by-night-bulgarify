@@ -6,25 +6,6 @@
 
 using namespace std;
 
-// T must be an unsigned integer type
-template <typename T>
-bool getUnsignedNumber(istream &file, T &x, char delimiter = '\n', unsigned long long maxValue = -1)
-{
-	string raw;
-
-	getline(file, raw, delimiter);
-
-	for (size_t i = 0; i < raw.size(); i++) {
-		if (raw[i] < '0' or raw[i] > '9') throw runtime_error("Non-digit character encountered");
-	}
-
-	x = (T)stoull(raw);
-
-	if ((unsigned long long)x > maxValue) throw out_of_range("Number " + to_string((unsigned long long)x) + " is larger than maxValue=" + to_string(maxValue));
-
-	return true;
-}
-
 bool restoreSchools(vector<SCHOOL> &schools, const string &filename)
 {
 	ifstream file(filename);
