@@ -1,6 +1,6 @@
+#include "data_manip.h"
 #include "file_io.h"
 #include "structures.h"
-#include "data_manip.h"
 
 #include <iostream>
 
@@ -28,7 +28,7 @@ bool storeSchools(const vector<SCHOOL> &schools, const string &filename)
 	return true;
 }
 
-void SCHOOL::store(ofstream &file) const
+void SCHOOL::store(ostream &file) const
 {
 	file << name << '\n'
 		 << city << '\n'
@@ -63,14 +63,14 @@ void SCHOOL::store(ofstream &file) const
 	}
 }
 
-void STUDENT::store(ofstream &file) const
+void STUDENT::store(ostream &file) const
 {
 	file << firstName << ' ' << lastName << '\n'
 		 << email << '\n'
 		 << grade << ' ' << classLetter << '\n';
 }
 
-void TEACHER::store(ofstream &file) const
+void TEACHER::store(ostream &file) const
 {
 	file << firstName << ' ' << lastName << '\n'
 		 << email << '\n';
@@ -81,7 +81,7 @@ void TEACHER::store(ofstream &file) const
 	}
 }
 
-void TEAM::store(ofstream &file) const
+void TEAM::store(ostream &file) const
 {
 	file << name << '\n'
 		 << description << '\n'
@@ -96,7 +96,7 @@ void TEAM::store(ofstream &file) const
 		 << project << '\n';
 }
 
-void PROJECT::store(ofstream &file) const
+void PROJECT::store(ostream &file) const
 {
 	file << name << '\n'
 		 << description << "|\n"

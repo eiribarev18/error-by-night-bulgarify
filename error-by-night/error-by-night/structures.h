@@ -17,8 +17,8 @@ struct STUDENT {
 	unsigned grade;
 	char classLetter;
 
-	bool restore(std::ifstream &file);
-	void store(std::ofstream &file) const;
+	bool restore(std::istream &file);
+	void store(std::ostream &file) const;
 };
 
 struct TEACHER {
@@ -27,8 +27,8 @@ struct TEACHER {
 	std::string email;
 	std::vector<size_t> teams;
 
-	bool restore(std::ifstream &file);
-	void store(std::ofstream &file) const;
+	bool restore(std::istream &file);
+	void store(std::ostream &file) const;
 };
 
 struct TEAM_MEMBER {
@@ -51,8 +51,8 @@ struct TEAM {
 	STATUS status;
 	std::string project;
 
-	bool restore(std::ifstream &file);
-	void store(std::ofstream &file) const;
+	bool restore(std::istream &file);
+	void store(std::ostream &file) const;
 
 	std::vector<std::string> getMembers() const;
 };
@@ -63,8 +63,8 @@ struct PROJECT {
 	std::vector<size_t> teams;
 	STATUS status;
 
-	bool restore(std::ifstream &file);
-	void store(std::ofstream &file) const;
+	bool restore(std::istream &file);
+	void store(std::ostream &file) const;
 };
 
 struct SCHOOL {
@@ -76,8 +76,8 @@ struct SCHOOL {
 	std::unordered_map<size_t, TEAM> teams;
 	std::unordered_map<std::string, PROJECT> projects;
 
-	bool restore(std::ifstream &file);
-	void store(std::ofstream &file) const;
+	bool restore(std::istream &file);
+	void store(std::ostream &file) const;
 
 	std::vector<std::string> getTeachersWithoutTeam() const;
 };
