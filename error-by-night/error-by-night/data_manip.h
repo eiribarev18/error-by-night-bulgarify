@@ -41,3 +41,27 @@ bool deleteElement(std::unordered_map<KEY, T> &m, const KEY &key)
 {
 	return m.erase(key);
 }
+
+template <typename T>
+T &dereferenceElement(const std::vector<T> &v, typename std::vector<T>::iterator it)
+{
+	return *it;
+}
+
+template <typename T>
+const T &dereferenceElement(const std::vector<T> &v, typename std::vector<T>::const_iterator it)
+{
+	return *it;
+}
+
+template <typename KEY, typename T>
+T &dereferenceElement(const std::unordered_map<KEY, T> &m, typename std::unordered_map<KEY, T>::iterator it)
+{
+	return it->second;
+}
+
+template <typename KEY, typename T>
+const T &dereferenceElement(const std::unordered_map<KEY, T> &m, typename std::unordered_map<KEY, T>::const_iterator it)
+{
+	return it->second;
+}

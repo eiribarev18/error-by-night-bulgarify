@@ -1,5 +1,6 @@
 #include "file_io.h"
 #include "structures.h"
+#include "data_manip.h"
 
 #include <iostream>
 
@@ -15,11 +16,10 @@ bool storeSchools(const vector<SCHOOL> &schools, const string &filename)
 		file << schools.size() << '\n';
 
 		for (auto it = schools.begin(); it != schools.end(); it++) {
-			it->store(file);
+			dereferenceElement(schools, it).store(file);
 		}
 	}
 	catch (exception &e) {
-		cout << "Unable to store to file due to exception" << endl;
 		cerr << "Master store encountered exception: " << e.what() << endl;
 
 		return false;

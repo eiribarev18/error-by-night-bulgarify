@@ -48,7 +48,6 @@ bool restoreSchools(vector<SCHOOL> &schools, const string &filename)
 		}
 	}
 	catch (exception &e) {
-		cout << "Unable to restore from file due to exception" << endl;
 		cerr << "Master restore encountered exception: " << e.what() << endl;
 
 		return false;
