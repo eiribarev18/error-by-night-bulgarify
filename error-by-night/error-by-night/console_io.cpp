@@ -92,3 +92,24 @@ void menuStore(const vector<SCHOOL> &schools)
 
 	storeSchools(schools, "backup");
 }
+
+void menuEditName(SCHOOL &school)
+{
+	cout << "Current name: " << school.name << endl;
+	cout << "Enter new school name: ";
+	getline(cin, school.name);
+};
+
+void menuEditCity(SCHOOL &school)
+{
+	cout << "Current city: " << school.city << endl;
+	cout << "Enter new school city: ";
+	getline(cin, school.city);
+};
+
+void menuEditAddress(SCHOOL &school)
+{
+	cout << "Current address: " << school.address << endl;
+	cout << "Enter new school address: ";
+	getline(cin, school.address);
+};

@@ -7,3 +7,6 @@ void menuDriverMain(std::vector<SCHOOL> &schools);
 bool menuMain(std::vector<SCHOOL> &schools);
 void menuRestore(std::vector<SCHOOL> &schools);
 void menuStore(const std::vector<SCHOOL> &schools);
+void menuEditName(SCHOOL &schools);
+void menuEditCity(SCHOOL &schools);
+void menuEditAddress(SCHOOL &schools);
