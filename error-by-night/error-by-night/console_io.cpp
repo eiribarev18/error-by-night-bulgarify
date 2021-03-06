@@ -1,7 +1,10 @@
 #include "console_io.h"
 
+#include "data_manip.h"
 #include "file_io.h"
 
+#include <cmath>
+#include <iomanip>
 #include <iostream>
 
 using namespace std;
@@ -43,8 +46,10 @@ bool menuMain(vector<SCHOOL> &schools)
 
 	switch (choice) {
 		case 1:
+			selectSchool(schools);
 			break;
 		case 2:
+			listSchools(schools);
 			break;
 		case 3:
 			break;
@@ -61,6 +66,92 @@ bool menuMain(vector<SCHOOL> &schools)
 	}
 
 	return true;
+}
+
+void selectSchool(vector<SCHOOL> &schools)
+{
+	size_t choice;
+
+	if (schools.empty()) {
+		cout << "There are currently no schools." << endl;
+		return;
+	}
+
+	listSchools(schools);
+
+	getMenuChoice(choice, schools.size());
+
+	menuDriverSchool(dereferenceElement(schools, schools.begin() + (choice - 1)));
+}
+
+void listSchools(const vector<SCHOOL> &schools)
+{
+	ios initialState(nullptr);
+
+	size_t colNoWidth, colNameWidth, colCityWidth, colAddressWidth, colStudentsWidth, colTeachersWidth, colTeamsWidth, colProjectsWidth;
+	SCHOOL currSchool;
+	string labelNo, labelName, labelCity, labelAddress, labelStudents, labelTeachers, labelTeams, labelProjects;
+
+	if (schools.empty()) {
+		cout << "There are currently no schools." << endl;
+		return;
+	}
+
+	initialState.copyfmt(cout);
+
+	labelNo = "No.";
+	labelName = "Name";
+	labelCity = "City";
+	labelAddress = "Address";
+	labelStudents = "Students";
+	labelTeachers = "Teachers";
+	labelTeams = "Teams";
+	labelProjects = "Projects";
+
+	colNoWidth = max((size_t)ceil(log10(schools.size())), labelNo.size()) + 1;
+	colNameWidth = labelName.size();
+	colCityWidth = labelCity.size();
+	colAddressWidth = labelAddress.size();
+	colStudentsWidth = labelStudents.size() + 1;
+	colTeachersWidth = labelTeachers.size() + 1;
+	colTeamsWidth = labelTeams.size() + 1;
+	colProjectsWidth = labelProjects.size() + 1;
+
+	for (auto it = schools.begin(); it != schools.end(); it++) {
+		currSchool = dereferenceElement(schools, it);
+
+		colNameWidth = max(colNameWidth, currSchool.name.size());
+		colCityWidth = max(colCityWidth, currSchool.city.size());
+		colAddressWidth = max(colAddressWidth, currSchool.address.size());
+	}
+
+	colNameWidth++;
+	colCityWidth++;
+	colAddressWidth++;
+
+	cout << left << setw(colNoWidth) << labelNo
+		 << setw(colNameWidth) << labelName
+		 << setw(colCityWidth) << labelCity
+		 << setw(colAddressWidth) << labelAddress
+		 << setw(colStudentsWidth) << labelStudents
+		 << setw(colTeachersWidth) << labelTeachers
+		 << setw(colTeamsWidth) << labelTeams
+		 << setw(colProjectsWidth) << labelProjects << endl;
+
+	cout << string(colNoWidth + colNameWidth + colCityWidth + colAddressWidth + colStudentsWidth + colTeachersWidth + colTeamsWidth + colProjectsWidth, '-') << endl;
+
+	for (size_t i = 0; i < schools.size(); i++) {
+		cout << left << setw(colNoWidth) << i + 1
+			 << setw(colNameWidth) << schools[i].name
+			 << setw(colCityWidth) << schools[i].city
+			 << setw(colAddressWidth) << schools[i].address
+			 << setw(colStudentsWidth) << schools[i].students.size()
+			 << setw(colTeachersWidth) << schools[i].teachers.size()
+			 << setw(colTeamsWidth) << schools[i].teams.size()
+			 << setw(colProjectsWidth) << schools[i].projects.size() << endl;
+	}
+
+	cout.copyfmt(initialState);
 }
 
 void menuRestore(vector<SCHOOL> &schools)
@@ -93,6 +184,11 @@ void menuStore(const vector<SCHOOL> &schools)
 	storeSchools(schools, "backup");
 }
 
+void menuDriverSchool(SCHOOL &school)
+{
+	while (menuSchool(school)) {};
+}
+
 bool menuSchool(SCHOOL &school)
 {
 	size_t choice;
@@ -101,7 +197,7 @@ bool menuSchool(SCHOOL &school)
 									"Select teacher", "List teacher",
 									"Select team", "List team",
 									"Select project", "List project",
-									"Quit"};
+									"Back to schools"};
 
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
