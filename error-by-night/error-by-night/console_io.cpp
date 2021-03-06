@@ -98,18 +98,39 @@ void menuEditName(SCHOOL &school)
 	cout << "Current name: " << school.name << endl;
 	cout << "Enter new school name: ";
 	getline(cin, school.name);
-};
+}
 
 void menuEditCity(SCHOOL &school)
 {
 	cout << "Current city: " << school.city << endl;
 	cout << "Enter new school city: ";
 	getline(cin, school.city);
-};
+}
 
 void menuEditAddress(SCHOOL &school)
 {
 	cout << "Current address: " << school.address << endl;
 	cout << "Enter new school address: ";
 	getline(cin, school.address);
-};
+}
+
+void menuEditFirstName(TEACHER &teacher)
+{
+	cout << "Current first name: " << teacher.firstName << endl;
+	cout << "Enter new first name: ";
+	getline(cin, teacher.firstName);
+}
+
+void menuEditLastName(TEACHER &teacher)
+{
+	cout << "Current last name: " << teacher.lastName << endl;
+	cout << "Enter new last name: ";
+	getline(cin, teacher.lastName);
+}
+
+void menuEditEmail(TEACHER &teacher)
+{
+	cout << "Current email: " << teacher.email << endl;
+	cout << "Enter new email: ";
+	getline(cin, teacher.email);
+}
