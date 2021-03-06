@@ -30,7 +30,13 @@
     <ClCompile Include="data_manip.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="operators.cpp">
+    <ClCompile Include="utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="console_io.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="listTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="data_manip.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="console_io.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

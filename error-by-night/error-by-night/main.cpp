@@ -11,5 +11,5 @@ int main()
 {
 	vector<SCHOOL> schools;
 
-	menuDriverMain(schools);
+	menuDriver(schools);
 }
