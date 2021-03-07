@@ -11,7 +11,9 @@ void listTable(const std::unordered_map<size_t, TEAM> &teams, const SCHOOL &pare
 void listTable(const std::unordered_map<std::string, PROJECT> &projects, const SCHOOL &parentSchool);
 void listTable(const std::vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool);
 
-void getMenuChoice(size_t &choice, size_t optionCount);
+void listTable(const std::vector<size_t> &keys, const std::unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSchool);
+
+void getMenuChoice(size_t &choice, size_t maxValue, size_t minValue = 1);
 
 bool menu(std::vector<SCHOOL> &schools);
 
@@ -21,25 +23,23 @@ void menuStore(const std::vector<SCHOOL> &schools);
 
 bool menu(SCHOOL &school);
 
-void menuEditName(SCHOOL &school);
 void menuEditCity(SCHOOL &school);
 void menuEditAddress(SCHOOL &school);
 
 bool menu(STUDENT &student, const SCHOOL &parentSchool);
 
-void menuEditFirstName(STUDENT &student);
-void menuEditLastName(STUDENT &student);
-void menuEditEmail(STUDENT &student);
+void menuEditClass(STUDENT &student);
+bool getStudentClass(unsigned &grade, char &classLetter);
 
 bool menu(TEACHER &teacher, const SCHOOL &parentSchool);
-
-void menuEditFirstName(TEACHER &teacher);
-void menuEditLastName(TEACHER &teacher);
-void menuEditEmail(TEACHER &teacher);
 
 bool menu(TEAM &team, const SCHOOL &parentSchool);
 
 bool menu(PROJECT &project, const SCHOOL &parentSchool);
+
+bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool);
+
+void menuEditRole(TEAM_MEMBER &member);
 
 template <typename T>
 void menuDriver(T &element)
@@ -91,5 +91,77 @@ void menuSelect(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
 
 	getMenuChoice(choice, m.size());
 
-	menuDriver(dereferenceElement(m, m.find(*keys[choice - 1])), parentSchool);
+	menuDriver(dereferenceElement(m, *keys[choice - 1]), parentSchool);
+}
+
+template <typename T>
+void menuEditFirstName(T &element)
+{
+	using std::cin, std::cout, std::endl, std::getline;
+
+	cout << "Current first name: " << element.firstName << endl;
+	cout << "Enter new first name: ";
+	getline(cin, element.firstName);
+}
+
+template <typename T>
+void menuEditLastName(T &element)
+{
+	using std::cin, std::cout, std::endl, std::getline;
+
+	cout << "Current last name: " << element.lastName << endl;
+	cout << "Enter new last name: ";
+	getline(cin, element.lastName);
+}
+
+template <typename T>
+void menuEditEmail(T &element)
+{
+	using std::cin, std::cout, std::endl, std::getline;
+
+	cout << "Current email: " << element.email << endl;
+	cout << "Enter new email: ";
+	getline(cin, element.email);
+}
+
+template <typename T>
+void menuEditName(T &element)
+{
+	using std::cin, std::cout, std::endl, std::getline;
+
+	cout << "Current name: " << element.name << endl;
+	cout << "Enter new name: ";
+	getline(cin, element.name);
+}
+
+template <typename T>
+void menuEditDescription(T &element)
+{
+	using std::cin, std::cout, std::endl, std::getline;
+
+	cout << "Current description: " << element.description << endl;
+	cout << "Enter new description: ";
+	getline(cin, element.description);
+}
+
+template <typename T>
+void menuEditStatus(T &element)
+{
+	using std::cin, std::cout, std::endl;
+
+	cout << "Legend:" << endl;
+	for (int i = 0; i <= 1; i++) {
+		cout << '(' << i << ") " << toString((STATUS)i) << endl;
+	}
+	cout << endl;
+
+	cout << "Current status: " << (unsigned)element.status << endl;
+	cout << "Enter new status: ";
+
+	try {
+		getUnsignedNumber(cin, element.status, '\n', 1);
+	}
+	catch (...) {
+		cout << "Invalid input!" << endl;
+	}
 }

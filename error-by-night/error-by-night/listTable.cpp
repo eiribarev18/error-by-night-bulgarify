@@ -283,7 +283,7 @@ void listTable(const unordered_map<string, PROJECT> &projects, const SCHOOL &par
 
 	labelNo = "No.";
 	labelName = "Name";
-	labelTeams = "Members";
+	labelTeams = "Teams";
 	labelStatus = "Status";
 
 	colNoWidth = max((size_t)ceil(log10(projects.size())), labelNo.size()) + 2;
@@ -385,6 +385,72 @@ void listTable(const vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool)
 			 << setw(colEmailWidth) << dereferenceElement(parentSchool.students, currMember.username).email
 			 << right << setw(colClassWidth - 4) << dereferenceElement(parentSchool.students, currMember.username).grade <<left<< ' ' << setw(3) << dereferenceElement(parentSchool.students, currMember.username).classLetter
 			 <<  setw(colRoleWidth) << toString(currMember.role) << endl;
+	}
+
+	cout.copyfmt(initialState);
+}
+
+void listTable(const vector<size_t> &keys, const unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSchool)
+{
+	ios initialState(nullptr);
+
+	size_t colNoWidth, colNameWidth, colProjectWidth, colDateWidth, colMembersWidth, colStatusWidth;
+	size_t loopCounter;
+	string labelNo, labelName, labelProject, labelDate, labelMembers, labelStatus;
+
+	if (keys.empty()) {
+		cout << "There are currently no teams." << endl;
+		return;
+	}
+
+	initialState.copyfmt(cout);
+
+	labelNo = "No.";
+	labelName = "Name";
+	labelProject = "Project";
+	labelDate = "Setup date";
+	labelMembers = "Members";
+	labelStatus = "Status";
+
+	colNoWidth = max((size_t)ceil(log10(keys.size())), labelNo.size()) + 2;
+	colNameWidth = labelName.size();
+	colProjectWidth = labelProject.size();
+	colDateWidth = max(10ull + 2, labelDate.size());
+	colMembersWidth = labelMembers.size() + 2;
+	colStatusWidth = labelStatus.size();
+
+	for (auto it = keys.begin(); it != keys.end(); it++) {
+		const TEAM &currTeam = dereferenceElement(teams, *it);
+
+		colNameWidth = max(colNameWidth, currTeam.name.size());
+		colProjectWidth = max(colProjectWidth, dereferenceElement(parentSchool.projects, currTeam.project).name.size());
+		colStatusWidth = max(colStatusWidth, toString(currTeam.status).size());
+	}
+
+	colNameWidth += 2;
+	colProjectWidth += 2;
+	colStatusWidth += 2;
+
+	cout << left << setw(colNoWidth) << labelNo
+		 << setw(colNameWidth) << labelName
+		 << setw(colProjectWidth) << labelProject
+		 << setw(colDateWidth) << labelDate
+		 << setw(colMembersWidth) << labelMembers
+		 << setw(colStatusWidth) << labelStatus << endl;
+
+	cout << string(colNoWidth + colNameWidth + colProjectWidth + colDateWidth + colMembersWidth + colStatusWidth, '-') << endl;
+
+	loopCounter = 0;
+	for (auto it = keys.begin(); it != keys.end(); it++) {
+		loopCounter++;
+		const TEAM &currTeam = dereferenceElement(teams, *it);
+
+		cout << left << setw(colNoWidth) << loopCounter
+			 << setw(colNameWidth) << currTeam.name
+			 << setw(colProjectWidth) << dereferenceElement(parentSchool.projects, currTeam.project).name
+			 << setw(colDateWidth) << currTeam.setupDate
+			 << setw(colMembersWidth) << currTeam.members.size()
+			 << setw(colStatusWidth) << toString(currTeam.status) << endl;
 	}
 
 	cout.copyfmt(initialState);
