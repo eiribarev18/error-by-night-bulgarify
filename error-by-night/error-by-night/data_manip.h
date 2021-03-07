@@ -34,7 +34,7 @@ bool deleteElement(std::vector<T> &v, const T &element)
 	return true;
 }
 
-bool deleteElement(std::vector<SCHOOL> &v, const std::string &name);
+bool deleteElement(std::vector<SCHOOL> &v, size_t pos);
 
 template <typename KEY, typename T>
 bool deleteElement(std::unordered_map<KEY, T> &m, const KEY &key)

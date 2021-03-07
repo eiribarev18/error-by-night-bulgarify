@@ -4,6 +4,7 @@
 #include "file_io.h"
 
 #include <cmath>
+#include <ctime>
 #include <iomanip>
 #include <sstream>
 
@@ -68,6 +69,25 @@ void printNewlines(size_t n)
 	}
 }
 
+bool getKey(size_t &key)
+{
+	try {
+		getUnsignedNumber(cin, key);
+	}
+	catch (...) {
+		return false;
+	}
+
+	return true;
+}
+
+bool getKey(string &key)
+{
+	getline(cin, key);
+
+	return true;
+}
+
 void displayMenuOptions(const vector<const char *> &options)
 {
 	for (size_t i = 0; i < options.size(); i++) {
@@ -114,8 +134,10 @@ bool menu(vector<SCHOOL> &schools)
 			menuSelect(schools);
 			break;
 		case 3:
+			menuAdd(schools);
 			break;
 		case 4:
+			menuRemove(schools);
 			break;
 		case 5:
 			menuRestore(schools);
@@ -148,6 +170,46 @@ void menuSelect(vector<SCHOOL> &schools)
 	getMenuChoice(choice, schools.size());
 
 	menuDriver(dereferenceElement(schools, schools.begin() + (choice - 1)));
+}
+
+void menuAdd(vector<SCHOOL> &schools)
+{
+	SCHOOL newSchool;
+
+	menuAddAdditionalPrep(newSchool);
+
+	if (!addElement(schools, newSchool)) {
+		cout << "Failed to create school: Name already exists!" << endl;
+		return;
+	}
+
+	menuDriver(dereferenceElement(schools, schools.begin() + (schools.size() - 1)));
+}
+
+void menuAddAdditionalPrep(SCHOOL &school)
+{
+	addElement(school.students, string("INVALID"), {});
+	addElement(school.teachers, string("INVALID"), {});
+	addElement(school.teams, 0ull, {"", "", "", {}, STATUS::ARCHIVED, "INVALID"});
+	addElement(school.projects, string("INVALID"), {"", "", {}, STATUS::ARCHIVED});
+}
+
+void menuRemove(vector<SCHOOL> &schools)
+{
+	size_t choice;
+
+	if (schools.empty()) {
+		std::cout << "There are currently no schools." << std::endl;
+		return;
+	}
+
+	listTable(schools);
+
+	getMenuChoice(choice, schools.size());
+
+	deleteElement(schools, choice - 1);
+
+	clearConsole();
 }
 
 void menuRestore(vector<SCHOOL> &schools)
@@ -186,10 +248,10 @@ bool menu(SCHOOL &school)
 {
 	size_t choice;
 	vector<const char *> options = {"Edit name", "Edit city", "Edit address",
-									"List students", "Select student",
-									"List teachers", "Select teacher",
-									"List teams", "Select team",
-									"List projects", "Select project",
+									"List students", "Select student", "Add student", "Remove student",
+									"List teachers", "Select teacher", "Add teacher", "Remove teacher",
+									"List teams", "Select team", "Add team", "Remove team",
+									"List projects", "Select project", "Add project", "Remove project",
 									"Back to schools"};
 
 	displayMenuOptions(options);
@@ -214,24 +276,48 @@ bool menu(SCHOOL &school)
 			menuSelect(school.students, school);
 			break;
 		case 6:
-			listTable(school.teachers, school);
+			menuAdd(school.students, school);
 			break;
 		case 7:
-			menuSelect(school.teachers, school);
+			menuRemove(school.students, school);
 			break;
 		case 8:
-			listTable(school.teams, school);
+			listTable(school.teachers, school);
 			break;
 		case 9:
-			menuSelect(school.teams, school);
+			menuSelect(school.teachers, school);
 			break;
 		case 10:
-			listTable(school.projects, school);
+			menuAdd(school.teachers, school);
 			break;
 		case 11:
-			menuSelect(school.projects, school);
+			menuRemove(school.teachers, school);
 			break;
 		case 12:
+			listTable(school.teams, school);
+			break;
+		case 13:
+			menuSelect(school.teams, school);
+			break;
+		case 14:
+			menuAdd(school.teams, school);
+			break;
+		case 15:
+			menuRemove(school.teams, school);
+			break;
+		case 16:
+			listTable(school.projects, school);
+			break;
+		case 17:
+			menuSelect(school.projects, school);
+			break;
+		case 18:
+			menuAdd(school.projects, school);
+			break;
+		case 19:
+			menuRemove(school.projects, school);
+			break;
+		case 20:
 			return false;
 	}
 
@@ -433,6 +519,26 @@ bool menu(TEAM &team, const SCHOOL &parentSchool)
 	printNewlines(1);
 
 	return true;
+}
+
+void menuAddAdditionalPrep(TEAM &team)
+{
+	team.project = "INVALID";
+
+	char *tempBuffer = new char[sizeof("YYYY-MM-DD")];
+	time_t currTime;
+	tm tm_;
+
+	time(&currTime);
+
+	// MS localtime_s
+	localtime_s(&tm_, &currTime);
+
+	strftime(tempBuffer, sizeof("YYYY-MM-DD"), "%F", &tm_);
+
+	team.setupDate = tempBuffer;
+
+	delete[] tempBuffer;
 }
 
 bool menu(PROJECT &project, const SCHOOL &parentSchool)

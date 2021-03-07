@@ -17,15 +17,11 @@ bool addElement(vector<SCHOOL> &v, const SCHOOL &school)
 	return true;
 }
 
-bool deleteElement(vector<SCHOOL> &schools, const string &name)
+bool deleteElement(vector<SCHOOL> &schools, size_t pos)
 {
-	auto it = find_if(schools.begin(), schools.end(), [&name](const SCHOOL &currSchool) {
-		return currSchool.name == name;
-	});
+	if (pos>=schools.size()) return false;
 
-	if (it == schools.end()) return false;
-
-	schools.erase(it);
+	schools.erase(schools.begin()+pos);
 
 	return true;
 }

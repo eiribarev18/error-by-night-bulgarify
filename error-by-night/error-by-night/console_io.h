@@ -15,12 +15,17 @@ void listTable(const std::vector<size_t> &keys, const std::unordered_map<size_t,
 
 void clearConsole();
 void printNewlines(size_t n);
+bool getKey(size_t &key);
+bool getKey(std::string &key);
 
 void getMenuChoice(size_t &choice, size_t maxValue, size_t minValue = 1);
 
 bool menu(std::vector<SCHOOL> &schools);
 
 void menuSelect(std::vector<SCHOOL> &schools);
+void menuAdd(std::vector<SCHOOL> &schools);
+void menuAddAdditionalPrep(SCHOOL &school);
+void menuRemove(std::vector<SCHOOL> &schools);
 void menuRestore(std::vector<SCHOOL> &schools);
 void menuStore(const std::vector<SCHOOL> &schools);
 
@@ -37,6 +42,8 @@ bool getStudentClass(unsigned &grade, char &classLetter);
 bool menu(TEACHER &teacher, const SCHOOL &parentSchool);
 
 bool menu(TEAM &team, const SCHOOL &parentSchool);
+
+void menuAddAdditionalPrep(TEAM &team);
 
 bool menu(PROJECT &project, const SCHOOL &parentSchool);
 
@@ -184,6 +191,62 @@ void menuEditStatus(T &element)
 		cout << "Invalid input!" << endl;
 		return;
 	}
+
+	clearConsole();
+}
+
+template <typename KEY, typename T>
+void menuAdd(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
+{
+	using std::cin, std::cout, std::endl;
+
+	KEY newKey;
+	T newElement = {};
+
+	cout << "Enter unique key: ";
+	if (!getKey(newKey)) {
+		cout << "Failed to add element: Invalid key!" << endl;
+		return;
+	}
+
+	menuAddAdditionalPrep(newElement);
+
+	if (!addElement(m, newKey, newElement)) {
+		cout << "Failed to add element: Key already exists!" << endl;
+		return;
+	}
+
+	menuDriver(dereferenceElement(m, newKey), parentSchool);
+}
+
+template <typename T>
+void menuAddAdditionalPrep(T &element)
+{
+	// Dummy function
+}
+
+template <typename KEY, typename T>
+void menuRemove(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
+{
+	std::vector<const KEY *> keys;
+
+	size_t choice;
+
+	if (m.empty()) {
+		std::cout << "There is currently nothing to remove." << std::endl;
+		return;
+	}
+
+	listTable(m, parentSchool);
+
+	keys.reserve(m.size());
+	for (auto it = m.begin(); it != m.end(); it++) {
+		keys.push_back(&it->first);
+	}
+
+	getMenuChoice(choice, m.size());
+
+	deleteElement(m, *keys[choice - 1]);
 
 	clearConsole();
 }
