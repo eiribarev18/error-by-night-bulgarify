@@ -13,6 +13,9 @@ void listTable(const std::vector<TEAM_MEMBER> &members, const SCHOOL &parentScho
 
 void listTable(const std::vector<size_t> &keys, const std::unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSchool);
 
+void clearConsole();
+void printNewlines(size_t n);
+
 void getMenuChoice(size_t &choice, size_t maxValue, size_t minValue = 1);
 
 bool menu(std::vector<SCHOOL> &schools);
@@ -44,12 +47,18 @@ void menuEditRole(TEAM_MEMBER &member);
 template <typename T>
 void menuDriver(T &element)
 {
+	clearConsole();
+	printNewlines(1);
+
 	while (menu(element)) {};
 }
 
 template <typename T>
 void menuDriver(T &element, const SCHOOL &parentSchool)
 {
+	clearConsole();
+	printNewlines(1);
+
 	while (menu(element, parentSchool)) {};
 }
 
@@ -102,6 +111,8 @@ void menuEditFirstName(T &element)
 	cout << "Current first name: " << element.firstName << endl;
 	cout << "Enter new first name: ";
 	getline(cin, element.firstName);
+
+	clearConsole();
 }
 
 template <typename T>
@@ -112,6 +123,8 @@ void menuEditLastName(T &element)
 	cout << "Current last name: " << element.lastName << endl;
 	cout << "Enter new last name: ";
 	getline(cin, element.lastName);
+
+	clearConsole();
 }
 
 template <typename T>
@@ -122,6 +135,8 @@ void menuEditEmail(T &element)
 	cout << "Current email: " << element.email << endl;
 	cout << "Enter new email: ";
 	getline(cin, element.email);
+
+	clearConsole();
 }
 
 template <typename T>
@@ -132,6 +147,8 @@ void menuEditName(T &element)
 	cout << "Current name: " << element.name << endl;
 	cout << "Enter new name: ";
 	getline(cin, element.name);
+
+	clearConsole();
 }
 
 template <typename T>
@@ -142,6 +159,8 @@ void menuEditDescription(T &element)
 	cout << "Current description: " << element.description << endl;
 	cout << "Enter new description: ";
 	getline(cin, element.description);
+
+	clearConsole();
 }
 
 template <typename T>
@@ -163,5 +182,8 @@ void menuEditStatus(T &element)
 	}
 	catch (...) {
 		cout << "Invalid input!" << endl;
+		return;
 	}
+
+	clearConsole();
 }

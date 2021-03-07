@@ -7,7 +7,66 @@
 #include <iomanip>
 #include <sstream>
 
+#ifdef _WIN32
+#include <windows.h>
+#endif
+
 using namespace std;
+
+void clearConsole()
+{
+#ifdef _WIN32
+	// Thank you, Microsoft <3
+	// https://docs.microsoft.com/en-us/windows/console/clearing-the-screen
+
+	CONSOLE_SCREEN_BUFFER_INFO csbi;
+	SMALL_RECT scrollRect;
+	COORD scrollTarget;
+	CHAR_INFO fill;
+	HANDLE hConsole;
+
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+	if (hConsole == INVALID_HANDLE_VALUE) {
+		return;
+	}
+
+	// Get the number of character cells in the current buffer.
+	if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) {
+		return;
+	}
+
+	// Scroll the rectangle of the entire buffer.
+	scrollRect.Left = 0;
+	scrollRect.Top = 0;
+	scrollRect.Right = csbi.dwSize.X;
+	scrollRect.Bottom = csbi.dwSize.Y;
+
+	// Scroll it upwards off the top of the buffer with a magnitude of the entire height.
+	scrollTarget.X = 0;
+	scrollTarget.Y = (SHORT)(0 - csbi.dwSize.Y);
+
+	// Fill with empty spaces with the buffer's default text attribute.
+	fill.Char.UnicodeChar = TEXT(' ');
+	fill.Attributes = csbi.wAttributes;
+
+	// Do the scroll
+	ScrollConsoleScreenBuffer(hConsole, &scrollRect, NULL, scrollTarget, &fill);
+
+	// Move the cursor to the top left corner too.
+	csbi.dwCursorPosition.X = 0;
+	csbi.dwCursorPosition.Y = 0;
+
+	SetConsoleCursorPosition(hConsole, csbi.dwCursorPosition);
+#endif
+}
+
+void printNewlines(size_t n)
+{
+	for (size_t i = 0; i < n; i++) {
+		cout << endl;
+	}
+}
 
 void displayMenuOptions(const vector<const char *> &options)
 {
@@ -45,6 +104,8 @@ bool menu(vector<SCHOOL> &schools)
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
 
+	clearConsole();
+
 	switch (choice) {
 		case 1:
 			listTable(schools);
@@ -66,12 +127,16 @@ bool menu(vector<SCHOOL> &schools)
 			return false;
 	}
 
+	printNewlines(1);
+
 	return true;
 }
 
 void menuSelect(vector<SCHOOL> &schools)
 {
 	size_t choice;
+
+	clearConsole();
 
 	if (schools.empty()) {
 		std::cout << "There is currently nothing to select." << std::endl;
@@ -94,6 +159,7 @@ void menuRestore(vector<SCHOOL> &schools)
 			 << "Do you wish to proceed? (y/n): ";
 
 		getline(cin, choice);
+		clearConsole();
 
 		if (choice[0] != 'y' and choice[0] != 'Y') return;
 	}
@@ -109,6 +175,7 @@ void menuStore(const vector<SCHOOL> &schools)
 		 << "Do you wish to proceed? (y/n): ";
 
 	getline(cin, choice);
+	clearConsole();
 
 	if (choice[0] != 'y' and choice[0] != 'Y') return;
 
@@ -127,6 +194,8 @@ bool menu(SCHOOL &school)
 
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
+
+	clearConsole();
 
 	switch (choice) {
 		case 1:
@@ -166,6 +235,8 @@ bool menu(SCHOOL &school)
 			return false;
 	}
 
+	printNewlines(1);
+
 	return true;
 }
 
@@ -174,6 +245,8 @@ void menuEditCity(SCHOOL &school)
 	cout << "Current city: " << school.city << endl;
 	cout << "Enter new school city: ";
 	getline(cin, school.city);
+
+	clearConsole();
 }
 
 void menuEditAddress(SCHOOL &school)
@@ -181,6 +254,8 @@ void menuEditAddress(SCHOOL &school)
 	cout << "Current address: " << school.address << endl;
 	cout << "Enter new school address: ";
 	getline(cin, school.address);
+
+	clearConsole();
 }
 
 bool menu(STUDENT &student, const SCHOOL &parentSchool)
@@ -194,6 +269,8 @@ bool menu(STUDENT &student, const SCHOOL &parentSchool)
 
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
+
+	clearConsole();
 
 	switch (choice) {
 		case 1:
@@ -212,6 +289,8 @@ bool menu(STUDENT &student, const SCHOOL &parentSchool)
 			return false;
 	}
 
+	printNewlines(1);
+
 	return true;
 }
 
@@ -222,7 +301,10 @@ void menuEditClass(STUDENT &student)
 
 	if (!getStudentClass(student.grade, student.classLetter)) {
 		cout << "Invalid input!" << endl;
+		return;
 	}
+
+	clearConsole();
 }
 
 bool getStudentClass(unsigned &grade, char &classLetter)
@@ -266,6 +348,8 @@ bool menu(TEACHER &teacher, const SCHOOL &parentSchool)
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
 
+	clearConsole();
+
 	switch (choice) {
 		case 1:
 			menuEditFirstName(teacher);
@@ -288,6 +372,8 @@ bool menu(TEACHER &teacher, const SCHOOL &parentSchool)
 			return false;
 	}
 
+	printNewlines(1);
+
 	return true;
 }
 
@@ -296,6 +382,8 @@ void menuEditProject(TEAM &team)
 	cout << "Current project: " << team.project << endl;
 	cout << "Enter new project: ";
 	getline(cin, team.project);
+
+	clearConsole();
 }
 
 bool menu(TEAM &team, const SCHOOL &parentSchool)
@@ -313,6 +401,8 @@ bool menu(TEAM &team, const SCHOOL &parentSchool)
 
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
+
+	clearConsole();
 
 	switch (choice) {
 		case 1:
@@ -340,6 +430,8 @@ bool menu(TEAM &team, const SCHOOL &parentSchool)
 			return false;
 	}
 
+	printNewlines(1);
+
 	return true;
 }
 
@@ -356,6 +448,8 @@ bool menu(PROJECT &project, const SCHOOL &parentSchool)
 
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
+
+	clearConsole();
 
 	switch (choice) {
 		case 1:
@@ -378,6 +472,8 @@ bool menu(PROJECT &project, const SCHOOL &parentSchool)
 			return false;
 	}
 
+	printNewlines(1);
+
 	return true;
 }
 
@@ -390,6 +486,8 @@ bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool)
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
 
+	clearConsole();
+
 	switch (choice) {
 		case 1:
 			menuEditRole(member);
@@ -397,6 +495,8 @@ bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool)
 		case 2:
 			return false;
 	}
+
+	printNewlines(1);
 
 	return true;
 }
@@ -417,5 +517,8 @@ void menuEditRole(TEAM_MEMBER &member)
 	}
 	catch (...) {
 		cout << "Invalid input!" << endl;
+		return;
 	}
+
+	clearConsole();
 }
