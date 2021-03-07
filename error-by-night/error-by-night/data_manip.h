@@ -65,3 +65,15 @@ const T &dereferenceElement(const std::unordered_map<KEY, T> &m, typename std::u
 {
 	return it->second;
 }
+
+template <typename KEY, typename T>
+T &dereferenceElement(std::unordered_map<KEY, T> &m, const KEY &key)
+{
+	return m.find(key)->second;
+}
+
+template <typename KEY, typename T>
+const T &dereferenceElement(const std::unordered_map<KEY, T> &m, const KEY &key)
+{
+	return m.find(key)->second;
+}

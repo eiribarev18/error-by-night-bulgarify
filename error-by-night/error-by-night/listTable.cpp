@@ -233,7 +233,7 @@ void listTable(const unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSch
 		const TEAM &currTeam = dereferenceElement(teams, it);
 
 		colNameWidth = max(colNameWidth, currTeam.name.size());
-		colProjectWidth = max(colProjectWidth, dereferenceElement(parentSchool.projects, parentSchool.projects.find(currTeam.project)).name.size());
+		colProjectWidth = max(colProjectWidth, dereferenceElement(parentSchool.projects, currTeam.project).name.size());
 		colStatusWidth = max(colStatusWidth, toString(currTeam.status).size());
 	}
 
@@ -257,7 +257,7 @@ void listTable(const unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSch
 
 		cout << left << setw(colNoWidth) << loopCounter
 			 << setw(colNameWidth) << currTeam.name
-			 << setw(colProjectWidth) << dereferenceElement(parentSchool.projects, parentSchool.projects.find(currTeam.project)).name
+			 << setw(colProjectWidth) << dereferenceElement(parentSchool.projects, currTeam.project).name
 			 << setw(colDateWidth) << currTeam.setupDate
 			 << setw(colMembersWidth) << currTeam.members.size()
 			 << setw(colStatusWidth) << toString(currTeam.status) << endl;
@@ -354,9 +354,9 @@ void listTable(const vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool)
 	for (auto it = members.begin(); it != members.end(); it++) {
 		const TEAM_MEMBER &currMember = dereferenceElement(members, it);
 
-		colFirstNameWidth = max(colFirstNameWidth, dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).firstName.size());
-		colLastNameWidth = max(colLastNameWidth, dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).lastName.size());
-		colEmailWidth = max(colEmailWidth, dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).email.size());
+		colFirstNameWidth = max(colFirstNameWidth, dereferenceElement(parentSchool.students, currMember.username).firstName.size());
+		colLastNameWidth = max(colLastNameWidth, dereferenceElement(parentSchool.students, currMember.username).lastName.size());
+		colEmailWidth = max(colEmailWidth, dereferenceElement(parentSchool.students, currMember.username).email.size());
 		colRoleWidth = max(colRoleWidth, toString(currMember.role).size());
 	}
 
@@ -380,10 +380,10 @@ void listTable(const vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool)
 		const TEAM_MEMBER &currMember = dereferenceElement(members, it);
 
 		cout << left << setw(colNoWidth) << loopCounter
-			 << setw(colFirstNameWidth) << dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).firstName
-			 << setw(colLastNameWidth) << dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).lastName
-			 << setw(colEmailWidth) << dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).email
-			 << right << setw(colClassWidth - 4) << dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).grade <<left<< ' ' << setw(3) << dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).classLetter
+			 << setw(colFirstNameWidth) << dereferenceElement(parentSchool.students, currMember.username).firstName
+			 << setw(colLastNameWidth) << dereferenceElement(parentSchool.students, currMember.username).lastName
+			 << setw(colEmailWidth) << dereferenceElement(parentSchool.students, currMember.username).email
+			 << right << setw(colClassWidth - 4) << dereferenceElement(parentSchool.students, currMember.username).grade <<left<< ' ' << setw(3) << dereferenceElement(parentSchool.students, currMember.username).classLetter
 			 <<  setw(colRoleWidth) << toString(currMember.role) << endl;
 	}
 
