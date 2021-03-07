@@ -84,3 +84,4 @@ struct SCHOOL {
 
 bool operator==(const TEAM_MEMBER &lhs, const TEAM_MEMBER &rhs);
 std::string toString(STATUS status);
+std::string toString(TEAM_MEMBER::ROLE role);

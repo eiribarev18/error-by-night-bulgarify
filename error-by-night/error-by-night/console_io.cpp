@@ -235,12 +235,45 @@ void menuEditEmail(TEACHER &teacher)
 	getline(cin, teacher.email);
 }
 
+void menuEditName(TEAM &team)
+{
+	cout << "Current name: " << team.name << endl;
+	cout << "Enter new name: ";
+	getline(cin, team.name);
+}
+
+void menuEditDescription(TEAM &team)
+{
+	cout << "Current description: " << team.description << endl;
+	cout << "Enter new description: ";
+	getline(cin, team.description);
+}
+
+void menuEditProject(TEAM &team)
+{
+	cout << "Current project: " << team.project << endl;
+	cout << "Enter new project: ";
+	getline(cin, team.project);
+}
+
+void menuEditStatus(TEAM &team)
+{
+	cout << "Current status: " << (unsigned)team.status << endl;
+	cout << "Enter new project: ";
+	getUnsignedNumber(cin, team.status, '\n', 1);
+}
+
 bool menu(TEAM &team, const SCHOOL &parentSchool)
 {
 	return true;
 }
 
 bool menu(PROJECT &project, const SCHOOL &parentSchool)
+{
+	return true;
+}
+
+bool menu(TEAM_MEMBER &members, const SCHOOL &parentSchool)
 {
 	return true;
 }

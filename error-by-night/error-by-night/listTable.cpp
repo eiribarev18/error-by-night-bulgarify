@@ -321,3 +321,71 @@ void listTable(const unordered_map<string, PROJECT> &projects, const SCHOOL &par
 
 	cout.copyfmt(initialState);
 }
+
+void listTable(const vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool)
+{
+	ios initialState(nullptr);
+
+	size_t colNoWidth, colFirstNameWidth, colLastNameWidth, colEmailWidth, colClassWidth, colRoleWidth;
+	size_t loopCounter;
+	string labelNo, labelFirstName, labelLastName, labelEmail, labelClass, labelRole;
+
+	if (members.empty()) {
+		cout << "There are currently no students." << endl;
+		return;
+	}
+
+	initialState.copyfmt(cout);
+
+	labelNo = "No.";
+	labelFirstName = "First name";
+	labelLastName = "Last name";
+	labelEmail = "Email";
+	labelClass = "Class";
+	labelRole = "Role";
+
+	colNoWidth = max((size_t)ceil(log10(members.size())), labelNo.size()) + 2;
+	colFirstNameWidth = labelFirstName.size();
+	colLastNameWidth = labelLastName.size();
+	colEmailWidth = labelEmail.size();
+	colClassWidth = labelClass.size() + 2;
+	colRoleWidth = labelRole.size();
+
+	for (auto it = members.begin(); it != members.end(); it++) {
+		const TEAM_MEMBER &currMember = dereferenceElement(members, it);
+
+		colFirstNameWidth = max(colFirstNameWidth, dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).firstName.size());
+		colLastNameWidth = max(colLastNameWidth, dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).lastName.size());
+		colEmailWidth = max(colEmailWidth, dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).email.size());
+		colRoleWidth = max(colRoleWidth, toString(currMember.role).size());
+	}
+
+	colFirstNameWidth += 2;
+	colLastNameWidth += 2;
+	colEmailWidth += 2;
+	colRoleWidth += 2;
+
+	cout << left << setw(colNoWidth) << labelNo
+		 << setw(colFirstNameWidth) << labelFirstName
+		 << setw(colLastNameWidth) << labelLastName
+		 << setw(colEmailWidth) << labelEmail
+		 << setw(colClassWidth) << labelClass
+		 << setw(colRoleWidth) << labelRole << endl;
+
+	cout << string(colNoWidth + colFirstNameWidth + colLastNameWidth + colEmailWidth + colClassWidth + colRoleWidth, '-') << endl;
+
+	loopCounter = 0;
+	for (auto it = members.begin(); it != members.end(); it++) {
+		loopCounter++;
+		const TEAM_MEMBER &currMember = dereferenceElement(members, it);
+
+		cout << left << setw(colNoWidth) << loopCounter
+			 << setw(colFirstNameWidth) << dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).firstName
+			 << setw(colLastNameWidth) << dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).lastName
+			 << setw(colEmailWidth) << dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).email
+			 << right << setw(colClassWidth - 4) << dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).grade <<left<< ' ' << setw(3) << dereferenceElement(parentSchool.students, parentSchool.students.find(currMember.username)).classLetter
+			 <<  setw(colRoleWidth) << toString(currMember.role) << endl;
+	}
+
+	cout.copyfmt(initialState);
+}

@@ -9,6 +9,7 @@ void listTable(const std::unordered_map<std::string, STUDENT> &students, const S
 void listTable(const std::unordered_map<std::string, TEACHER> &teachers, const SCHOOL &parentSchool);
 void listTable(const std::unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSchool);
 void listTable(const std::unordered_map<std::string, PROJECT> &projects, const SCHOOL &parentSchool);
+void listTable(const std::vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool);
 
 void getMenuChoice(size_t &choice, size_t optionCount);
 
