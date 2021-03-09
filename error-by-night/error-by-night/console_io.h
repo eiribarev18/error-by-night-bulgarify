@@ -11,46 +11,38 @@ void listTable(const std::unordered_map<std::string, TEACHER> &teachers, const S
 void listTable(const std::unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSchool);
 void listTable(const std::unordered_map<std::string, PROJECT> &projects, const SCHOOL &parentSchool);
 void listTable(const std::vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool);
-
 void listTable(const std::vector<size_t> &keys, const std::unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSchool);
 
 void clearConsole();
 void printNewlines(size_t n);
 bool getKey(size_t &key);
 bool getKey(std::string &key);
-
+void displayMenuOptions(const std::vector<const char *> &options);
 void getMenuChoice(size_t &choice, size_t maxValue, size_t minValue = 1);
 
 bool menu(std::vector<SCHOOL> &schools);
+bool menu(SCHOOL &school);
+bool menu(STUDENT &student, const SCHOOL &parentSchool);
+bool menu(TEACHER &teacher, const SCHOOL &parentSchool);
+bool menu(TEAM &team, const SCHOOL &parentSchool);
+bool menu(PROJECT &project, const SCHOOL &parentSchool);
+bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool);
 
 void menuSelect(std::vector<SCHOOL> &schools);
 void menuAdd(std::vector<SCHOOL> &schools);
-void menuAddAdditionalPrep(SCHOOL &school);
 void menuRemove(std::vector<SCHOOL> &schools);
 void menuRestore(std::vector<SCHOOL> &schools);
 void menuStore(const std::vector<SCHOOL> &schools);
 
-bool menu(SCHOOL &school);
+void menuAddAdditionalPrep(SCHOOL &school);
+void menuAddAdditionalPrep(TEAM &team);
+void menuAddAdditionalPrep(TEAM_MEMBER &member);
 
 void menuEditCity(SCHOOL &school);
 void menuEditAddress(SCHOOL &school);
 
-bool menu(STUDENT &student, const SCHOOL &parentSchool);
-
 void menuEditClass(STUDENT &student);
 bool getStudentClass(unsigned &grade, char &classLetter);
-
-bool menu(TEACHER &teacher, const SCHOOL &parentSchool);
-
-bool menu(TEAM &team, const SCHOOL &parentSchool);
-
-void menuAddAdditionalPrep(TEAM &team);
-
-bool menu(PROJECT &project, const SCHOOL &parentSchool);
-
-bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool);
-
-void menuAddAdditionalPrep(TEAM_MEMBER &member);
 
 void menuEditRole(TEAM_MEMBER &member);
 

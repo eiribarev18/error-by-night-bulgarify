@@ -154,96 +154,6 @@ bool menu(vector<SCHOOL> &schools)
 	return true;
 }
 
-void menuSelect(vector<SCHOOL> &schools)
-{
-	size_t choice;
-
-	clearConsole();
-
-	if (schools.empty()) {
-		std::cout << "There is currently nothing to select." << std::endl;
-		return;
-	}
-
-	listTable(schools);
-
-	getMenuChoice(choice, schools.size());
-
-	menuDriver(dereferenceElement(schools, schools.begin() + (choice - 1)));
-}
-
-void menuAdd(vector<SCHOOL> &schools)
-{
-	SCHOOL newSchool;
-
-	menuAddAdditionalPrep(newSchool);
-
-	if (!addElement(schools, newSchool)) {
-		cout << "Failed to create school: Name already exists!" << endl;
-		return;
-	}
-
-	menuDriver(dereferenceElement(schools, schools.begin() + (schools.size() - 1)));
-}
-
-void menuAddAdditionalPrep(SCHOOL &school)
-{
-	addElement(school.students, string("INVALID"), {});
-	addElement(school.teachers, string("INVALID"), {});
-	addElement(school.teams, 0ull, {"", "", "", {}, STATUS::ARCHIVED, "INVALID"});
-	addElement(school.projects, string("INVALID"), {"", "", {}, STATUS::ARCHIVED});
-}
-
-void menuRemove(vector<SCHOOL> &schools)
-{
-	size_t choice;
-
-	if (schools.empty()) {
-		std::cout << "There are currently no schools." << std::endl;
-		return;
-	}
-
-	listTable(schools);
-
-	getMenuChoice(choice, schools.size());
-
-	deleteElement(schools, choice - 1);
-
-	clearConsole();
-}
-
-void menuRestore(vector<SCHOOL> &schools)
-{
-	string choice;
-
-	if (!schools.empty()) {
-		cout << "WARNING: This operation will override your existing schools and you will not be able to recover them." << endl
-			 << "Do you wish to proceed? (y/n): ";
-
-		getline(cin, choice);
-		clearConsole();
-
-		if (choice[0] != 'y' and choice[0] != 'Y') return;
-	}
-
-	restoreSchools(schools, "backup");
-}
-
-void menuStore(const vector<SCHOOL> &schools)
-{
-	string choice;
-
-	cout << "WARNING: This operation will override your existing backup and you will no longer be able to access it." << endl
-		 << "Do you wish to proceed? (y/n): ";
-
-	getline(cin, choice);
-	clearConsole();
-
-	if (choice[0] != 'y' and choice[0] != 'Y') return;
-
-	storeSchools(schools, "backup");
-}
-
 bool menu(SCHOOL &school)
 {
 	size_t choice;
@@ -326,24 +236,6 @@ bool menu(SCHOOL &school)
 	return true;
 }
 
-void menuEditCity(SCHOOL &school)
-{
-	cout << "Current city: " << school.city << endl;
-	cout << "Enter new school city: ";
-	getline(cin, school.city);
-
-	clearConsole();
-}
-
-void menuEditAddress(SCHOOL &school)
-{
-	cout << "Current address: " << school.address << endl;
-	cout << "Enter new school address: ";
-	getline(cin, school.address);
-
-	clearConsole();
-}
-
 bool menu(STUDENT &student, const SCHOOL &parentSchool)
 {
 	size_t choice;
@@ -376,46 +268,6 @@ bool menu(STUDENT &student, const SCHOOL &parentSchool)
 	}
 
 	printNewlines(1);
-
-	return true;
-}
-
-void menuEditClass(STUDENT &student)
-{
-	cout << "Current class: " << student.grade << ' ' << student.classLetter << endl;
-	cout << "Enter new class: ";
-
-	if (!getStudentClass(student.grade, student.classLetter)) {
-		cout << "Invalid input!" << endl;
-		return;
-	}
-
-	clearConsole();
-}
-
-bool getStudentClass(unsigned &grade, char &classLetter)
-{
-	string stemp;
-	unsigned utemp;
-	char ctemp;
-
-	getline(cin, stemp);
-
-	stringstream line(stemp);
-	line.exceptions(ios::failbit | ios::badbit);
-
-	try {
-		getUnsignedNumber(line, utemp, ' ', 12, 1);
-		if (line.str().empty()) return false;
-		getline(line, stemp);
-		ctemp = stemp[0];
-	}
-	catch (...) {
-		return false;
-	}
-
-	grade = utemp;
-	classLetter = ctemp;
 
 	return true;
 }
@@ -515,26 +367,6 @@ bool menu(TEAM &team, const SCHOOL &parentSchool)
 	return true;
 }
 
-void menuAddAdditionalPrep(TEAM &team)
-{
-	team.project = "INVALID";
-
-	char *tempBuffer = new char[sizeof("YYYY-MM-DD")];
-	time_t currTime;
-	tm tm_;
-
-	time(&currTime);
-
-	// MS localtime_s
-	localtime_s(&tm_, &currTime);
-
-	strftime(tempBuffer, sizeof("YYYY-MM-DD"), "%F", &tm_);
-
-	team.setupDate = tempBuffer;
-
-	delete[] tempBuffer;
-}
-
 bool menu(PROJECT &project, const SCHOOL &parentSchool)
 {
 	size_t choice;
@@ -606,9 +438,177 @@ bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool)
 	return true;
 }
 
+void menuSelect(vector<SCHOOL> &schools)
+{
+	size_t choice;
+
+	clearConsole();
+
+	if (schools.empty()) {
+		std::cout << "There is currently nothing to select." << std::endl;
+		return;
+	}
+
+	listTable(schools);
+
+	getMenuChoice(choice, schools.size());
+
+	menuDriver(dereferenceElement(schools, schools.begin() + (choice - 1)));
+}
+
+void menuAdd(vector<SCHOOL> &schools)
+{
+	SCHOOL newSchool;
+
+	menuAddAdditionalPrep(newSchool);
+
+	if (!addElement(schools, newSchool)) {
+		cout << "Failed to create school: Name already exists!" << endl;
+		return;
+	}
+
+	menuDriver(dereferenceElement(schools, schools.begin() + (schools.size() - 1)));
+}
+
+void menuRemove(vector<SCHOOL> &schools)
+{
+	size_t choice;
+
+	if (schools.empty()) {
+		std::cout << "There are currently no schools." << std::endl;
+		return;
+	}
+
+	listTable(schools);
+
+	getMenuChoice(choice, schools.size());
+
+	deleteElement(schools, choice - 1);
+
+	clearConsole();
+}
+
+void menuRestore(vector<SCHOOL> &schools)
+{
+	string choice;
+
+	if (!schools.empty()) {
+		cout << "WARNING: This operation will override your existing schools and you will not be able to recover them." << endl
+			 << "Do you wish to proceed? (y/n): ";
+
+		getline(cin, choice);
+		clearConsole();
+
+		if (choice[0] != 'y' and choice[0] != 'Y') return;
+	}
+
+	restoreSchools(schools, "backup");
+}
+
+void menuStore(const vector<SCHOOL> &schools)
+{
+	string choice;
+
+	cout << "WARNING: This operation will override your existing backup and you will no longer be able to access it." << endl
+		 << "Do you wish to proceed? (y/n): ";
+
+	getline(cin, choice);
+	clearConsole();
+
+	if (choice[0] != 'y' and choice[0] != 'Y') return;
+
+	storeSchools(schools, "backup");
+}
+
+void menuAddAdditionalPrep(SCHOOL &school)
+{
+	addElement(school.students, string("INVALID"), {});
+	addElement(school.teachers, string("INVALID"), {});
+	addElement(school.teams, 0ull, {"", "", "", {}, STATUS::ARCHIVED, "INVALID"});
+	addElement(school.projects, string("INVALID"), {"", "", {}, STATUS::ARCHIVED});
+}
+
+void menuAddAdditionalPrep(TEAM &team)
+{
+	team.project = "INVALID";
+
+	char *tempBuffer = new char[sizeof("YYYY-MM-DD")];
+	time_t currTime;
+	tm tm_;
+
+	time(&currTime);
+
+	// MS localtime_s
+	localtime_s(&tm_, &currTime);
+
+	strftime(tempBuffer, sizeof("YYYY-MM-DD"), "%F", &tm_);
+
+	team.setupDate = tempBuffer;
+
+	delete[] tempBuffer;
+}
+
 void menuAddAdditionalPrep(TEAM_MEMBER &member)
 {
 	member.username = "INVALID";
+}
+
+void menuEditCity(SCHOOL &school)
+{
+	cout << "Current city: " << school.city << endl;
+	cout << "Enter new school city: ";
+	getline(cin, school.city);
+
+	clearConsole();
+}
+
+void menuEditAddress(SCHOOL &school)
+{
+	cout << "Current address: " << school.address << endl;
+	cout << "Enter new school address: ";
+	getline(cin, school.address);
+
+	clearConsole();
+}
+
+void menuEditClass(STUDENT &student)
+{
+	cout << "Current class: " << student.grade << ' ' << student.classLetter << endl;
+	cout << "Enter new class: ";
+
+	if (!getStudentClass(student.grade, student.classLetter)) {
+		cout << "Invalid input!" << endl;
+		return;
+	}
+
+	clearConsole();
+}
+
+bool getStudentClass(unsigned &grade, char &classLetter)
+{
+	string stemp;
+	unsigned utemp;
+	char ctemp;
+
+	getline(cin, stemp);
+
+	stringstream line(stemp);
+	line.exceptions(ios::failbit | ios::badbit);
+
+	try {
+		getUnsignedNumber(line, utemp, ' ', 12, 1);
+		if (line.str().empty()) return false;
+		getline(line, stemp);
+		ctemp = stemp[0];
+	}
+	catch (...) {
+		return false;
+	}
+
+	grade = utemp;
+	classLetter = ctemp;
+
+	return true;
 }
 
 void menuEditRole(TEAM_MEMBER &member)
