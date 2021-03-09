@@ -16,12 +16,3 @@ bool addElement(vector<SCHOOL> &v, const SCHOOL &school)
 
 	return true;
 }
-
-bool deleteElement(vector<SCHOOL> &schools, size_t pos)
-{
-	if (pos>=schools.size()) return false;
-
-	schools.erase(schools.begin()+pos);
-
-	return true;
-}

@@ -23,18 +23,14 @@ bool addElement(std::unordered_map<KEY, T> &m, const KEY &key, const T &element)
 }
 
 template <typename T>
-bool deleteElement(std::vector<T> &v, const T &element)
+bool deleteElement(std::vector<T> &v, size_t pos)
 {
-	auto it = find(v.begin(), v.end(), element);
+	if (pos >= v.size()) return false;
 
-	if (it == v.end()) return false;
-
-	v.erase(it);
+	v.erase(v.begin() + pos);
 
 	return true;
 }
-
-bool deleteElement(std::vector<SCHOOL> &v, size_t pos);
 
 template <typename KEY, typename T>
 bool deleteElement(std::unordered_map<KEY, T> &m, const KEY &key)

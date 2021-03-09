@@ -450,9 +450,10 @@ bool menu(TEACHER &teacher, const SCHOOL &parentSchool)
 			listTable(teacher.teams, parentSchool.teams, parentSchool);
 			break;
 		case 5:
-
+			menuLink(teacher.teams, parentSchool.teams, parentSchool);
 			break;
 		case 6:
+			menuUnlink(teacher.teams, parentSchool.teams, parentSchool);
 			break;
 		case 7:
 			return false;
@@ -461,15 +462,6 @@ bool menu(TEACHER &teacher, const SCHOOL &parentSchool)
 	printNewlines(1);
 
 	return true;
-}
-
-void menuEditProject(TEAM &team)
-{
-	cout << "Current project: " << team.project << endl;
-	cout << "Enter new project: ";
-	getline(cin, team.project);
-
-	clearConsole();
 }
 
 bool menu(TEAM &team, const SCHOOL &parentSchool)
@@ -509,8 +501,10 @@ bool menu(TEAM &team, const SCHOOL &parentSchool)
 			menuSelect(team.members, parentSchool);
 			break;
 		case 7:
+			menuAdd(team.members, parentSchool);
 			break;
 		case 8:
+			menuRemove(team.members, parentSchool);
 			break;
 		case 9:
 			return false;
@@ -571,8 +565,10 @@ bool menu(PROJECT &project, const SCHOOL &parentSchool)
 			listTable(project.teams, parentSchool.teams, parentSchool);
 			break;
 		case 5:
+			menuLink(project.teams, parentSchool.teams, parentSchool);
 			break;
 		case 6:
+			menuUnlink(project.teams, parentSchool.teams, parentSchool);
 			break;
 		case 7:
 			return false;
@@ -586,7 +582,8 @@ bool menu(PROJECT &project, const SCHOOL &parentSchool)
 bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool)
 {
 	size_t choice;
-	vector<const char *> options = {"Edit role",
+	vector<const char *> options = {"Change student",
+									"Edit role",
 									"Back to team"};
 
 	displayMenuOptions(options);
@@ -596,15 +593,22 @@ bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool)
 
 	switch (choice) {
 		case 1:
-			menuEditRole(member);
 			break;
 		case 2:
+			menuEditRole(member);
+			break;
+		case 3:
 			return false;
 	}
 
 	printNewlines(1);
 
 	return true;
+}
+
+void menuAddAdditionalPrep(TEAM_MEMBER &member)
+{
+	member.username = "INVALID";
 }
 
 void menuEditRole(TEAM_MEMBER &member)

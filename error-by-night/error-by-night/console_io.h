@@ -1,5 +1,6 @@
 #pragma once
 
+#include "data_manip.h"
 #include "structures.h"
 
 #include <iostream>
@@ -48,6 +49,8 @@ void menuAddAdditionalPrep(TEAM &team);
 bool menu(PROJECT &project, const SCHOOL &parentSchool);
 
 bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool);
+
+void menuAddAdditionalPrep(TEAM_MEMBER &member);
 
 void menuEditRole(TEAM_MEMBER &member);
 
@@ -220,6 +223,23 @@ void menuAdd(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
 }
 
 template <typename T>
+void menuAdd(std::vector<T> &v, const SCHOOL &parentSchool)
+{
+	using std::cout, std::endl;
+
+	T newElement = {};
+
+	menuAddAdditionalPrep(newElement);
+
+	if (!addElement(v, newElement)) {
+		cout << "Failed to add element: Element already exists!" << endl;
+		return;
+	}
+
+	menuDriver(dereferenceElement(v, v.end() - 1), parentSchool);
+}
+
+template <typename T>
 void menuAddAdditionalPrep(T &element)
 {
 	// Dummy function
@@ -249,4 +269,93 @@ void menuRemove(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
 	deleteElement(m, *keys[choice - 1]);
 
 	clearConsole();
+}
+
+template <typename T>
+void menuRemove(std::vector<T> &v, const SCHOOL &parentSchool)
+{
+	using std::cout, std::endl;
+
+	size_t choice;
+
+	if (v.empty()) {
+		std::cout << "There is currently nothing to remove." << std::endl;
+		return;
+	}
+
+	listTable(v, parentSchool);
+
+	getMenuChoice(choice, v.size());
+
+	deleteElement(v, choice - 1);
+
+	clearConsole();
+}
+
+template <typename KEY, typename T>
+void menuLink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, T> &allElements, const SCHOOL &parentSchool)
+{
+	std::vector<const KEY *> keys;
+
+	using std::cout, std::endl;
+
+	size_t choice;
+
+	if (allElements.empty()) {
+		cout << "There is currently nothing to select." << endl;
+		return;
+	}
+
+	cout << "Choose from the list: " << endl;
+	printNewlines(1);
+
+	listTable(allElements, parentSchool);
+
+	keys.reserve(allElements.size());
+	for (auto it = allElements.begin(); it != allElements.end(); it++) {
+		keys.push_back(&it->first);
+	}
+
+	getMenuChoice(choice, allElements.size());
+
+	clearConsole();
+
+	if (!addElement(linkedElements, *keys[choice - 1])) {
+		cout << "Failed to link!" << endl;
+		return;
+	}
+}
+
+template <typename KEY, typename T>
+void menuUnlink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, T> &allElements, const SCHOOL &parentSchool)
+{
+	std::vector<const KEY *> keys;
+
+	using std::cout, std::endl;
+
+	size_t choice;
+
+	if (allElements.empty()) {
+		cout << "There is currently nothing to select." << endl;
+		return;
+	}
+
+	cout << "Choose from the list: " << endl;
+	printNewlines(1);
+
+	listTable(linkedElements, allElements, parentSchool);
+
+	keys.reserve(linkedElements.size());
+	for (auto it = linkedElements.begin(); it != linkedElements.end(); it++) {
+		keys.push_back(&*it);
+	}
+
+	getMenuChoice(choice, linkedElements.size());
+
+	clearConsole();
+
+	if (!deleteElement(linkedElements, *keys[choice - 1])) {
+		cout << "Failed to unlink!" << endl;
+		return;
+	}
 }
