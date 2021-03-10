@@ -27,7 +27,7 @@ namespace Unittesting
 			try {
 				getUnsignedNumber(inputStream, num);
 			}
-			catch (exception &e) {
+			catch (...) {
 				Assert::Fail(L"Unexpected exception thrown");
 			}
 			
@@ -39,7 +39,7 @@ namespace Unittesting
 			stringstream inputStream;
 			unsigned num;
 
-			inputStream << "4";
+			inputStream << "4x2";
 			try {
 				getUnsignedNumber(inputStream, num);
 			}
@@ -67,11 +67,11 @@ namespace Unittesting
 			{
 			
 				vector<int> a;
-				int element;
-				int size1 = a.size();
+				int element = 22;
+				size_t size1 = a.size();
 				
 				bool returnStatus=addElement(a, element);
-				int size2 = a.size();
+				size_t size2 = a.size();
 					
 				Assert::AreEqual(true, returnStatus,L"The functions had not add the element");
 				Assert::AreEqual(size1 + 1, size2, L"Vector size has not changed");
@@ -82,12 +82,12 @@ namespace Unittesting
 			TEST_METHOD(mustReturnFalseIfTheElementAlreadyExcist)
 			{
 			
-				vector<int> a;
-				int element;
-				int size1 = a.size();
+				vector<int> a = {22};
+				int element = 22;
+				size_t size1 = a.size();
 				
 				bool returnStatus=addElement(a, element);
-				int size2 = a.size();
+				size_t size2 = a.size();
 					
 				Assert::AreEqual(false, returnStatus,L"The functions should have failed");
 				Assert::AreEqual(size1, size2, L"Vector size shouldn't have changed");
