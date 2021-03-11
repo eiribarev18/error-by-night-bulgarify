@@ -39,6 +39,9 @@
     <ClCompile Include="listTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="clear_console.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="structures.h">

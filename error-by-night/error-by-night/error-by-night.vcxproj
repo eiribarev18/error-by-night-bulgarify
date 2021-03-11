@@ -141,6 +141,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="clear_console.cpp" />
     <ClCompile Include="console_io.cpp" />
     <ClCompile Include="data_manip.cpp" />
     <ClCompile Include="data_queries.cpp" />
