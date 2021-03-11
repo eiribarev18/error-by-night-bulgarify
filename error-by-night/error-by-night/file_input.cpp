@@ -134,7 +134,8 @@ bool TEAM::restore(istream &file)
 	TEAM_MEMBER currMember;
 
 	getline(file, name);
-	getline(file, description);
+	getline(file, description, '|');
+	file.ignore();
 	getline(file, setupDate);
 
 	getUnsignedNumber(file, vectorSize);

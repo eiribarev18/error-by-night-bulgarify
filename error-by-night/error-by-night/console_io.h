@@ -46,6 +46,13 @@ bool getStudentClass(unsigned &grade, char &classLetter);
 
 void menuEditRole(TEAM_MEMBER &member);
 
+void displayDetails(const STUDENT &student);
+void displayDetails(const TEACHER &teacher);
+void displayDetails(const TEAM_MEMBER &member, const SCHOOL &parentSchool);
+void displayDetails(const TEAM &team, const SCHOOL &parentSchool);
+void displayDetails(const PROJECT &project);
+void displayDetails(const SCHOOL &school);
+
 template <typename T>
 void menuDriver(T &element)
 {
@@ -159,8 +166,9 @@ void menuEditDescription(T &element)
 	using std::cin, std::cout, std::endl, std::getline;
 
 	cout << "Current description: " << element.description << endl;
-	cout << "Enter new description: ";
-	getline(cin, element.description);
+	cout << "Enter new description: (to end description, type | at the end of the last line)" << endl;
+	getline(cin, element.description, '|');
+	cin.ignore();
 
 	clearConsole();
 }

@@ -84,7 +84,7 @@ void TEACHER::store(ostream &file) const
 void TEAM::store(ostream &file) const
 {
 	file << name << '\n'
-		 << description << '\n'
+		 << description << "|\n"
 		 << setupDate << '\n';
 
 	file << members.size() << '\n';

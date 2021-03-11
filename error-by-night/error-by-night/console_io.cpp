@@ -164,6 +164,9 @@ bool menu(SCHOOL &school)
 									"List projects", "Select project", "Add project", "Remove project",
 									"Back to schools"};
 
+	displayDetails(school);
+	printNewlines(1);
+
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
 
@@ -245,6 +248,9 @@ bool menu(STUDENT &student, const SCHOOL &parentSchool)
 									"Edit class",
 									"Back to school"};
 
+	displayDetails(student);
+	printNewlines(1);
+
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
 
@@ -282,6 +288,9 @@ bool menu(TEACHER &teacher, const SCHOOL &parentSchool)
 									"Assign team",
 									"Dismiss team",
 									"Back to school"};
+
+	displayDetails(teacher);
+	printNewlines(1);
 
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
@@ -328,6 +337,9 @@ bool menu(TEAM &team, const SCHOOL &parentSchool)
 									"Add member",
 									"Delete member",
 									"Back to school"};
+
+	displayDetails(team, parentSchool);
+	printNewlines(1);
 
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
@@ -378,6 +390,9 @@ bool menu(PROJECT &project, const SCHOOL &parentSchool)
 									"Dismiss team",
 									"Back to school"};
 
+	displayDetails(project);
+	printNewlines(1);
+
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
 
@@ -417,6 +432,9 @@ bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool)
 	vector<const char *> options = {"Change student",
 									"Edit role",
 									"Back to team"};
+
+	displayDetails(member, parentSchool);
+	printNewlines(1);
 
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
@@ -631,4 +649,55 @@ void menuEditRole(TEAM_MEMBER &member)
 	}
 
 	clearConsole();
+}
+
+void displayDetails(const STUDENT &student)
+{
+	cout << "First name: " << student.firstName << endl
+		 << "Last name: " << student.lastName << endl
+		 << "Class: " << student.grade << ' ' << student.classLetter << endl;
+}
+
+void displayDetails(const TEACHER &teacher)
+{
+	cout << "First name: " << teacher.firstName << endl
+		 << "Last name: " << teacher.lastName << endl
+		 << "Email: " << teacher.email << endl
+		 << "Number of assigned teams: " << teacher.teams.size() << endl;
+}
+
+void displayDetails(const TEAM_MEMBER &member, const SCHOOL &parentSchool)
+{
+	const STUDENT &student = dereferenceElement(parentSchool.students, member.username);
+
+	cout << "Student: " << student.firstName << ' ' << student.lastName << endl
+		 << "Role: " << toString(member.role) << endl;
+}
+
+void displayDetails(const TEAM &team, const SCHOOL &parentSchool)
+{
+	cout << "Name: " << team.name << endl
+		 << "Setup date: " << team.setupDate << endl
+		 << "Description: " << team.description << endl
+		 << "Status: " << toString(team.status) << endl
+		 << "Project: " << dereferenceElement(parentSchool.projects, team.project).name << endl;
+}
+
+void displayDetails(const PROJECT &project)
+{
+	cout << "Name: " << project.name << endl
+		 << "Description: " << project.description << endl
+		 << "Status: " << toString(project.status) << endl
+		 << "Number of assigned teams: " << project.teams.size() << endl;
+}
+
+void displayDetails(const SCHOOL &school)
+{
+	cout << "Name: " << school.name << endl
+		 << "City: " << school.city << endl
+		 << "Address: " << school.address << endl
+		 << "Number of students: " << school.students.size() << endl
+		 << "Number of teachers: " << school.teachers.size() << endl
+		 << "Number of teams: " << school.teams.size() << endl
+		 << "Number of projects: " << school.projects.size() << endl;
 }
