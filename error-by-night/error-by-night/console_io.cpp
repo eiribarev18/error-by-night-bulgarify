@@ -399,6 +399,7 @@ bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool)
 
 	switch (choice) {
 		case 1:
+			menuEditUsername(member, parentSchool);
 			break;
 		case 2:
 			menuEditRole(member);
@@ -583,6 +584,31 @@ bool getStudentClass(unsigned &grade, char &classLetter)
 	classLetter = ctemp;
 
 	return true;
+}
+
+void menuEditUsername(TEAM_MEMBER &member, const SCHOOL &parentSchool)
+{
+	vector<const string *> keys;
+
+	size_t choice;
+
+	if (parentSchool.students.empty()) {
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "No students!" << endl;
+		return;
+	}
+
+	listTable(parentSchool.students, parentSchool);
+
+	keys.reserve(parentSchool.students.size());
+	for (auto it = parentSchool.students.begin(); it != parentSchool.students.end(); it++) {
+		keys.push_back(&it->first);
+	}
+
+	getMenuChoice(choice, parentSchool.students.size());
+
+	member.username = *keys[choice - 1];
+
+	clearConsole();
 }
 
 void menuEditRole(TEAM_MEMBER &member)

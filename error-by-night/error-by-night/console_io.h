@@ -82,6 +82,7 @@ void menuEditAddress(SCHOOL &school);
 void menuEditClass(STUDENT &student);
 bool getStudentClass(unsigned &grade, char &classLetter);
 
+void menuEditUsername(TEAM_MEMBER &member, const SCHOOL &parentSchool);
 void menuEditRole(TEAM_MEMBER &member);
 
 void displayDetails(const STUDENT &student);
