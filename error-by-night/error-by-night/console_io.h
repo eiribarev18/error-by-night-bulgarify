@@ -5,6 +5,43 @@
 
 #include <iostream>
 
+enum class ANSI_ESCAPE
+{
+	RESET = 0,
+	FG_BLACK = 30,
+	FG_RED,
+	FG_GREEN,
+	FG_YELLOW,
+	FG_BLUE,
+	FG_MAGENTA,
+	FG_CYAN,
+	FG_WHITE,
+	BG_BLACK = 40,
+	BG_RED,
+	BG_GREEN,
+	BG_YELLOW,
+	BG_BLUE,
+	BG_MAGENTA,
+	BG_CYAN,
+	BG_WHITE,
+	FG_B_BLACK = 90,
+	FG_B_RED,
+	FG_B_GREEN,
+	FG_B_YELLOW,
+	FG_B_BLUE,
+	FG_B_MAGENTA,
+	FG_B_CYAN,
+	FG_B_WHITE,
+	BG_B_BLACK = 100,
+	BG_B_RED,
+	BG_B_GREEN,
+	BG_B_YELLOW,
+	BG_B_BLUE,
+	BG_B_MAGENTA,
+	BG_B_CYAN,
+	BG_B_WHITE
+};
+
 void listTable(const std::vector<SCHOOL> &schools);
 void listTable(const std::unordered_map<std::string, STUDENT> &students, const SCHOOL &parentSchool);
 void listTable(const std::unordered_map<std::string, TEACHER> &teachers, const SCHOOL &parentSchool);
@@ -19,6 +56,7 @@ bool getKey(size_t &key);
 bool getKey(std::string &key);
 void displayMenuOptions(const std::vector<const char *> &options);
 void getMenuChoice(size_t &choice, size_t maxValue, size_t minValue = 1);
+std::string getAnsiEscape(ANSI_ESCAPE colour);
 
 bool menu(std::vector<SCHOOL> &schools);
 bool menu(SCHOOL &school);

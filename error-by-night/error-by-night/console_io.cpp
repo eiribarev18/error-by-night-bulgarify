@@ -38,24 +38,32 @@ bool getKey(string &key)
 
 void displayMenuOptions(const vector<const char *> &options)
 {
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN);
+
 	for (size_t i = 0; i < options.size(); i++) {
 		cout << i + 1 << ". " << options[i] << endl;
 	}
+
+	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
 void getMenuChoice(size_t &choice, size_t maxValue, size_t minValue)
 {
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW);
+
 	while (true) {
+		cout << "Enter choice (" << minValue << " - " << maxValue << "): ";
 		try {
-			cout << "Enter choice (" << minValue << " - " << maxValue << "): ";
 			getUnsignedNumber(cin, choice, '\n', maxValue, minValue);
 		}
 		catch (...) {
-			cout << "Invalid input!" << endl;
+			cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Invalid input!" << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << endl;
 			continue;
 		}
 		break;
 	}
+
+	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
 bool menu(vector<SCHOOL> &schools)
@@ -411,7 +419,7 @@ void menuSelect(vector<SCHOOL> &schools)
 	clearConsole();
 
 	if (schools.empty()) {
-		std::cout << "There is currently nothing to select." << std::endl;
+		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << std::endl;
 		return;
 	}
 
@@ -429,7 +437,7 @@ void menuAdd(vector<SCHOOL> &schools)
 	menuAddAdditionalPrep(newSchool);
 
 	if (!addElement(schools, newSchool)) {
-		cout << "Failed to create school: Name already exists!" << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to create school: Name already exists!" << endl;
 		return;
 	}
 
@@ -441,7 +449,7 @@ void menuRemove(vector<SCHOOL> &schools)
 	size_t choice;
 
 	if (schools.empty()) {
-		std::cout << "There are currently no schools." << std::endl;
+		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no schools." << std::endl;
 		return;
 	}
 
@@ -459,8 +467,8 @@ void menuRestore(vector<SCHOOL> &schools)
 	string choice;
 
 	if (!schools.empty()) {
-		cout << "WARNING: This operation will override your existing schools and you will not be able to recover them." << endl
-			 << "Do you wish to proceed? (y/n): ";
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW) << "WARNING: This operation will override your existing schools and you will not be able to recover them." << endl
+			 << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Do you wish to proceed? (y/n): ";
 
 		getline(cin, choice);
 		clearConsole();
@@ -475,8 +483,8 @@ void menuStore(const vector<SCHOOL> &schools)
 {
 	string choice;
 
-	cout << "WARNING: This operation will override your existing backup and you will no longer be able to access it." << endl
-		 << "Do you wish to proceed? (y/n): ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW) << "WARNING: This operation will override your existing backup and you will no longer be able to access it." << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Do you wish to proceed? (y/n): ";
 
 	getline(cin, choice);
 	clearConsole();
@@ -521,8 +529,8 @@ void menuAddAdditionalPrep(TEAM_MEMBER &member)
 
 void menuEditCity(SCHOOL &school)
 {
-	cout << "Current city: " << school.city << endl;
-	cout << "Enter new school city: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current city: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.city << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new school city: ";
 	getline(cin, school.city);
 
 	clearConsole();
@@ -530,8 +538,8 @@ void menuEditCity(SCHOOL &school)
 
 void menuEditAddress(SCHOOL &school)
 {
-	cout << "Current address: " << school.address << endl;
-	cout << "Enter new school address: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current address: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.address << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new school address: ";
 	getline(cin, school.address);
 
 	clearConsole();
@@ -539,11 +547,11 @@ void menuEditAddress(SCHOOL &school)
 
 void menuEditClass(STUDENT &student)
 {
-	cout << "Current class: " << student.grade << ' ' << student.classLetter << endl;
-	cout << "Enter new class: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current class: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << student.grade << ' ' << student.classLetter << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new class: ";
 
 	if (!getStudentClass(student.grade, student.classLetter)) {
-		cout << "Invalid input!" << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Invalid input!" << endl;
 		return;
 	}
 
@@ -579,20 +587,21 @@ bool getStudentClass(unsigned &grade, char &classLetter)
 
 void menuEditRole(TEAM_MEMBER &member)
 {
-	cout << "Legend:" << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Legend:" << endl;
 	for (int i = 0; i <= 3; i++) {
-		cout << '(' << i << ") " << toString((TEAM_MEMBER::ROLE)i) << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << '(' << i << ") " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << toString((TEAM_MEMBER::ROLE)i) << endl;
 	}
 	cout << endl;
 
-	cout << "Current role: " << (unsigned)member.role << endl;
-	cout << "Enter new role: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current role: " << (unsigned)member.role << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new role: ";
 
 	try {
 		getUnsignedNumber(cin, member.role, '\n', 3);
 	}
 	catch (...) {
-		cout << "Invalid input!" << endl;
+		clearConsole();
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Invalid input!" << endl;
 		return;
 	}
 
@@ -601,51 +610,63 @@ void menuEditRole(TEAM_MEMBER &member)
 
 void displayDetails(const STUDENT &student)
 {
-	cout << "First name: " << student.firstName << endl
-		 << "Last name: " << student.lastName << endl
-		 << "Class: " << student.grade << ' ' << student.classLetter << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "First name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << student.firstName << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Last name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << student.lastName << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Class: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << student.grade << ' ' << student.classLetter << endl;
+
+	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
 void displayDetails(const TEACHER &teacher)
 {
-	cout << "First name: " << teacher.firstName << endl
-		 << "Last name: " << teacher.lastName << endl
-		 << "Email: " << teacher.email << endl
-		 << "Number of assigned teams: " << teacher.teams.size() << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "First name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << teacher.firstName << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Last name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << teacher.lastName << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Email: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << teacher.email << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of assigned teams: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << teacher.teams.size() << endl;
+
+	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
 void displayDetails(const TEAM_MEMBER &member, const SCHOOL &parentSchool)
 {
 	const STUDENT &student = dereferenceElement(parentSchool.students, member.username);
 
-	cout << "Student: " << student.firstName << ' ' << student.lastName << endl
-		 << "Role: " << toString(member.role) << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Student: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << student.firstName << ' ' << student.lastName << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Role: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << toString(member.role) << endl;
+
+	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
 void displayDetails(const TEAM &team, const SCHOOL &parentSchool)
 {
-	cout << "Name: " << team.name << endl
-		 << "Setup date: " << team.setupDate << endl
-		 << "Description: " << team.description << endl
-		 << "Status: " << toString(team.status) << endl
-		 << "Project: " << dereferenceElement(parentSchool.projects, team.project).name << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << team.name << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Setup date: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << team.setupDate << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Description: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << team.description << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Status: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << toString(team.status) << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Project: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << dereferenceElement(parentSchool.projects, team.project).name << endl;
+
+	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
 void displayDetails(const PROJECT &project)
 {
-	cout << "Name: " << project.name << endl
-		 << "Description: " << project.description << endl
-		 << "Status: " << toString(project.status) << endl
-		 << "Number of assigned teams: " << project.teams.size() << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << project.name << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Description: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << project.description << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Status: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << toString(project.status) << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of assigned teams: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << project.teams.size() << endl;
+
+	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
 void displayDetails(const SCHOOL &school)
 {
-	cout << "Name: " << school.name << endl
-		 << "City: " << school.city << endl
-		 << "Address: " << school.address << endl
-		 << "Number of students: " << school.students.size() << endl
-		 << "Number of teachers: " << school.teachers.size() << endl
-		 << "Number of teams: " << school.teams.size() << endl
-		 << "Number of projects: " << school.projects.size() << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.name << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "City: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.city << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Address: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.address << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of students: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.students.size() << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of teachers: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.teachers.size() << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of teams: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.teams.size() << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of projects: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.projects.size() << endl;
+
+	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }

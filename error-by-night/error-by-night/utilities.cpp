@@ -1,3 +1,4 @@
+#include "console_io.h"
 #include "structures.h"
 
 using namespace std;
@@ -23,4 +24,14 @@ string toString(TEAM_MEMBER::ROLE role)
 										"FRONTEND DEV"};
 
 	return translation[(size_t)role];
+}
+
+string getAnsiEscape(ANSI_ESCAPE colour)
+{
+	string out = "\033[";
+
+	out += to_string((int)colour);
+	out += "m";
+
+	return out;
 }
