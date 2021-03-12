@@ -116,7 +116,7 @@ void menuSelect(std::vector<T> &v, const SCHOOL &parentSchool)
 	size_t choice;
 
 	if (v.empty()) {
-		std::cout << "There is currently nothing to select." << std::endl;
+		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << std::endl;
 		return;
 	}
 
@@ -135,7 +135,7 @@ void menuSelect(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
 	size_t choice;
 
 	if (m.empty()) {
-		std::cout << "There is currently nothing to select." << std::endl;
+		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << std::endl;
 		return;
 	}
 
@@ -156,8 +156,8 @@ void menuEditFirstName(T &element)
 {
 	using std::cin, std::cout, std::endl, std::getline;
 
-	cout << "Current first name: " << element.firstName << endl;
-	cout << "Enter new first name: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current first name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << element.firstName << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new first name: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, element.firstName);
 
 	clearConsole();
@@ -168,8 +168,8 @@ void menuEditLastName(T &element)
 {
 	using std::cin, std::cout, std::endl, std::getline;
 
-	cout << "Current last name: " << element.lastName << endl;
-	cout << "Enter new last name: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current last name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << element.lastName << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new last name: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, element.lastName);
 
 	clearConsole();
@@ -180,8 +180,8 @@ void menuEditEmail(T &element)
 {
 	using std::cin, std::cout, std::endl, std::getline;
 
-	cout << "Current email: " << element.email << endl;
-	cout << "Enter new email: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current email: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << element.email << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new email: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, element.email);
 
 	clearConsole();
@@ -192,8 +192,8 @@ void menuEditName(T &element)
 {
 	using std::cin, std::cout, std::endl, std::getline;
 
-	cout << "Current name: " << element.name << endl;
-	cout << "Enter new name: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << element.name << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new name: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, element.name);
 
 	clearConsole();
@@ -204,8 +204,8 @@ void menuEditDescription(T &element)
 {
 	using std::cin, std::cout, std::endl, std::getline;
 
-	cout << "Current description: " << element.description << endl;
-	cout << "Enter new description: (to end description, type | at the end of the last line)" << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current description: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << element.description << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new description: (to end description, type | at the end of the last line)" << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW) << endl;
 	getline(cin, element.description, '|');
 	cin.ignore();
 
@@ -217,20 +217,20 @@ void menuEditStatus(T &element)
 {
 	using std::cin, std::cout, std::endl;
 
-	cout << "Legend:" << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Legend:" << endl;
 	for (int i = 0; i <= 1; i++) {
-		cout << '(' << i << ") " << toString((STATUS)i) << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << '(' << i << ") " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << toString((STATUS)i) << endl;
 	}
 	cout << endl;
 
-	cout << "Current status: " << (unsigned)element.status << endl;
-	cout << "Enter new status: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current status: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << (unsigned)element.status << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new status: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 
 	try {
 		getUnsignedNumber(cin, element.status, '\n', 1);
 	}
 	catch (...) {
-		cout << "Invalid input!" << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Invalid input!" << endl;
 		return;
 	}
 
@@ -245,16 +245,16 @@ void menuAdd(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
 	KEY newKey;
 	T newElement = {};
 
-	cout << "Enter unique key: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter unique key: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	if (!getKey(newKey)) {
-		cout << "Failed to add element: Invalid key!" << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to add element: Invalid key!" << endl;
 		return;
 	}
 
 	menuAddAdditionalPrep(newElement);
 
 	if (!addElement(m, newKey, newElement)) {
-		cout << "Failed to add element: Key already exists!" << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to add element: Key already exists!" << endl;
 		return;
 	}
 
@@ -271,7 +271,7 @@ void menuAdd(std::vector<T> &v, const SCHOOL &parentSchool)
 	menuAddAdditionalPrep(newElement);
 
 	if (!addElement(v, newElement)) {
-		cout << "Failed to add element: Element already exists!" << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to add element: Element already exists!" << endl;
 		return;
 	}
 
@@ -292,7 +292,7 @@ void menuRemove(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
 	size_t choice;
 
 	if (m.empty()) {
-		std::cout << "There is currently nothing to remove." << std::endl;
+		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to remove." << std::endl;
 		return;
 	}
 
@@ -318,7 +318,7 @@ void menuRemove(std::vector<T> &v, const SCHOOL &parentSchool)
 	size_t choice;
 
 	if (v.empty()) {
-		std::cout << "There is currently nothing to remove." << std::endl;
+		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to remove." << std::endl;
 		return;
 	}
 
@@ -341,7 +341,7 @@ void menuLink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, T>
 	size_t choice;
 
 	if (allElements.empty()) {
-		cout << "There is currently nothing to select." << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << endl;
 		return;
 	}
 
@@ -360,7 +360,7 @@ void menuLink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, T>
 	clearConsole();
 
 	if (!addElement(linkedElements, *keys[choice - 1])) {
-		cout << "Failed to link!" << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to link!" << endl;
 		return;
 	}
 }
@@ -375,11 +375,11 @@ void menuUnlink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, 
 	size_t choice;
 
 	if (allElements.empty()) {
-		cout << "There is currently nothing to select." << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << endl;
 		return;
 	}
 
-	cout << "Choose from the list: " << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Choose from the list: " << endl;
 	printNewlines(1);
 
 	listTable(linkedElements, allElements, parentSchool);
@@ -394,7 +394,7 @@ void menuUnlink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, 
 	clearConsole();
 
 	if (!deleteElement(linkedElements, *keys[choice - 1])) {
-		cout << "Failed to unlink!" << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to unlink!" << endl;
 		return;
 	}
 }

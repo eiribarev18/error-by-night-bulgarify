@@ -52,7 +52,7 @@ void getMenuChoice(size_t &choice, size_t maxValue, size_t minValue)
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW);
 
 	while (true) {
-		cout << "Enter choice (" << minValue << " - " << maxValue << "): ";
+		cout << "Enter choice (" << minValue << " - " << maxValue << "): " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 		try {
 			getUnsignedNumber(cin, choice, '\n', maxValue, minValue);
 		}
@@ -531,7 +531,7 @@ void menuAddAdditionalPrep(TEAM_MEMBER &member)
 void menuEditCity(SCHOOL &school)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current city: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.city << endl;
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new school city: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new school city: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, school.city);
 
 	clearConsole();
@@ -540,7 +540,7 @@ void menuEditCity(SCHOOL &school)
 void menuEditAddress(SCHOOL &school)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current address: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.address << endl;
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new school address: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new school address: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, school.address);
 
 	clearConsole();
@@ -549,7 +549,7 @@ void menuEditAddress(SCHOOL &school)
 void menuEditClass(STUDENT &student)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current class: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << student.grade << ' ' << student.classLetter << endl;
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new class: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new class: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 
 	if (!getStudentClass(student.grade, student.classLetter)) {
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Invalid input!" << endl;
@@ -620,7 +620,7 @@ void menuEditRole(TEAM_MEMBER &member)
 	cout << endl;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current role: " << (unsigned)member.role << endl;
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new role: ";
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new role: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 
 	try {
 		getUnsignedNumber(cin, member.role, '\n', 3);
@@ -638,6 +638,7 @@ void displayDetails(const STUDENT &student)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "First name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << student.firstName << endl
 		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Last name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << student.lastName << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Email: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << student.email << endl
 		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Class: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << student.grade << ' ' << student.classLetter << endl;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
