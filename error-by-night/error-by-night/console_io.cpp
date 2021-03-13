@@ -292,8 +292,8 @@ bool menu(TEAM &team, const SCHOOL &parentSchool)
 									"Edit description",
 									"Edit status",
 									"Change project",
-									"Select members",
-									"List member",
+									"Select member",
+									"List members",
 									"Add member",
 									"Delete member",
 									"Back to school"};
