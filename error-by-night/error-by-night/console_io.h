@@ -380,7 +380,7 @@ void menuUnlink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, 
 
 	size_t choice;
 
-	if (allElements.empty()) {
+	if (linkedElements.empty()) {
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << endl;
 		return;
 	}
