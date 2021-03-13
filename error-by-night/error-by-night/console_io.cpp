@@ -554,12 +554,24 @@ void menuRemoveAdditionalPrep(size_t key, const TEAM &team, SCHOOL &parentSchool
 
 void menuRemoveAdditionalPrep(const string &key, const PROJECT &project, SCHOOL &parentSchool)
 {
-	vector<string>::iterator tempIt;
-
 	for (auto it = parentSchool.teams.begin(); it != parentSchool.teams.end(); it++) {
 		TEAM &currTeam = dereferenceElement(parentSchool.teams, it);
 
 		if (currTeam.project == key) currTeam.project = "INVALID";
+	}
+}
+
+void menuRemoveAdditionalPrep(const string &key, const STUDENT &student, SCHOOL &parentSchool)
+{
+	vector<TEAM_MEMBER>::iterator tempIt;
+
+	for (auto it = parentSchool.teams.begin(); it != parentSchool.teams.end(); it++) {
+		TEAM &currTeam = dereferenceElement(parentSchool.teams, it);
+		tempIt = find_if(currTeam.members.begin(), currTeam.members.end(), [&key](const TEAM_MEMBER &currMember) {
+			return currMember.username == key;
+		});
+
+		deleteElement(currTeam.members, tempIt - currTeam.members.begin());
 	}
 }
 
@@ -800,10 +812,10 @@ void displayDetails(const SCHOOL &school)
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.name << endl
 		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "City: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.city << endl
 		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Address: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.address << endl
-		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of students: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.students.size()-1 << endl
-		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of teachers: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.teachers.size()-1 << endl
-		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of teams: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.teams.size()-1 << endl
-		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of projects: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.projects.size()-1 << endl;
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of students: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.students.size() - 1 << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of teachers: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.teachers.size() - 1 << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of teams: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.teams.size() - 1 << endl
+		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of projects: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.projects.size() - 1 << endl;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
