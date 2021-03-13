@@ -317,6 +317,7 @@ bool menu(TEAM &team, const SCHOOL &parentSchool)
 			menuEditStatus(team);
 			break;
 		case 4:
+			menuEditProject(team, parentSchool);
 			break;
 		case 5:
 			listTable(team.members, parentSchool);
@@ -634,6 +635,31 @@ void menuEditRole(TEAM_MEMBER &member)
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Invalid input!" << endl;
 		return;
 	}
+
+	clearConsole();
+}
+
+void menuEditProject(TEAM &team, const SCHOOL &parentSchool)
+{
+	vector<const string *> keys;
+
+	size_t choice;
+
+	if (parentSchool.projects.empty()) {
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "No projects!" << endl;
+		return;
+	}
+
+	listTable(parentSchool.projects, parentSchool);
+
+	keys.reserve(parentSchool.projects.size());
+	for (auto it = parentSchool.projects.begin(); it != parentSchool.projects.end(); it++) {
+		keys.push_back(&it->first);
+	}
+
+	getMenuChoice(choice, parentSchool.projects.size());
+
+	team.project = *keys[choice - 1];
 
 	clearConsole();
 }

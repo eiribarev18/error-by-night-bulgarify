@@ -86,6 +86,8 @@ bool getStudentClass(unsigned &grade, char &classLetter);
 void menuEditUsername(TEAM_MEMBER &member, const SCHOOL &parentSchool);
 void menuEditRole(TEAM_MEMBER &member);
 
+void menuEditProject(TEAM &team, const SCHOOL &parentSchool);
+
 bool menuQueries(const SCHOOL &school);
 void menuQueryTeachersWithoutTeam(const SCHOOL &school);
 
