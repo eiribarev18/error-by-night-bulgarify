@@ -2,6 +2,9 @@
 
 #include "structures.h"
 
+bool isValidKey(const std::string &key);
+bool isValidKey(size_t key);
+
 template <typename T>
 bool addElement(std::vector<T> &v, const T &element)
 {
@@ -72,4 +75,20 @@ template <typename KEY, typename T>
 const T &dereferenceElement(const std::unordered_map<KEY, T> &m, const KEY &key)
 {
 	return m.find(key)->second;
+}
+
+template <typename T>
+bool hasValidRecords(const std::unordered_map<std::string, T> &m)
+{
+	if (m.find("INVALID") != m.end() and m.size() == 1) return false;
+
+	return m.size();
+}
+
+template <typename T>
+bool hasValidRecords(const std::unordered_map<size_t, T> &m)
+{
+	if (m.find(0) != m.end() and m.size() == 1) return false;
+
+	return m.size();
 }

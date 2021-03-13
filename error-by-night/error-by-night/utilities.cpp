@@ -1,4 +1,5 @@
 #include "console_io.h"
+#include "data_manip.h"
 #include "structures.h"
 
 using namespace std;
@@ -34,4 +35,14 @@ string getAnsiEscape(ANSI_ESCAPE colour)
 	out += "m";
 
 	return out;
+}
+
+bool isValidKey(const string &key)
+{
+	return key != "INVALID";
+}
+
+bool isValidKey(size_t key)
+{
+	return key != 0;
 }

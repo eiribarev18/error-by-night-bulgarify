@@ -14,7 +14,7 @@ void listTable(const vector<SCHOOL> &schools)
 	string labelNo, labelName, labelCity, labelAddress, labelStudents, labelTeachers, labelTeams, labelProjects;
 
 	if (schools.empty()) {
-		cout << "There are currently no schools." << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no schools." << endl;
 		return;
 	}
 
@@ -86,8 +86,8 @@ void listTable(const unordered_map<string, STUDENT> &students, const SCHOOL &par
 	size_t loopCounter;
 	string labelNo, labelFirstName, labelLastName, labelEmail, labelClass;
 
-	if (students.empty()) {
-		cout << "There are currently no students." << endl;
+	if (!hasValidRecords(students)) {
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no students." << endl;
 		return;
 	}
 
@@ -127,6 +127,8 @@ void listTable(const unordered_map<string, STUDENT> &students, const SCHOOL &par
 
 	loopCounter = 0;
 	for (auto it = students.begin(); it != students.end(); it++) {
+		if (!isValidKey(it->first)) continue;
+
 		loopCounter++;
 		const STUDENT &currStudent = dereferenceElement(students, it);
 
@@ -149,8 +151,8 @@ void listTable(const unordered_map<string, TEACHER> &teachers, const SCHOOL &par
 	size_t loopCounter;
 	string labelNo, labelFirstName, labelLastName, labelEmail, labelTeams;
 
-	if (teachers.empty()) {
-		cout << "There are currently no teachers." << endl;
+	if (!hasValidRecords(teachers)) {
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no teachers." << endl;
 		return;
 	}
 
@@ -190,6 +192,8 @@ void listTable(const unordered_map<string, TEACHER> &teachers, const SCHOOL &par
 
 	loopCounter = 0;
 	for (auto it = teachers.begin(); it != teachers.end(); it++) {
+		if (!isValidKey(it->first)) continue;
+
 		loopCounter++;
 		const TEACHER &currTeacher = dereferenceElement(teachers, it);
 
@@ -212,8 +216,8 @@ void listTable(const unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSch
 	size_t loopCounter;
 	string labelNo, labelName, labelProject, labelDate, labelMembers, labelStatus;
 
-	if (teams.empty()) {
-		cout << "There are currently no teams." << endl;
+	if (!hasValidRecords(teams)) {
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no teams." << endl;
 		return;
 	}
 
@@ -256,6 +260,8 @@ void listTable(const unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSch
 
 	loopCounter = 0;
 	for (auto it = teams.begin(); it != teams.end(); it++) {
+		if (!isValidKey(it->first)) continue;
+
 		loopCounter++;
 		const TEAM &currTeam = dereferenceElement(teams, it);
 
@@ -279,8 +285,8 @@ void listTable(const unordered_map<string, PROJECT> &projects, const SCHOOL &par
 	size_t loopCounter;
 	string labelNo, labelName, labelTeams, labelStatus;
 
-	if (projects.empty()) {
-		cout << "There are currently no projects." << endl;
+	if (!hasValidRecords(projects)) {
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no projects." << endl;
 		return;
 	}
 
@@ -315,6 +321,8 @@ void listTable(const unordered_map<string, PROJECT> &projects, const SCHOOL &par
 
 	loopCounter = 0;
 	for (auto it = projects.begin(); it != projects.end(); it++) {
+		if (!isValidKey(it->first)) continue;
+
 		loopCounter++;
 		const PROJECT &currProject = dereferenceElement(projects, it);
 
@@ -337,7 +345,7 @@ void listTable(const vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool)
 	string labelNo, labelFirstName, labelLastName, labelEmail, labelClass, labelRole;
 
 	if (members.empty()) {
-		cout << "There are currently no students." << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no students." << endl;
 		return;
 	}
 
@@ -406,7 +414,7 @@ void listTable(const vector<size_t> &keys, const unordered_map<size_t, TEAM> &te
 	string labelNo, labelName, labelProject, labelDate, labelMembers, labelStatus;
 
 	if (keys.empty()) {
-		cout << "There are currently no teams." << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no teams." << endl;
 		return;
 	}
 
@@ -473,7 +481,7 @@ void listTable(const vector<string> &keys, const unordered_map<string, TEACHER> 
 	string labelNo, labelFirstName, labelLastName, labelEmail, labelTeams;
 
 	if (teachers.empty()) {
-		cout << "There are currently no teachers." << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no teachers." << endl;
 		return;
 	}
 

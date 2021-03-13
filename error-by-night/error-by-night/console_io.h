@@ -77,6 +77,9 @@ void menuAddAdditionalPrep(SCHOOL &school);
 void menuAddAdditionalPrep(TEAM &team);
 void menuAddAdditionalPrep(TEAM_MEMBER &member);
 
+void menuRemoveAdditionalPrep(size_t key, const TEAM &team, SCHOOL &parentSchool);
+void menuRemoveAdditionalPrep(const std::string &key, const PROJECT &project, SCHOOL &parentSchool);
+
 void menuEditCity(SCHOOL &school);
 void menuEditAddress(SCHOOL &school);
 
@@ -140,7 +143,7 @@ void menuSelect(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
 
 	size_t choice;
 
-	if (m.empty()) {
+	if (!hasValidRecords(m)) {
 		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << std::endl;
 		return;
 	}
@@ -149,10 +152,10 @@ void menuSelect(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
 
 	keys.reserve(m.size());
 	for (auto it = m.begin(); it != m.end(); it++) {
-		keys.push_back(&it->first);
+		if (isValidKey(it->first)) keys.push_back(&it->first);
 	}
 
-	getMenuChoice(choice, m.size());
+	getMenuChoice(choice, m.size() - 1);
 
 	menuDriver(dereferenceElement(m, *keys[choice - 1]), parentSchool);
 }
@@ -291,13 +294,19 @@ void menuAddAdditionalPrep(T &element)
 }
 
 template <typename KEY, typename T>
-void menuRemove(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
+void menuRemoveAdditionalPrep(const KEY &key, const T &element, SCHOOL &parentSchool)
+{
+	// Dummy function
+}
+
+template <typename KEY, typename T>
+void menuRemove(std::unordered_map<KEY, T> &m, SCHOOL &parentSchool)
 {
 	std::vector<const KEY *> keys;
 
 	size_t choice;
 
-	if (m.empty()) {
+	if (!hasValidRecords(m)) {
 		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to remove." << std::endl;
 		return;
 	}
@@ -306,11 +315,12 @@ void menuRemove(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
 
 	keys.reserve(m.size());
 	for (auto it = m.begin(); it != m.end(); it++) {
-		keys.push_back(&it->first);
+		if (isValidKey(it->first)) keys.push_back(&it->first);
 	}
 
-	getMenuChoice(choice, m.size());
+	getMenuChoice(choice, m.size() - 1);
 
+	menuRemoveAdditionalPrep(*keys[choice - 1], m.begin()->second, parentSchool);
 	deleteElement(m, *keys[choice - 1]);
 
 	clearConsole();
@@ -346,22 +356,22 @@ void menuLink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, T>
 
 	size_t choice;
 
-	if (allElements.empty()) {
+	if (!hasValidRecords(allElements)) {
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << endl;
 		return;
 	}
 
-	cout << "Choose from the list: " << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Choose from the list: " << endl;
 	printNewlines(1);
 
 	listTable(allElements, parentSchool);
 
 	keys.reserve(allElements.size());
 	for (auto it = allElements.begin(); it != allElements.end(); it++) {
-		keys.push_back(&it->first);
+		if (isValidKey(it->first)) keys.push_back(&it->first);
 	}
 
-	getMenuChoice(choice, allElements.size());
+	getMenuChoice(choice, allElements.size() - 1);
 
 	clearConsole();
 
@@ -399,7 +409,7 @@ void menuUnlink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, 
 
 	clearConsole();
 
-	if (!deleteElement(linkedElements, *keys[choice - 1])) {
+	if (!deleteElement(linkedElements, choice - 1)) {
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to unlink!" << endl;
 		return;
 	}
