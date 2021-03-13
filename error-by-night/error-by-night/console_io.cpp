@@ -473,7 +473,7 @@ void menuRestore(vector<SCHOOL> &schools)
 
 	if (!schools.empty()) {
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW) << "WARNING: This operation will override your existing schools and you will not be able to recover them." << endl
-			 << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Do you wish to proceed? (y/n): ";
+			 << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Do you wish to proceed? (y/n): " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 
 		getline(cin, choice);
 		clearConsole();
@@ -489,7 +489,7 @@ void menuStore(const vector<SCHOOL> &schools)
 	string choice;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW) << "WARNING: This operation will override your existing backup and you will no longer be able to access it." << endl
-		 << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Do you wish to proceed? (y/n): ";
+		 << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Do you wish to proceed? (y/n): " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 
 	getline(cin, choice);
 	clearConsole();

@@ -8,17 +8,17 @@ using namespace std;
 
 bool restoreSchools(vector<SCHOOL> &schools, const string &filename)
 {
-	ifstream file(filename);
-	size_t schoolsSize;
-	SCHOOL currSchool;
-
-	file.exceptions(ios::failbit | ios::badbit);
-
-	if (!file.good()) return false;
-
-	schools.clear();
-
 	try {
+		ifstream file(filename);
+		size_t schoolsSize;
+		SCHOOL currSchool;
+
+		file.exceptions(ios::failbit | ios::badbit);
+
+		if (!file.good()) return false;
+
+		schools.clear();
+
 		getUnsignedNumber(file, schoolsSize);
 
 		schools.reserve(schoolsSize);
