@@ -69,8 +69,8 @@ void getMenuChoice(size_t &choice, size_t maxValue, size_t minValue)
 bool menu(vector<SCHOOL> &schools)
 {
 	size_t choice;
-	vector<const char *> options = {"List schools",
-									"Select school",
+	vector<const char *> options = {"Select school",
+									"List schools",
 									"Add school",
 									"Remove school",
 									"Restore from backup",
@@ -84,10 +84,10 @@ bool menu(vector<SCHOOL> &schools)
 
 	switch (choice) {
 		case 1:
-			listTable(schools);
+			menuSelect(schools);
 			break;
 		case 2:
-			menuSelect(schools);
+			listTable(schools);
 			break;
 		case 3:
 			menuAdd(schools);
@@ -114,10 +114,10 @@ bool menu(SCHOOL &school)
 {
 	size_t choice;
 	vector<const char *> options = {"Edit name", "Edit city", "Edit address",
-									"List students", "Select student", "Add student", "Remove student",
-									"List teachers", "Select teacher", "Add teacher", "Remove teacher",
-									"List teams", "Select team", "Add team", "Remove team",
-									"List projects", "Select project", "Add project", "Remove project",
+									"Select student", "Select teacher", "Select team", "Select project",
+									"List students", "List teachers", "List teams", "List projects",
+									"Add student", "Add teacher", "Add team", "Add project",
+									"Remove student", "Remove teacher", "Remove team", "Remove project",
 									"Queries",
 									"Back to schools"};
 
@@ -140,49 +140,49 @@ bool menu(SCHOOL &school)
 			menuEditAddress(school);
 			break;
 		case 4:
-			listTable(school.students, school);
-			break;
-		case 5:
 			menuSelect(school.students, school);
 			break;
-		case 6:
-			menuAdd(school.students, school);
-			break;
-		case 7:
-			menuRemove(school.students, school);
-			break;
-		case 8:
-			listTable(school.teachers, school);
-			break;
-		case 9:
+		case 5:
 			menuSelect(school.teachers, school);
 			break;
+		case 6:
+			menuSelect(school.teams, school);
+			break;
+		case 7:
+			menuSelect(school.projects, school);
+			break;
+		case 8:
+			listTable(school.students, school);
+			break;
+		case 9:
+			listTable(school.teachers, school);
+			break;
 		case 10:
-			menuAdd(school.teachers, school);
-			break;
-		case 11:
-			menuRemove(school.teachers, school);
-			break;
-		case 12:
 			listTable(school.teams, school);
 			break;
+		case 11:
+			listTable(school.projects, school);
+			break;
+		case 12:
+			menuAdd(school.students, school);
+			break;
 		case 13:
-			menuSelect(school.teams, school);
+			menuAdd(school.teachers, school);
 			break;
 		case 14:
 			menuAdd(school.teams, school);
 			break;
 		case 15:
-			menuRemove(school.teams, school);
+			menuAdd(school.projects, school);
 			break;
 		case 16:
-			listTable(school.projects, school);
+			menuRemove(school.students, school);
 			break;
 		case 17:
-			menuSelect(school.projects, school);
+			menuRemove(school.teachers, school);
 			break;
 		case 18:
-			menuAdd(school.projects, school);
+			menuRemove(school.teams, school);
 			break;
 		case 19:
 			menuRemove(school.projects, school);
@@ -292,8 +292,8 @@ bool menu(TEAM &team, const SCHOOL &parentSchool)
 									"Edit description",
 									"Edit status",
 									"Change project",
-									"List members",
-									"Select member",
+									"Select members",
+									"List member",
 									"Add member",
 									"Delete member",
 									"Back to school"};
@@ -320,10 +320,10 @@ bool menu(TEAM &team, const SCHOOL &parentSchool)
 			menuEditProject(team, parentSchool);
 			break;
 		case 5:
-			listTable(team.members, parentSchool);
+			menuSelect(team.members, parentSchool);
 			break;
 		case 6:
-			menuSelect(team.members, parentSchool);
+			listTable(team.members, parentSchool);
 			break;
 		case 7:
 			menuAdd(team.members, parentSchool);
