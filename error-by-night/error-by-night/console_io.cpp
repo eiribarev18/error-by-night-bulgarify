@@ -118,6 +118,7 @@ bool menu(SCHOOL &school)
 									"List teachers", "Select teacher", "Add teacher", "Remove teacher",
 									"List teams", "Select team", "Add team", "Remove team",
 									"List projects", "Select project", "Add project", "Remove project",
+									"Queries",
 									"Back to schools"};
 
 	displayDetails(school);
@@ -187,6 +188,9 @@ bool menu(SCHOOL &school)
 			menuRemove(school.projects, school);
 			break;
 		case 20:
+			while (menuQueries(school)) {};
+			break;
+		case 21:
 			return false;
 	}
 
@@ -632,6 +636,56 @@ void menuEditRole(TEAM_MEMBER &member)
 	}
 
 	clearConsole();
+}
+
+bool menuQueries(const SCHOOL &school)
+{
+	size_t choice;
+	vector<const char *> options = {"Get teachers wihout teams",
+									"Back to school"};
+
+	printNewlines(1);
+
+	displayMenuOptions(options);
+	getMenuChoice(choice, options.size());
+
+	clearConsole();
+
+	switch (choice) {
+		case 1:
+			menuQueryTeachersWithoutTeam(school);
+			break;
+		case 2:
+			return false;
+	}
+
+	return true;
+}
+
+void menuQueryTeachersWithoutTeam(const SCHOOL &school)
+{
+	vector<const string *> keys;
+	size_t choice;
+
+	if (school.projects.empty()) {
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "No projects!" << endl;
+		return;
+	}
+
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Select project:" << endl;
+	printNewlines(1);
+
+	listTable(school.projects, school);
+
+	keys.reserve(school.projects.size());
+	for (auto it = school.projects.begin(); it != school.projects.end(); it++) {
+		keys.push_back(&it->first);
+	}
+
+	getMenuChoice(choice, school.projects.size());
+
+	clearConsole();
+	listTable(school.getTeachersWithoutTeam(*keys[choice - 1]), school.teachers, school);
 }
 
 void displayDetails(const STUDENT &student)

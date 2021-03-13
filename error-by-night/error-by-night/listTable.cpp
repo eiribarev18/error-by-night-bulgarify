@@ -463,3 +463,66 @@ void listTable(const vector<size_t> &keys, const unordered_map<size_t, TEAM> &te
 	cout.copyfmt(initialState);
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
+
+void listTable(const vector<string> &keys, const unordered_map<string, TEACHER> &teachers, const SCHOOL &parentSchool)
+{
+	ios initialState(nullptr);
+
+	size_t colNoWidth, colFirstNameWidth, colLastNameWidth, colEmailWidth, colTeamsWidth;
+	size_t loopCounter;
+	string labelNo, labelFirstName, labelLastName, labelEmail, labelTeams;
+
+	if (teachers.empty()) {
+		cout << "There are currently no teachers." << endl;
+		return;
+	}
+
+	initialState.copyfmt(cout);
+
+	labelNo = "No.";
+	labelFirstName = "First name";
+	labelLastName = "Last name";
+	labelEmail = "Email";
+	labelTeams = "Assigned teams";
+
+	colNoWidth = max((size_t)ceil(log10(teachers.size())), labelNo.size()) + 2;
+	colFirstNameWidth = labelFirstName.size();
+	colLastNameWidth = labelLastName.size();
+	colEmailWidth = labelEmail.size();
+	colTeamsWidth = labelTeams.size() + 2;
+
+	for (auto it = keys.begin(); it != keys.end(); it++) {
+		const TEACHER &currTeacher = dereferenceElement(teachers, *it);
+
+		colFirstNameWidth = max(colFirstNameWidth, currTeacher.firstName.size());
+		colLastNameWidth = max(colLastNameWidth, currTeacher.lastName.size());
+		colEmailWidth = max(colEmailWidth, currTeacher.email.size());
+	}
+
+	colFirstNameWidth += 2;
+	colLastNameWidth += 2;
+	colEmailWidth += 2;
+
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo
+		 << setw(colFirstNameWidth) << labelFirstName
+		 << setw(colLastNameWidth) << labelLastName
+		 << setw(colEmailWidth) << labelEmail
+		 << setw(colTeamsWidth) << labelTeams << endl;
+
+	cout << string(colNoWidth + colFirstNameWidth + colLastNameWidth + colEmailWidth + colTeamsWidth, '-') << endl;
+
+	loopCounter = 0;
+	for (auto it = keys.begin(); it != keys.end(); it++) {
+		loopCounter++;
+		const TEACHER &currTeacher = dereferenceElement(teachers, *it);
+
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
+			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colFirstNameWidth) << currTeacher.firstName
+			 << setw(colLastNameWidth) << currTeacher.lastName
+			 << setw(colEmailWidth) << currTeacher.email
+			 << setw(colTeamsWidth) << currTeacher.teams.size() << endl;
+	}
+
+	cout.copyfmt(initialState);
+	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
+}

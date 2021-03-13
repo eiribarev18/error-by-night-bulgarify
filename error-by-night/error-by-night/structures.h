@@ -79,7 +79,7 @@ struct SCHOOL {
 	bool restore(std::istream &file);
 	void store(std::ostream &file) const;
 
-	std::vector<std::string> getTeachersWithoutTeam() const;
+	std::vector<std::string> getTeachersWithoutTeam(const std::string &project) const;
 };
 
 bool operator==(const TEAM_MEMBER &lhs, const TEAM_MEMBER &rhs);

@@ -49,6 +49,7 @@ void listTable(const std::unordered_map<size_t, TEAM> &teams, const SCHOOL &pare
 void listTable(const std::unordered_map<std::string, PROJECT> &projects, const SCHOOL &parentSchool);
 void listTable(const std::vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool);
 void listTable(const std::vector<size_t> &keys, const std::unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSchool);
+void listTable(const std::vector<std::string> &keys, const std::unordered_map<std::string, TEACHER> &teachers, const SCHOOL &parentSchool);
 
 void clearConsole();
 void printNewlines(size_t n);
@@ -84,6 +85,9 @@ bool getStudentClass(unsigned &grade, char &classLetter);
 
 void menuEditUsername(TEAM_MEMBER &member, const SCHOOL &parentSchool);
 void menuEditRole(TEAM_MEMBER &member);
+
+bool menuQueries(const SCHOOL &school);
+void menuQueryTeachersWithoutTeam(const SCHOOL &school);
 
 void displayDetails(const STUDENT &student);
 void displayDetails(const TEACHER &teacher);
