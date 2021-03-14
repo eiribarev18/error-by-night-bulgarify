@@ -68,10 +68,10 @@ void listTable(const vector<SCHOOL> &schools)
 			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colNameWidth) << currSchool.name
 			 << setw(colCityWidth) << currSchool.city
 			 << setw(colAddressWidth) << currSchool.address
-			 << setw(colStudentsWidth) << currSchool.students.size()
-			 << setw(colTeachersWidth) << currSchool.teachers.size()
-			 << setw(colTeamsWidth) << currSchool.teams.size()
-			 << setw(colProjectsWidth) << currSchool.projects.size() << endl;
+			 << setw(colStudentsWidth) << currSchool.students.size() - 1
+			 << setw(colTeachersWidth) << currSchool.teachers.size() - 1
+			 << setw(colTeamsWidth) << currSchool.teams.size() - 1
+			 << setw(colProjectsWidth) << currSchool.projects.size() - 1 << endl;
 	}
 
 	cout.copyfmt(initialState);
