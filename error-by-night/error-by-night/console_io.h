@@ -79,6 +79,7 @@ void menuAddAdditionalPrep(TEAM_MEMBER &member);
 
 void menuRemoveAdditionalPrep(size_t key, const TEAM &team, SCHOOL &parentSchool);
 void menuRemoveAdditionalPrep(const std::string &key, const PROJECT &project, SCHOOL &parentSchool);
+void menuRemoveAdditionalPrep(const std::string &key, const STUDENT &student, SCHOOL &parentSchool);
 
 void menuEditCity(SCHOOL &school);
 void menuEditAddress(SCHOOL &school);
