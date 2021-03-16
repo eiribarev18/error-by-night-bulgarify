@@ -101,7 +101,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>$(SolutionDir)error-by-night\x64\Debug;$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>console_io.obj;data_manip.obj;data_queries.obj;file_input.obj;file_output.obj;listTable.obj;main.obj;utilities.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>console_io.obj;data_manip.obj;data_queries.obj;file_input.obj;file_output.obj;listTable.obj;main.obj;utilities.obj;clear_console.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

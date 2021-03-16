@@ -95,4 +95,56 @@ namespace Unittesting
 			}
 
 	};
+
+	TEST_CLASS(test_menuAddAdditionalPrep_school) 
+	{
+		TEST_METHOD(mustAddInvalidStudent) 
+		{
+			SCHOOL school;
+			STUDENT invalidStudent = {"", "", "",0,0};
+			menuAddAdditionalPrep(school);
+			Assert::AreEqual(invalidStudent.firstName, school.students.begin()->second.firstName);
+			Assert::AreEqual(invalidStudent.lastName, school.students.begin()->second.lastName);
+			Assert::AreEqual(invalidStudent.email, school.students.begin()->second.email);
+			Assert::AreEqual(invalidStudent.grade, school.students.begin()->second.grade);
+			Assert::AreEqual(invalidStudent.classLetter, school.students.begin()->second.classLetter);
+		}
+
+		TEST_METHOD(mustAddInvalidTeacher)
+		{
+			SCHOOL school;
+			TEACHER invalidTeacher = {"", "", "", {}};
+			menuAddAdditionalPrep(school);
+			Assert::AreEqual(invalidTeacher.firstName, school.teachers.begin()->second.firstName);
+			Assert::AreEqual(invalidTeacher.lastName, school.teachers.begin()->second.lastName);
+			Assert::AreEqual(invalidTeacher.email, school.teachers.begin()->second.email);
+			Assert::AreEqual(invalidTeacher.teams.size(), school.teachers.begin()->second.teams.size());
+		
+		}
+
+		TEST_METHOD(mustAddInvalidTeam)
+		{
+			SCHOOL school;
+			TEAM invalidTeam = {"", "", "", {}, STATUS::ARCHIVED, "INVALID"};
+			menuAddAdditionalPrep(school);
+			Assert::AreEqual(invalidTeam.name, school.teams.begin()->second.name);
+			Assert::AreEqual(invalidTeam.description, school.teams.begin()->second.description);
+			Assert::AreEqual(invalidTeam.setupDate, school.teams.begin()->second.setupDate);
+			Assert::AreEqual(invalidTeam.members.size(), school.teams.begin()->second.members.size());
+			Assert::AreEqual((int)invalidTeam.status, (int)school.teams.begin()->second.status);
+			Assert::AreEqual(invalidTeam.project, school.teams.begin()->second.project);
+		}
+
+		TEST_METHOD(mustAddInvalidProject)
+		{
+			SCHOOL school;
+			PROJECT invalidProject = {"", "", {}, STATUS::ARCHIVED};
+			menuAddAdditionalPrep(school);
+			Assert::AreEqual(invalidProject.name, school.projects.begin()->second.name);
+			Assert::AreEqual(invalidProject.description, school.projects.begin()->second.description);
+			Assert::AreEqual(invalidProject.teams.size(), school.projects.begin()->second.teams.size());
+			Assert::AreEqual((int)invalidProject.status, (int)school.projects.begin()->second.status);
+			
+		}
+	};
 }
