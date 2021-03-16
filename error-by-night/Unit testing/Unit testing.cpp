@@ -193,5 +193,17 @@ namespace Unittesting
 			size_t a = 0;
 			Assert::AreEqual(false, isValidKey(a));
 		}
+
+		TEST_METHOD(mustReturnTrueIfTheValueIstNotINVALID)
+		{
+			string a = "ala bala";
+			Assert::AreEqual(true, isValidKey(a));
+		}
+
+		TEST_METHOD(mustReturnFalseIfTheValueIsINVALID)
+		{
+			string a = "INVALID";
+			Assert::AreEqual(false, isValidKey(a));
+		}
 	};
 	}
