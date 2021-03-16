@@ -252,4 +252,42 @@ namespace Unittesting
 			Assert::AreEqual(true, hasValidRecords(a));
 		}
 	};
+
+	TEST_CLASS(test_toString_STATUS) 
+	{
+		TEST_METHOD(mustGetActiveStatus) 
+		{
+			STATUS statusActive = STATUS::ACTIVE;
+			Assert::AreEqual((string) "ACTIVE", toString(statusActive));
+		} 
+		TEST_METHOD(mustGetArchivedStatus)
+		{
+			STATUS statusArchived = STATUS::ARCHIVED;
+			Assert::AreEqual((string) "ARCHIVED", toString(statusArchived));
+		}
+	};
+
+	TEST_CLASS(test_toString_ROLE)
+	{
+		TEST_METHOD(mustGetScrumMasterRole)
+		{	
+			TEAM_MEMBER::ROLE roleScrum = TEAM_MEMBER::ROLE::SCRUM_MASTER;
+			Assert::AreEqual((string) "SCRUM MASTER", toString(roleScrum));
+		}
+		TEST_METHOD(mustGetQARole)
+		{
+			TEAM_MEMBER::ROLE roleQa = TEAM_MEMBER::ROLE::QA_ENGINEER;
+			Assert::AreEqual((string) "QA ENGINEER", toString(roleQa));
+		}
+		TEST_METHOD(mustGetDevBackEndRole)
+		{
+			TEAM_MEMBER::ROLE roleBackEnd = TEAM_MEMBER::ROLE::DEV_BACKEND;
+			Assert::AreEqual((string) "BACKEND DEV", toString(roleBackEnd));
+		}
+		TEST_METHOD(mustGetDevFrontEndRole)
+		{
+			TEAM_MEMBER::ROLE roleFrontEnd = TEAM_MEMBER::ROLE::DEV_FRONTEND;
+			Assert::AreEqual((string) "FRONTEND DEV", toString(roleFrontEnd));
+		}
+	};
 	}
