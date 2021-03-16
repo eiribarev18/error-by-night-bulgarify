@@ -206,4 +206,50 @@ namespace Unittesting
 			Assert::AreEqual(false, isValidKey(a));
 		}
 	};
+
+	TEST_CLASS(test_hasValidRecords) 
+	{
+		TEST_METHOD(mustReturnFalseWhenTheOnlyRecordIsINVALID) 
+		{
+			unordered_map<string,int>a;
+			a.insert({"INVALID",4});
+			Assert::AreEqual(false, hasValidRecords(a));
+		}
+
+		TEST_METHOD(mustReturnFalseWhenTheMapIsEmpty_string)
+		{
+			unordered_map<string, int> a;
+		
+			Assert::AreEqual(false, hasValidRecords(a));
+		}
+
+		TEST_METHOD(mustReturnTrueWhenTheAreValidRecords_string)
+		{
+			unordered_map<string, int> a;
+			a.insert({"INVALID", 4});
+			a.insert({"cherven portokal", 4});
+			Assert::AreEqual(true, hasValidRecords(a));
+		}
+
+		TEST_METHOD(mustReturnFalseWhenTheOnlyRecordIsZero)
+		{
+			unordered_map<size_t, int> a;
+			a.insert({0, 6});
+			Assert::AreEqual(false, hasValidRecords(a));
+		}
+
+		TEST_METHOD(mustReturnFalseWhenTheMapIsEmpty_size_t)
+		{
+			unordered_map<size_t, int> a;
+			Assert::AreEqual(false, hasValidRecords(a));
+		}
+
+		TEST_METHOD(mustReturnTrueWhenTheRecordsAreValid_size_t)
+		{
+			unordered_map<size_t, int> a;
+			a.insert({0, 6});
+			a.insert({2, 6});
+			Assert::AreEqual(true, hasValidRecords(a));
+		}
+	};
 	}
