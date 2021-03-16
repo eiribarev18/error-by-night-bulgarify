@@ -147,4 +147,51 @@ namespace Unittesting
 			
 		}
 	};
-}
+	TEST_CLASS(test_menuAddAdditionalPrep_team) 
+	{
+		TEST_METHOD(mustSetValidTime) 
+		{
+			TEAM team1;
+
+			char *tempBuffer = new char[sizeof("YYYY-MM-DD")];
+			time_t currTime;
+			tm tm_;
+			menuAddAdditionalPrep(team1);
+			time(&currTime);
+			localtime_s(&tm_, &currTime);
+
+			strftime(tempBuffer, sizeof("YYYY-MM-DD"), "%F", &tm_);
+			Assert::AreEqual((string)tempBuffer, team1.setupDate);
+			delete[] tempBuffer;
+			
+		}
+
+		TEST_METHOD(mustSetInvalidProject)
+		{
+			TEAM team1;
+			menuAddAdditionalPrep(team1);
+			Assert::AreEqual((string)"INVALID",team1.project);
+		}
+
+		TEST_METHOD(mustSetInvalidStudent)
+		{
+			TEAM_MEMBER member;
+			menuAddAdditionalPrep(member);
+			Assert::AreEqual((string) "INVALID", member.username);
+		}
+	};
+	TEST_CLASS(test_isValidKey)
+	{
+		TEST_METHOD(mustReturnTrueIfTheValueIsNotZero) 
+		{
+			size_t a=1;
+			Assert::AreEqual(true,isValidKey(a));
+		}
+
+		TEST_METHOD(mustReturnTrueIfTheValueIsZero)
+		{
+			size_t a = 0;
+			Assert::AreEqual(false, isValidKey(a));
+		}
+	};
+	}
