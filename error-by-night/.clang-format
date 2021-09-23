@@ -1,9 +1,12 @@
-﻿---
-BasedOnStyle: Microsoft
+﻿BasedOnStyle: Microsoft
 AllowShortBlocksOnASingleLine: 'true'
 AllowShortIfStatementsOnASingleLine: WithoutElse
+AlwaysBreakTemplateDeclarations: 'Yes'
+BinPackArguments: 'false'
 BreakBeforeBraces: Stroustrup
-ColumnLimit: '0'
+BreakConstructorInitializers: AfterColon
+ColumnLimit: '120'
+ConstructorInitializerAllOnOneLineOrOnePerLine: 'true'
 IncludeBlocks: Regroup
 IndentCaseLabels: 'true'
 KeepEmptyLinesAtTheStartOfBlocks: 'false'
@@ -12,5 +15,3 @@ PointerAlignment: Right
 SpaceAfterTemplateKeyword: 'true'
 TabWidth: '4'
 UseTab: Always
-
-...
