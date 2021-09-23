@@ -20,14 +20,10 @@ void clearConsole()
 
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-	if (hConsole == INVALID_HANDLE_VALUE) {
-		return;
-	}
+	if (hConsole == INVALID_HANDLE_VALUE) { return; }
 
 	// Get the number of character cells in the current buffer.
-	if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) {
-		return;
-	}
+	if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) { return; }
 
 	// Scroll the rectangle of the entire buffer.
 	scrollRect.Left = 0;

@@ -30,9 +30,7 @@ bool storeSchools(const vector<SCHOOL> &schools, const string &filename)
 
 void SCHOOL::store(ostream &file) const
 {
-	file << name << '\n'
-		 << city << '\n'
-		 << address << '\n';
+	file << name << '\n' << city << '\n' << address << '\n';
 
 	// students
 	file << students.size() << '\n';
@@ -65,15 +63,12 @@ void SCHOOL::store(ostream &file) const
 
 void STUDENT::store(ostream &file) const
 {
-	file << firstName << ' ' << lastName << '\n'
-		 << email << '\n'
-		 << grade << ' ' << classLetter << '\n';
+	file << firstName << ' ' << lastName << '\n' << email << '\n' << grade << ' ' << classLetter << '\n';
 }
 
 void TEACHER::store(ostream &file) const
 {
-	file << firstName << ' ' << lastName << '\n'
-		 << email << '\n';
+	file << firstName << ' ' << lastName << '\n' << email << '\n';
 
 	file << teams.size() << '\n';
 	for (auto it = teams.begin(); it != teams.end(); it++) {
@@ -83,24 +78,19 @@ void TEACHER::store(ostream &file) const
 
 void TEAM::store(ostream &file) const
 {
-	file << name << '\n'
-		 << description << "|\n"
-		 << setupDate << '\n';
+	file << name << '\n' << description << "|\n" << setupDate << '\n';
 
 	file << members.size() << '\n';
 	for (auto it = members.begin(); it != members.end(); it++) {
 		file << it->username << ' ' << it->role << '\n';
 	}
 
-	file << (unsigned)status << '\n'
-		 << project << '\n';
+	file << (unsigned)status << '\n' << project << '\n';
 }
 
 void PROJECT::store(ostream &file) const
 {
-	file << name << '\n'
-		 << description << "|\n"
-		 << (unsigned)status << '\n';
+	file << name << '\n' << description << "|\n" << (unsigned)status << '\n';
 
 	file << teams.size() << '\n';
 	for (auto it = teams.begin(); it != teams.end(); it++) {

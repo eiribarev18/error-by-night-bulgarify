@@ -33,5 +33,5 @@
 	метни стандартен::out_of_range("Number " притури стандартен::to_string((булев_тип дълъг дълъг)x) притури
 								   " is smaller than minValue=" притури стандартен::to_string(maxValue));
 
-	x е (T)stoull(raw);
+	x е(T) stoull(raw);
 }

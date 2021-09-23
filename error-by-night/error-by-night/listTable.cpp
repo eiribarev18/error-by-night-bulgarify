@@ -9,7 +9,8 @@ void listTable(const vector<SCHOOL> &schools)
 {
 	ios initialState(nullptr);
 
-	size_t colNoWidth, colNameWidth, colCityWidth, colAddressWidth, colStudentsWidth, colTeachersWidth, colTeamsWidth, colProjectsWidth;
+	size_t colNoWidth, colNameWidth, colCityWidth, colAddressWidth, colStudentsWidth, colTeachersWidth, colTeamsWidth,
+		colProjectsWidth;
 	SCHOOL currSchool;
 	string labelNo, labelName, labelCity, labelAddress, labelStudents, labelTeachers, labelTeams, labelProjects;
 
@@ -50,28 +51,25 @@ void listTable(const vector<SCHOOL> &schools)
 	colCityWidth += 2;
 	colAddressWidth += 2;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo
-		 << setw(colNameWidth) << labelName
-		 << setw(colCityWidth) << labelCity
-		 << setw(colAddressWidth) << labelAddress
-		 << setw(colStudentsWidth) << labelStudents
-		 << setw(colTeachersWidth) << labelTeachers
-		 << setw(colTeamsWidth) << labelTeams
-		 << setw(colProjectsWidth) << labelProjects << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colNameWidth)
+		 << labelName << setw(colCityWidth) << labelCity << setw(colAddressWidth) << labelAddress
+		 << setw(colStudentsWidth) << labelStudents << setw(colTeachersWidth) << labelTeachers << setw(colTeamsWidth)
+		 << labelTeams << setw(colProjectsWidth) << labelProjects << endl;
 
-	cout << string(colNoWidth + colNameWidth + colCityWidth + colAddressWidth + colStudentsWidth + colTeachersWidth + colTeamsWidth + colProjectsWidth, '-') << endl;
+	cout << string(colNoWidth + colNameWidth + colCityWidth + colAddressWidth + colStudentsWidth + colTeachersWidth +
+					   colTeamsWidth + colProjectsWidth,
+				   '-')
+		 << endl;
 
 	for (size_t i = 0; i < schools.size(); i++) {
 		const SCHOOL &currSchool = dereferenceElement(schools, schools.begin() + i);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << i + 1
-			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colNameWidth) << currSchool.name
-			 << setw(colCityWidth) << currSchool.city
-			 << setw(colAddressWidth) << currSchool.address
-			 << setw(colStudentsWidth) << currSchool.students.size() - 1
-			 << setw(colTeachersWidth) << currSchool.teachers.size() - 1
-			 << setw(colTeamsWidth) << currSchool.teams.size() - 1
-			 << setw(colProjectsWidth) << currSchool.projects.size() - 1 << endl;
+			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colNameWidth) << currSchool.name << setw(colCityWidth)
+			 << currSchool.city << setw(colAddressWidth) << currSchool.address << setw(colStudentsWidth)
+			 << currSchool.students.size() - 1 << setw(colTeachersWidth) << currSchool.teachers.size() - 1
+			 << setw(colTeamsWidth) << currSchool.teams.size() - 1 << setw(colProjectsWidth)
+			 << currSchool.projects.size() - 1 << endl;
 	}
 
 	cout.copyfmt(initialState);
@@ -117,10 +115,8 @@ void listTable(const unordered_map<string, STUDENT> &students, const SCHOOL &par
 	colLastNameWidth += 2;
 	colEmailWidth += 2;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo
-		 << setw(colFirstNameWidth) << labelFirstName
-		 << setw(colLastNameWidth) << labelLastName
-		 << setw(colEmailWidth) << labelEmail
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colFirstNameWidth)
+		 << labelFirstName << setw(colLastNameWidth) << labelLastName << setw(colEmailWidth) << labelEmail
 		 << setw(colClassWidth) << labelClass << endl;
 
 	cout << string(colNoWidth + colFirstNameWidth + colLastNameWidth + colEmailWidth + colClassWidth, '-') << endl;
@@ -134,8 +130,7 @@ void listTable(const unordered_map<string, STUDENT> &students, const SCHOOL &par
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
 			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colFirstNameWidth) << currStudent.firstName
-			 << setw(colLastNameWidth) << currStudent.lastName
-			 << setw(colEmailWidth) << currStudent.email
+			 << setw(colLastNameWidth) << currStudent.lastName << setw(colEmailWidth) << currStudent.email
 			 << currStudent.grade << ' ' << currStudent.classLetter << endl;
 	}
 
@@ -182,10 +177,8 @@ void listTable(const unordered_map<string, TEACHER> &teachers, const SCHOOL &par
 	colLastNameWidth += 2;
 	colEmailWidth += 2;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo
-		 << setw(colFirstNameWidth) << labelFirstName
-		 << setw(colLastNameWidth) << labelLastName
-		 << setw(colEmailWidth) << labelEmail
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colFirstNameWidth)
+		 << labelFirstName << setw(colLastNameWidth) << labelLastName << setw(colEmailWidth) << labelEmail
 		 << setw(colTeamsWidth) << labelTeams << endl;
 
 	cout << string(colNoWidth + colFirstNameWidth + colLastNameWidth + colEmailWidth + colTeamsWidth, '-') << endl;
@@ -199,8 +192,7 @@ void listTable(const unordered_map<string, TEACHER> &teachers, const SCHOOL &par
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
 			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colFirstNameWidth) << currTeacher.firstName
-			 << setw(colLastNameWidth) << currTeacher.lastName
-			 << setw(colEmailWidth) << currTeacher.email
+			 << setw(colLastNameWidth) << currTeacher.lastName << setw(colEmailWidth) << currTeacher.email
 			 << setw(colTeamsWidth) << currTeacher.teams.size() << endl;
 	}
 
@@ -249,14 +241,12 @@ void listTable(const unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSch
 	colProjectWidth += 2;
 	colStatusWidth += 2;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo
-		 << setw(colNameWidth) << labelName
-		 << setw(colProjectWidth) << labelProject
-		 << setw(colDateWidth) << labelDate
-		 << setw(colMembersWidth) << labelMembers
-		 << setw(colStatusWidth) << labelStatus << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colNameWidth)
+		 << labelName << setw(colProjectWidth) << labelProject << setw(colDateWidth) << labelDate
+		 << setw(colMembersWidth) << labelMembers << setw(colStatusWidth) << labelStatus << endl;
 
-	cout << string(colNoWidth + colNameWidth + colProjectWidth + colDateWidth + colMembersWidth + colStatusWidth, '-') << endl;
+	cout << string(colNoWidth + colNameWidth + colProjectWidth + colDateWidth + colMembersWidth + colStatusWidth, '-')
+		 << endl;
 
 	loopCounter = 0;
 	for (auto it = teams.begin(); it != teams.end(); it++) {
@@ -266,11 +256,10 @@ void listTable(const unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSch
 		const TEAM &currTeam = dereferenceElement(teams, it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
-			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colNameWidth) << currTeam.name
-			 << setw(colProjectWidth) << dereferenceElement(parentSchool.projects, currTeam.project).name
-			 << setw(colDateWidth) << currTeam.setupDate
-			 << setw(colMembersWidth) << currTeam.members.size()
-			 << setw(colStatusWidth) << toString(currTeam.status) << endl;
+			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colNameWidth) << currTeam.name << setw(colProjectWidth)
+			 << dereferenceElement(parentSchool.projects, currTeam.project).name << setw(colDateWidth)
+			 << currTeam.setupDate << setw(colMembersWidth) << currTeam.members.size() << setw(colStatusWidth)
+			 << toString(currTeam.status) << endl;
 	}
 
 	cout.copyfmt(initialState);
@@ -312,10 +301,8 @@ void listTable(const unordered_map<string, PROJECT> &projects, const SCHOOL &par
 	colNameWidth += 2;
 	colStatusWidth += 2;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo
-		 << setw(colNameWidth) << labelName
-		 << setw(colTeamsWidth) << labelTeams
-		 << setw(colStatusWidth) << labelStatus << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colNameWidth)
+		 << labelName << setw(colTeamsWidth) << labelTeams << setw(colStatusWidth) << labelStatus << endl;
 
 	cout << string(colNoWidth + colNameWidth + colTeamsWidth + colStatusWidth, '-') << endl;
 
@@ -327,9 +314,8 @@ void listTable(const unordered_map<string, PROJECT> &projects, const SCHOOL &par
 		const PROJECT &currProject = dereferenceElement(projects, it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
-			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colNameWidth) << currProject.name
-			 << setw(colTeamsWidth) << currProject.teams.size()
-			 << setw(colStatusWidth) << toString(currProject.status) << endl;
+			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colNameWidth) << currProject.name << setw(colTeamsWidth)
+			 << currProject.teams.size() << setw(colStatusWidth) << toString(currProject.status) << endl;
 	}
 
 	cout.copyfmt(initialState);
@@ -368,8 +354,10 @@ void listTable(const vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool)
 	for (auto it = members.begin(); it != members.end(); it++) {
 		const TEAM_MEMBER &currMember = dereferenceElement(members, it);
 
-		colFirstNameWidth = max(colFirstNameWidth, dereferenceElement(parentSchool.students, currMember.username).firstName.size());
-		colLastNameWidth = max(colLastNameWidth, dereferenceElement(parentSchool.students, currMember.username).lastName.size());
+		colFirstNameWidth =
+			max(colFirstNameWidth, dereferenceElement(parentSchool.students, currMember.username).firstName.size());
+		colLastNameWidth =
+			max(colLastNameWidth, dereferenceElement(parentSchool.students, currMember.username).lastName.size());
 		colEmailWidth = max(colEmailWidth, dereferenceElement(parentSchool.students, currMember.username).email.size());
 		colRoleWidth = max(colRoleWidth, toString(currMember.role).size());
 	}
@@ -379,14 +367,13 @@ void listTable(const vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool)
 	colEmailWidth += 2;
 	colRoleWidth += 2;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo
-		 << setw(colFirstNameWidth) << labelFirstName
-		 << setw(colLastNameWidth) << labelLastName
-		 << setw(colEmailWidth) << labelEmail
-		 << setw(colClassWidth) << labelClass
-		 << setw(colRoleWidth) << labelRole << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colFirstNameWidth)
+		 << labelFirstName << setw(colLastNameWidth) << labelLastName << setw(colEmailWidth) << labelEmail
+		 << setw(colClassWidth) << labelClass << setw(colRoleWidth) << labelRole << endl;
 
-	cout << string(colNoWidth + colFirstNameWidth + colLastNameWidth + colEmailWidth + colClassWidth + colRoleWidth, '-') << endl;
+	cout << string(colNoWidth + colFirstNameWidth + colLastNameWidth + colEmailWidth + colClassWidth + colRoleWidth,
+				   '-')
+		 << endl;
 
 	loopCounter = 0;
 	for (auto it = members.begin(); it != members.end(); it++) {
@@ -394,11 +381,13 @@ void listTable(const vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool)
 		const TEAM_MEMBER &currMember = dereferenceElement(members, it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
-			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colFirstNameWidth) << dereferenceElement(parentSchool.students, currMember.username).firstName
-			 << setw(colLastNameWidth) << dereferenceElement(parentSchool.students, currMember.username).lastName
-			 << setw(colEmailWidth) << dereferenceElement(parentSchool.students, currMember.username).email
-			 << right << setw(colClassWidth - 4) << dereferenceElement(parentSchool.students, currMember.username).grade << left << ' ' << setw(3) << dereferenceElement(parentSchool.students, currMember.username).classLetter
-			 << setw(colRoleWidth) << toString(currMember.role) << endl;
+			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colFirstNameWidth)
+			 << dereferenceElement(parentSchool.students, currMember.username).firstName << setw(colLastNameWidth)
+			 << dereferenceElement(parentSchool.students, currMember.username).lastName << setw(colEmailWidth)
+			 << dereferenceElement(parentSchool.students, currMember.username).email << right << setw(colClassWidth - 4)
+			 << dereferenceElement(parentSchool.students, currMember.username).grade << left << ' ' << setw(3)
+			 << dereferenceElement(parentSchool.students, currMember.username).classLetter << setw(colRoleWidth)
+			 << toString(currMember.role) << endl;
 	}
 
 	cout.copyfmt(initialState);
@@ -446,14 +435,12 @@ void listTable(const vector<size_t> &keys, const unordered_map<size_t, TEAM> &te
 	colProjectWidth += 2;
 	colStatusWidth += 2;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo
-		 << setw(colNameWidth) << labelName
-		 << setw(colProjectWidth) << labelProject
-		 << setw(colDateWidth) << labelDate
-		 << setw(colMembersWidth) << labelMembers
-		 << setw(colStatusWidth) << labelStatus << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colNameWidth)
+		 << labelName << setw(colProjectWidth) << labelProject << setw(colDateWidth) << labelDate
+		 << setw(colMembersWidth) << labelMembers << setw(colStatusWidth) << labelStatus << endl;
 
-	cout << string(colNoWidth + colNameWidth + colProjectWidth + colDateWidth + colMembersWidth + colStatusWidth, '-') << endl;
+	cout << string(colNoWidth + colNameWidth + colProjectWidth + colDateWidth + colMembersWidth + colStatusWidth, '-')
+		 << endl;
 
 	loopCounter = 0;
 	for (auto it = keys.begin(); it != keys.end(); it++) {
@@ -461,11 +448,10 @@ void listTable(const vector<size_t> &keys, const unordered_map<size_t, TEAM> &te
 		const TEAM &currTeam = dereferenceElement(teams, *it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
-			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colNameWidth) << currTeam.name
-			 << setw(colProjectWidth) << dereferenceElement(parentSchool.projects, currTeam.project).name
-			 << setw(colDateWidth) << currTeam.setupDate
-			 << setw(colMembersWidth) << currTeam.members.size()
-			 << setw(colStatusWidth) << toString(currTeam.status) << endl;
+			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colNameWidth) << currTeam.name << setw(colProjectWidth)
+			 << dereferenceElement(parentSchool.projects, currTeam.project).name << setw(colDateWidth)
+			 << currTeam.setupDate << setw(colMembersWidth) << currTeam.members.size() << setw(colStatusWidth)
+			 << toString(currTeam.status) << endl;
 	}
 
 	cout.copyfmt(initialState);
@@ -511,10 +497,8 @@ void listTable(const vector<string> &keys, const unordered_map<string, TEACHER> 
 	colLastNameWidth += 2;
 	colEmailWidth += 2;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo
-		 << setw(colFirstNameWidth) << labelFirstName
-		 << setw(colLastNameWidth) << labelLastName
-		 << setw(colEmailWidth) << labelEmail
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colFirstNameWidth)
+		 << labelFirstName << setw(colLastNameWidth) << labelLastName << setw(colEmailWidth) << labelEmail
 		 << setw(colTeamsWidth) << labelTeams << endl;
 
 	cout << string(colNoWidth + colFirstNameWidth + colLastNameWidth + colEmailWidth + colTeamsWidth, '-') << endl;
@@ -526,8 +510,7 @@ void listTable(const vector<string> &keys, const unordered_map<string, TEACHER> 
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
 			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colFirstNameWidth) << currTeacher.firstName
-			 << setw(colLastNameWidth) << currTeacher.lastName
-			 << setw(colEmailWidth) << currTeacher.email
+			 << setw(colLastNameWidth) << currTeacher.lastName << setw(colEmailWidth) << currTeacher.email
 			 << setw(colTeamsWidth) << currTeacher.teams.size() << endl;
 	}
 
