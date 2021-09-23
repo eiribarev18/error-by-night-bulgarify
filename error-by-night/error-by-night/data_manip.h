@@ -1,94 +1,91 @@
-#pragma once
+﻿#pragma once
 
 #include "structures.h"
 
-bool isValidKey(const std::string &key);
-bool isValidKey(size_t key);
+булев_тип isValidKey(константен стандартен::низ псевдоним key);
+булев_тип isValidKey(size_t key);
 
-template <typename T>
-bool addElement(std::vector<T> &v, const T &element)
+шаблон<типово_име T> булев_тип addElement(стандартен::vector<T> псевдоним v, константен T псевдоним element)
 {
-	auto it = find(v.begin(), v.end(), element);
+	auto it е find(v.begin(), v.end(), element);
 
-	if (it != v.end()) return false;
+	ако(it не_е_равно_на v.end()) върни грешно;
 
 	v.push_back(element);
 
-	return true;
+	върни вярно;
 }
 
-bool addElement(std::vector<SCHOOL> &v, const SCHOOL &school);
+булев_тип addElement(стандартен::vector<SCHOOL> псевдоним v, константен SCHOOL псевдоним school);
 
-template <typename KEY, typename T>
-bool addElement(std::unordered_map<KEY, T> &m, const KEY &key, const T &element)
+шаблон<типово_име KEY, типово_име T> булев_тип addElement(стандартен::unordered_map<KEY, T> псевдоним m,
+														  константен KEY псевдоним key, константен T псевдоним element)
 {
-	return m.insert({key, element}).second;
+	върни m.insert({key, element}).second;
 }
 
-template <typename T>
-bool deleteElement(std::vector<T> &v, size_t pos)
+шаблон<типово_име T> булев_тип deleteElement(стандартен::vector<T> псевдоним v, size_t pos)
 {
-	if (pos >= v.size()) return false;
+	ако(pos е_по_голямо_или_равно_на v.size()) върни грешно;
 
 	v.erase(v.begin() + pos);
 
-	return true;
+	върни вярно;
 }
 
-template <typename KEY, typename T>
-bool deleteElement(std::unordered_map<KEY, T> &m, const KEY &key)
+шаблон<типово_име KEY, типово_име T> булев_тип deleteElement(стандартен::unordered_map<KEY, T> псевдоним m,
+															 константен KEY псевдоним key)
 {
-	return m.erase(key);
+	върни m.erase(key);
 }
 
-template <typename T>
-T &dereferenceElement(const std::vector<T> &v, typename std::vector<T>::iterator it)
+шаблон<типово_име T> T псевдоним dereferenceElement(константен стандартен::vector<T> псевдоним v,
+													типово_име стандартен::vector<T>::iterator it)
 {
-	return *it;
+	върни достъпи_стойността_на it;
 }
 
-template <typename T>
-const T &dereferenceElement(const std::vector<T> &v, typename std::vector<T>::const_iterator it)
+шаблон<типово_име T> константен T псевдоним dereferenceElement(константен стандартен::vector<T> псевдоним v,
+															   типово_име стандартен::vector<T>::const_iterator it)
 {
-	return *it;
+	върни достъпи_стойността_на it;
 }
 
-template <typename KEY, typename T>
-T &dereferenceElement(const std::unordered_map<KEY, T> &m, typename std::unordered_map<KEY, T>::iterator it)
+шаблон<типово_име KEY, типово_име T> T псевдоним dereferenceElement(
+	константен стандартен::unordered_map<KEY, T> псевдоним m, типово_име стандартен::unordered_map<KEY, T>::iterator it)
 {
-	return it->second;
+	върни it->second;
 }
 
-template <typename KEY, typename T>
-const T &dereferenceElement(const std::unordered_map<KEY, T> &m, typename std::unordered_map<KEY, T>::const_iterator it)
+шаблон<типово_име KEY, типово_име T> константен T псевдоним
+dereferenceElement(константен стандартен::unordered_map<KEY, T> псевдоним m,
+				   типово_име стандартен::unordered_map<KEY, T>::const_iterator it)
 {
-	return it->second;
+	върни it->second;
 }
 
-template <typename KEY, typename T>
-T &dereferenceElement(std::unordered_map<KEY, T> &m, const KEY &key)
+шаблон<типово_име KEY, типово_име T> T псевдоним dereferenceElement(стандартен::unordered_map<KEY, T> псевдоним m,
+																	константен KEY псевдоним key)
 {
-	return m.find(key)->second;
+	върни m.find(key)->second;
 }
 
-template <typename KEY, typename T>
-const T &dereferenceElement(const std::unordered_map<KEY, T> &m, const KEY &key)
+шаблон<типово_име KEY, типово_име T> константен T псевдоним
+dereferenceElement(константен стандартен::unordered_map<KEY, T> псевдоним m, константен KEY псевдоним key)
 {
-	return m.find(key)->second;
+	върни m.find(key)->second;
 }
 
-template <typename T>
-bool hasValidRecords(const std::unordered_map<std::string, T> &m)
+шаблон<типово_име T> булев_тип hasValidRecords(константен стандартен::unordered_map<std::string, T> псевдоним m)
 {
-	if (m.find("INVALID") != m.end() and m.size() == 1) return false;
+	ако(m.find("INVALID") не_е_равно_на m.end() и m.size() е_равно_на 1) върни грешно;
 
-	return m.size();
+	върни m.size();
 }
 
-template <typename T>
-bool hasValidRecords(const std::unordered_map<size_t, T> &m)
+шаблон<типово_име T> булев_тип hasValidRecords(константен стандартен::unordered_map<size_t, T> псевдоним m)
 {
-	if (m.find(0) != m.end() and m.size() == 1) return false;
+	ако(m.find(0) не_е_равно_на m.end() и m.size() е_равно_на 1) върни false;
 
-	return m.size();
+	върни m.size();
 }

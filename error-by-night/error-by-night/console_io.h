@@ -1,14 +1,14 @@
-#pragma once
+﻿#pragma once
 
 #include "data_manip.h"
 #include "structures.h"
 
 #include <iostream>
 
-enum class ANSI_ESCAPE
+enum клас ANSI_ESCAPE
 {
-	RESET = 0,
-	FG_BLACK = 30,
+	RESET е 0,
+	FG_BLACK е 30,
 	FG_RED,
 	FG_GREEN,
 	FG_YELLOW,
@@ -16,7 +16,7 @@ enum class ANSI_ESCAPE
 	FG_MAGENTA,
 	FG_CYAN,
 	FG_WHITE,
-	BG_BLACK = 40,
+	BG_BLACK е 40,
 	BG_RED,
 	BG_GREEN,
 	BG_YELLOW,
@@ -24,7 +24,7 @@ enum class ANSI_ESCAPE
 	BG_MAGENTA,
 	BG_CYAN,
 	BG_WHITE,
-	FG_B_BLACK = 90,
+	FG_B_BLACK е 90,
 	FG_B_RED,
 	FG_B_GREEN,
 	FG_B_YELLOW,
@@ -32,7 +32,7 @@ enum class ANSI_ESCAPE
 	FG_B_MAGENTA,
 	FG_B_CYAN,
 	FG_B_WHITE,
-	BG_B_BLACK = 100,
+	BG_B_BLACK е 100,
 	BG_B_RED,
 	BG_B_GREEN,
 	BG_B_YELLOW,
@@ -48,8 +48,10 @@ void listTable(const std::unordered_map<std::string, TEACHER> &teachers, const S
 void listTable(const std::unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSchool);
 void listTable(const std::unordered_map<std::string, PROJECT> &projects, const SCHOOL &parentSchool);
 void listTable(const std::vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool);
-void listTable(const std::vector<size_t> &keys, const std::unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSchool);
-void listTable(const std::vector<std::string> &keys, const std::unordered_map<std::string, TEACHER> &teachers, const SCHOOL &parentSchool);
+void listTable(const std::vector<size_t> &keys, const std::unordered_map<size_t, TEAM> &teams,
+			   const SCHOOL &parentSchool);
+void listTable(const std::vector<std::string> &keys, const std::unordered_map<std::string, TEACHER> &teachers,
+			   const SCHOOL &parentSchool);
 
 void clearConsole();
 void printNewlines(size_t n);
@@ -166,8 +168,10 @@ void menuEditFirstName(T &element)
 {
 	using std::cin, std::cout, std::endl, std::getline;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current first name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << element.firstName << endl;
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new first name: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current first name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
+		 << element.firstName << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW)
+		 << "Enter new first name: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, element.firstName);
 
 	clearConsole();
@@ -178,7 +182,8 @@ void menuEditLastName(T &element)
 {
 	using std::cin, std::cout, std::endl, std::getline;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current last name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << element.lastName << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current last name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
+		 << element.lastName << endl;
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new last name: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, element.lastName);
 
@@ -190,7 +195,8 @@ void menuEditEmail(T &element)
 {
 	using std::cin, std::cout, std::endl, std::getline;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current email: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << element.email << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current email: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
+		 << element.email << endl;
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new email: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, element.email);
 
@@ -202,7 +208,8 @@ void menuEditName(T &element)
 {
 	using std::cin, std::cout, std::endl, std::getline;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << element.name << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
+		 << element.name << endl;
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new name: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, element.name);
 
@@ -214,8 +221,11 @@ void menuEditDescription(T &element)
 {
 	using std::cin, std::cout, std::endl, std::getline;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current description: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << element.description << endl;
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new description: (to end description, type | at the end of the last line)" << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW) << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current description: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
+		 << element.description << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW)
+		 << "Enter new description: (to end description, type | at the end of the last line)"
+		 << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW) << endl;
 	getline(cin, element.description, '|');
 	cin.ignore();
 
@@ -229,11 +239,13 @@ void menuEditStatus(T &element)
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Legend:" << endl;
 	for (int i = 0; i <= 1; i++) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << '(' << i << ") " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << toString((STATUS)i) << endl;
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << '(' << i << ") " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
+			 << toString((STATUS)i) << endl;
 	}
 	cout << endl;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current status: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << (unsigned)element.status << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current status: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
+		 << (unsigned)element.status << endl;
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new status: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 
 	try {
@@ -349,7 +361,8 @@ void menuRemove(std::vector<T> &v, const SCHOOL &parentSchool)
 }
 
 template <typename KEY, typename T>
-void menuLink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, T> &allElements, const SCHOOL &parentSchool)
+void menuLink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, T> &allElements,
+			  const SCHOOL &parentSchool)
 {
 	std::vector<const KEY *> keys;
 
@@ -383,7 +396,8 @@ void menuLink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, T>
 }
 
 template <typename KEY, typename T>
-void menuUnlink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, T> &allElements, const SCHOOL &parentSchool)
+void menuUnlink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, T> &allElements,
+				const SCHOOL &parentSchool)
 {
 	std::vector<const KEY *> keys;
 

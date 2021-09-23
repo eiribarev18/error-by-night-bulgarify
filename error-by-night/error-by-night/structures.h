@@ -1,87 +1,97 @@
-#pragma once
+﻿#pragma once
+
+#include "bulgarify/Bulgarify.h"
 
 #include <fstream>
 #include <string>
 #include <unordered_map>
 #include <vector>
 
-enum class STATUS {
+enum клас STATUS
+{
 	ACTIVE,
 	ARCHIVED
 };
 
-struct STUDENT {
-	std::string firstName;
-	std::string lastName;
-	std::string email;
-	unsigned grade;
-	char classLetter;
+структура STUDENT
+{
+	стандартен::низ firstName;
+	стандартен::низ lastName;
+	стандартен::низ email;
+	беззнаков grade;
+	символ classLetter;
 
-	bool restore(std::istream &file);
-	void store(std::ostream &file) const;
+	булев_тип restore(стандартен::istream псевдоним file);
+	безтипов store(стандартен::ostream псевдоним file) константен;
 };
 
-struct TEACHER {
-	std::string firstName;
-	std::string lastName;
-	std::string email;
-	std::vector<size_t> teams;
+структура TEACHER
+{
+	стандартен::низ firstName;
+	стандартен::низ lastName;
+	стандартен::низ email;
+	стандартен::vector<size_t> teams;
 
-	bool restore(std::istream &file);
-	void store(std::ostream &file) const;
+	булев_тип restore(стандартен::istream псевдоним file);
+	безтипов store(стандартен::ostream псевдоним file) константен;
 };
 
-struct TEAM_MEMBER {
-	enum ROLE {
+структура TEAM_MEMBER
+{
+	enum ROLE
+	{
 		SCRUM_MASTER,
 		QA_ENGINEER,
 		DEV_BACKEND,
 		DEV_FRONTEND
 	};
 
-	std::string username;
+	стандартен::низ username;
 	ROLE role;
 };
 
-struct TEAM {
-	std::string name;
-	std::string description;
-	std::string setupDate;
-	std::vector<TEAM_MEMBER> members;
+структура TEAM
+{
+	стандартен::низ name;
+	стандартен::низ description;
+	стандартен::низ setupDate;
+	стандартен::vector<TEAM_MEMBER> members;
 	STATUS status;
-	std::string project;
+	стандартен::string project;
 
-	bool restore(std::istream &file);
-	void store(std::ostream &file) const;
+	булев_тип restore(стандартен::istream псевдоним file);
+	безтипов store(стандартен::ostream псевдоним file) константен;
 
-	std::vector<std::string> getMembers() const;
+	стандартен::vector<стандартен::низ> getMembers() константен;
 };
 
-struct PROJECT {
-	std::string name;
-	std::string description;
-	std::vector<size_t> teams;
+структура PROJECT
+{
+	стандартен::низ name;
+	стандартен::низ description;
+	стандартен::vector<size_t> teams;
 	STATUS status;
 
-	bool restore(std::istream &file);
-	void store(std::ostream &file) const;
+	булев_тип restore(стандартен::istream псевдоним file);
+	безтипов store(стандартен::ostream псевдоним file) константен;
 };
 
-struct SCHOOL {
-	std::string name;
-	std::string city;
-	std::string address;
-	std::unordered_map<std::string, STUDENT> students;
-	std::unordered_map<std::string, TEACHER> teachers;
-	std::unordered_map<size_t, TEAM> teams;
-	std::unordered_map<std::string, PROJECT> projects;
+структура SCHOOL
+{
+	стандартен::низ name;
+	стандартен::низ city;
+	стандартен::низ address;
+	стандартен::unordered_map<стандартен::низ, STUDENT> students;
+	стандартен::unordered_map<стандартен::низ, TEACHER> teachers;
+	стандартен::unordered_map<size_t, TEAM> teams;
+	стандартен::unordered_map<стандартен::низ, PROJECT> projects;
 
-	bool restore(std::istream &file);
-	void store(std::ostream &file) const;
+	булев_тип restore(стандартен::istream псевдоним file);
+	безтипов store(стандартен::ostream псевдоним file) константен;
 
-	std::vector<std::string> getTeachersWithoutTeam(const std::string &project) const;
+	стандартен::vector<стандартен::низ> getTeachersWithoutTeam(константен стандартен::низ псевдоним project) константен;
 };
 
-bool operator==(const TEAM_MEMBER &lhs, const TEAM_MEMBER &rhs);
-std::string toString(STATUS status);
-std::string toString(TEAM_MEMBER::ROLE role);
+булев_тип operator==(константен TEAM_MEMBER псевдоним lhs, константен TEAM_MEMBER псевдоним rhs);
+стандартен::низ toString(STATUS status);
+стандартен::низ toString(TEAM_MEMBER::ROLE role);
