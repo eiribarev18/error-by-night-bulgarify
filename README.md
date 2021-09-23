@@ -1,3 +1,10 @@
+# Error by Night - Bulgarify
+
+This is meant to be a demonstration of the [Bulgarify.h library](https://github.com/kamilanov18/Bulgarify.h).
+
+The [original project](https://github.com/RAStoychev18/error-by-night)'s README is left below for reference:
+
+---
 # Error by Night
 
 ## Introduction
