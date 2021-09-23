@@ -2,12 +2,9 @@ name: Test clang-format compliance
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+    branches: [ main ]
 
 jobs:
   clang-format:
