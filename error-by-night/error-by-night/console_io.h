@@ -42,134 +42,143 @@ enum клас ANSI_ESCAPE
 	BG_B_WHITE
 };
 
-void listTable(const std::vector<SCHOOL> &schools);
-void listTable(const std::unordered_map<std::string, STUDENT> &students, const SCHOOL &parentSchool);
-void listTable(const std::unordered_map<std::string, TEACHER> &teachers, const SCHOOL &parentSchool);
-void listTable(const std::unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSchool);
-void listTable(const std::unordered_map<std::string, PROJECT> &projects, const SCHOOL &parentSchool);
-void listTable(const std::vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool);
-void listTable(const std::vector<size_t> &keys, const std::unordered_map<size_t, TEAM> &teams,
-			   const SCHOOL &parentSchool);
-void listTable(const std::vector<std::string> &keys, const std::unordered_map<std::string, TEACHER> &teachers,
-			   const SCHOOL &parentSchool);
+безтипов listTable(константен стандартен::vector<SCHOOL> псевдоним schools);
+безтипов listTable(константен стандартен::unordered_map<стандартен::низ, STUDENT> псевдоним students,
+				   константен SCHOOL псевдоним parentSchool);
+безтипов listTable(константен стандартен::unordered_map<стандартен::низ, TEACHER> псевдоним teachers,
+				   константен SCHOOL псевдоним parentSchool);
+безтипов listTable(константен стандартен::unordered_map<size_t, TEAM> псевдоним teams,
+				   константен SCHOOL псевдоним parentSchool);
+безтипов listTable(константен стандартен::unordered_map<стандартен::низ, PROJECT> псевдоним projects,
+				   константен SCHOOL псевдоним parentSchool);
+безтипов listTable(константен стандартен::vector<TEAM_MEMBER> псевдоним members,
+				   константен SCHOOL псевдоним parentSchool);
+безтипов listTable(константен стандартен::vector<size_t> псевдоним keys,
+				   константен стандартен::unordered_map<size_t, TEAM> псевдоним teams,
+				   константен SCHOOL псевдоним parentSchool);
+безтипов listTable(константен стандартен::vector<стандартен::низ> псевдоним keys,
+				   константен стандартен::unordered_map<стандартен::низ, TEACHER> псевдоним teachers,
+				   константен SCHOOL псевдоним parentSchool);
 
-void clearConsole();
-void printNewlines(size_t n);
-bool getKey(size_t &key);
-bool getKey(std::string &key);
-void displayMenuOptions(const std::vector<const char *> &options);
-void getMenuChoice(size_t &choice, size_t maxValue, size_t minValue = 1);
-std::string getAnsiEscape(ANSI_ESCAPE colour);
+безтипов clearConsole();
+безтипов printNewlines(size_t n);
+булев_тип getKey(size_t псевдоним key);
+булев_тип getKey(стандартен::низ псевдоним key);
+безтипов displayMenuOptions(константен стандартен::vector<константен символ указател> псевдоним options);
+безтипов getMenuChoice(size_t псевдоним choice, size_t maxValue, size_t minValue е 1);
+стандартен::низ getAnsiEscape(ANSI_ESCAPE colour);
 
-bool menu(std::vector<SCHOOL> &schools);
-bool menu(SCHOOL &school);
-bool menu(STUDENT &student, const SCHOOL &parentSchool);
-bool menu(TEACHER &teacher, const SCHOOL &parentSchool);
-bool menu(TEAM &team, const SCHOOL &parentSchool);
-bool menu(PROJECT &project, const SCHOOL &parentSchool);
-bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool);
+булев_тип menu(стандартен::vector<SCHOOL> псевдоним schools);
+булев_тип menu(SCHOOL псевдоним school);
+булев_тип menu(STUDENT псевдоним student, константен SCHOOL псевдоним parentSchool);
+булев_тип menu(TEACHER псевдоним teacher, константен SCHOOL псевдоним parentSchool);
+булев_тип menu(TEAM псевдоним team, константен SCHOOL псевдоним parentSchool);
+булев_тип menu(PROJECT псевдоним project, константен SCHOOL псевдоним parentSchool);
+булев_тип menu(TEAM_MEMBER псевдоним member, константен SCHOOL псевдоним parentSchool);
 
-void menuSelect(std::vector<SCHOOL> &schools);
-void menuAdd(std::vector<SCHOOL> &schools);
-void menuRemove(std::vector<SCHOOL> &schools);
-void menuRestore(std::vector<SCHOOL> &schools);
-void menuStore(const std::vector<SCHOOL> &schools);
+безтипов menuSelect(стандартен::vector<SCHOOL> псевдоним schools);
+безтипов menuAdd(стандартен::vector<SCHOOL> псевдоним schools);
+безтипов menuRemove(стандартен::vector<SCHOOL> псевдоним schools);
+безтипов menuRestore(стандартен::vector<SCHOOL> псевдоним schools);
+безтипов menuStore(константен стандартен::vector<SCHOOL> псевдоним schools);
 
-void menuAddAdditionalPrep(SCHOOL &school);
-void menuAddAdditionalPrep(TEAM &team);
-void menuAddAdditionalPrep(TEAM_MEMBER &member);
+безтипов menuAddAdditionalPrep(SCHOOL псевдоним school);
+безтипов menuAddAdditionalPrep(TEAM псевдоним team);
+безтипов menuAddAdditionalPrep(TEAM_MEMBER псевдоним member);
 
-void menuRemoveAdditionalPrep(size_t key, const TEAM &team, SCHOOL &parentSchool);
-void menuRemoveAdditionalPrep(const std::string &key, const PROJECT &project, SCHOOL &parentSchool);
-void menuRemoveAdditionalPrep(const std::string &key, const STUDENT &student, SCHOOL &parentSchool);
+безтипов menuRemoveAdditionalPrep(size_t key, константен TEAM псевдоним team, SCHOOL псевдоним parentSchool);
+безтипов menuRemoveAdditionalPrep(константен стандартен::низ псевдоним key, константен PROJECT псевдоним project,
+								  SCHOOL псевдоним parentSchool);
+безтипов menuRemoveAdditionalPrep(константен стандартен::низ псевдоним key, константен STUDENT псевдоним student,
+								  SCHOOL псевдоним parentSchool);
 
-void menuEditCity(SCHOOL &school);
-void menuEditAddress(SCHOOL &school);
+безтипов menuEditCity(SCHOOL псевдоним school);
+безтипов menuEditAddress(SCHOOL псевдоним school);
 
-void menuEditClass(STUDENT &student);
-bool getStudentClass(unsigned &grade, char &classLetter);
+безтипов menuEditClass(STUDENT псевдоним student);
+булев_тип getStudentClass(беззнаков псевдоним grade, символ псевдоним classLetter);
 
-void menuEditUsername(TEAM_MEMBER &member, const SCHOOL &parentSchool);
-void menuEditRole(TEAM_MEMBER &member);
+безтипов menuEditUsername(TEAM_MEMBER псевдоним member, константен SCHOOL псевдоним parentSchool);
+безтипов menuEditRole(TEAM_MEMBER псевдоним member);
 
-void menuEditProject(TEAM &team, const SCHOOL &parentSchool);
+безтипов menuEditProject(TEAM псевдоним team, константен SCHOOL псевдоним parentSchool);
 
-bool menuQueries(const SCHOOL &school);
-void menuQueryTeachersWithoutTeam(const SCHOOL &school);
+булев_тип menuQueries(константен SCHOOL псевдоним school);
+безтипов menuQueryTeachersWithoutTeam(константен SCHOOL псевдоним school);
 
-void displayDetails(const STUDENT &student);
-void displayDetails(const TEACHER &teacher);
-void displayDetails(const TEAM_MEMBER &member, const SCHOOL &parentSchool);
-void displayDetails(const TEAM &team, const SCHOOL &parentSchool);
-void displayDetails(const PROJECT &project);
-void displayDetails(const SCHOOL &school);
+безтипов displayDetails(константен STUDENT псевдоним student);
+безтипов displayDetails(константен TEACHER псевдоним teacher);
+безтипов displayDetails(константен TEAM_MEMBER псевдоним member, константен SCHOOL псевдоним parentSchool);
+безтипов displayDetails(константен TEAM псевдоним team, константен SCHOOL псевдоним parentSchool);
+безтипов displayDetails(константен PROJECT псевдоним project);
+безтипов displayDetails(константен SCHOOL псевдоним school);
 
-template <typename T>
-void menuDriver(T &element)
+шаблон<типово_име T> безтипов menuDriver(T псевдоним element)
 {
 	clearConsole();
 	printNewlines(1);
 
-	while (menu(element)) {};
+	докато(menu(element)){};
 }
 
-template <typename T>
-void menuDriver(T &element, const SCHOOL &parentSchool)
+шаблон<типово_име T> безтипов menuDriver(T псевдоним element, константен SCHOOL псевдоним parentSchool)
 {
 	clearConsole();
 	printNewlines(1);
 
-	while (menu(element, parentSchool)) {};
+	докато(menu(element, parentSchool)){};
 }
 
-template <typename T>
-void menuSelect(std::vector<T> &v, const SCHOOL &parentSchool)
+шаблон<типово_име T> безтипов menuSelect(стандартен::vector<T> псевдоним v, константен SCHOOL псевдоним parentSchool)
 {
 	size_t choice;
 
-	if (v.empty()) {
-		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << std::endl;
-		return;
+	ако(v.empty())
+	{
+		стандартен::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select."
+						 << стандартен::край_на_ред;
+		върни;
 	}
 
 	listTable(v, parentSchool);
 
 	getMenuChoice(choice, v.size());
 
-	menuDriver(dereferenceElement(v, v.begin() + (choice - 1)), parentSchool);
+	menuDriver(dereferenceElement(v, v.begin() плюс(choice минус 1)), parentSchool);
 }
 
-template <typename KEY, typename T>
-void menuSelect(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
+шаблон<типово_име KEY, типово_име T> безтипов menuSelect(стандартен::unordered_map<KEY, T> псевдоним m,
+														 константен SCHOOL псевдоним parentSchool)
 {
-	std::vector<const KEY *> keys;
+	стандартен::vector<константен KEY указател> keys;
 
 	size_t choice;
 
-	if (!hasValidRecords(m)) {
-		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << std::endl;
-		return;
+	ако(не hasValidRecords(m))
+	{
+		стандартен::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select."
+						 << стандартен::край_на_ред;
+		върни;
 	}
 
 	listTable(m, parentSchool);
 
 	keys.reserve(m.size());
-	for (auto it = m.begin(); it != m.end(); it++) {
-		if (isValidKey(it->first)) keys.push_back(&it->first);
+	for (auto it e m.begin(); it не_е_равно_на m.end(); it плюс_плюс) {
+		ако(isValidKey(it->first)) keys.push_back(адрес_на it->first);
 	}
 
-	getMenuChoice(choice, m.size() - 1);
+	getMenuChoice(choice, m.size() минус 1);
 
-	menuDriver(dereferenceElement(m, *keys[choice - 1]), parentSchool);
+	menuDriver(dereferenceElement(m, достъпи_стойността_на keys[choice минус 1]), parentSchool);
 }
 
-template <typename T>
-void menuEditFirstName(T &element)
+шаблон<типово_име T> безтипов menuEditFirstName(T псевдоним element)
 {
-	using std::cin, std::cout, std::endl, std::getline;
+	използвайки стандартен::cin, стандартен::cout, стандартен::край_на_ред, стандартен::getline;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current first name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
-		 << element.firstName << endl;
+		 << element.firstName << край_на_ред;
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW)
 		 << "Enter new first name: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, element.firstName);
@@ -177,255 +186,265 @@ void menuEditFirstName(T &element)
 	clearConsole();
 }
 
-template <typename T>
-void menuEditLastName(T &element)
+шаблон<типово_име T> безтипов menuEditLastName(T псевдоним element)
 {
-	using std::cin, std::cout, std::endl, std::getline;
+	използвайки стандартен::cin, стандартен::cout, стандартен::край_на_ред, стандартен::getline;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current last name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
-		 << element.lastName << endl;
+		 << element.lastName << край_на_ред;
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new last name: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, element.lastName);
 
 	clearConsole();
 }
 
-template <typename T>
-void menuEditEmail(T &element)
+шаблон<типово_име T> безтипов menuEditEmail(T псевдоним element)
 {
-	using std::cin, std::cout, std::endl, std::getline;
+	използвайки стандартен::cin, стандартен::cout, стандартен::край_на_ред, стандартен::getline;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current email: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
-		 << element.email << endl;
+		 << element.email << край_на_ред;
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new email: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, element.email);
 
 	clearConsole();
 }
 
-template <typename T>
-void menuEditName(T &element)
+шаблон<типово_име T> безтипов menuEditName(T псевдоним element)
 {
-	using std::cin, std::cout, std::endl, std::getline;
+	използвайки стандартен::cin, стандартен::cout, стандартен::край_на_ред, стандартен::getline;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
-		 << element.name << endl;
+		 << element.name << край_на_ред;
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new name: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 	getline(cin, element.name);
 
 	clearConsole();
 }
 
-template <typename T>
-void menuEditDescription(T &element)
+шаблон<типово_име T> безтипов menuEditDescription(T псевдоним element)
 {
-	using std::cin, std::cout, std::endl, std::getline;
+	използвайки стандартен::cin, стандартен::cout, стандартен::край_на_ред, стандартен::getline;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current description: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
-		 << element.description << endl;
+		 << element.description << край_на_ред;
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW)
 		 << "Enter new description: (to end description, type | at the end of the last line)"
-		 << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW) << endl;
+		 << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW) << край_на_ред;
 	getline(cin, element.description, '|');
 	cin.ignore();
 
 	clearConsole();
 }
 
-template <typename T>
-void menuEditStatus(T &element)
+шаблон<типово_име T> безтипов menuEditStatus(T псевдоним element)
 {
-	using std::cin, std::cout, std::endl;
+	използвайки стандартен::cin, стандартен::cout, стандартен::край_на_ред;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Legend:" << endl;
-	for (int i = 0; i <= 1; i++) {
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Legend:" << край_на_ред;
+	за(целочислен_тип i е 0; i е_по_малко_или_равно_на 1; i плюс_плюс)
+	{
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << '(' << i << ") " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
-			 << toString((STATUS)i) << endl;
+			 << toString((STATUS)i) << край_на_ред;
 	}
-	cout << endl;
+	cout << край_на_ред;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current status: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
-		 << (unsigned)element.status << endl;
+		 << (беззнаков)element.status << край_на_ред;
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new status: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 
-	try {
-		getUnsignedNumber(cin, element.status, '\n', 1);
+	пробвай
+	{
+		getбеззнаковNumber(cin, element.status, '\n', 1);
 	}
-	catch (...) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Invalid input!" << endl;
-		return;
+	хвани(...)
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Invalid input!" << край_на_ред;
+		върни;
 	}
 
 	clearConsole();
 }
 
-template <typename KEY, typename T>
-void menuAdd(std::unordered_map<KEY, T> &m, const SCHOOL &parentSchool)
+шаблон<типово_име KEY, типово_име T> безтипов menuAdd(стандартен::unordered_map<KEY, T> псевдоним m,
+													  константен SCHOOL псевдоним parentSchool)
 {
-	using std::cin, std::cout, std::endl;
+	използвайки стандартен::cin, стандартен::cout, стандартен::край_на_ред;
 
 	KEY newKey;
-	T newElement = {};
+	T newElement е{};
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter unique key: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
-	if (!getKey(newKey)) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to add element: Invalid key!" << endl;
-		return;
+	ако(не getKey(newKey))
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to add element: Invalid key!" << край_на_ред;
+		върни;
 	}
 
 	menuAddAdditionalPrep(newElement);
 
-	if (!addElement(m, newKey, newElement)) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to add element: Key already exists!" << endl;
-		return;
+	ако(не addElement(m, newKey, newElement))
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to add element: Key already exists!" << край_на_ред;
+		върни;
 	}
 
 	menuDriver(dereferenceElement(m, newKey), parentSchool);
 }
 
-template <typename T>
-void menuAdd(std::vector<T> &v, const SCHOOL &parentSchool)
+шаблон<типово_име T> безтипов menuAdd(стандартен::vector<T> псевдоним v, константен SCHOOL псевдоним parentSchool)
 {
-	using std::cout, std::endl;
+	използвайки стандартен::cout, стандартен::край_на_ред;
 
-	T newElement = {};
+	T newElement е{};
 
 	menuAddAdditionalPrep(newElement);
 
-	if (!addElement(v, newElement)) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to add element: Element already exists!" << endl;
-		return;
+	ако(не addElement(v, newElement))
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to add element: Element already exists!" << край_на_ред;
+		върни;
 	}
 
-	menuDriver(dereferenceElement(v, v.end() - 1), parentSchool);
+	menuDriver(dereferenceElement(v, v.end() минус 1), parentSchool);
 }
 
-template <typename T>
-void menuAddAdditionalPrep(T &element)
+шаблон<типово_име T> безтипов menuAddAdditionalPrep(T псевдоним element)
 {
 	// Dummy function
 }
 
-template <typename KEY, typename T>
-void menuRemoveAdditionalPrep(const KEY &key, const T &element, SCHOOL &parentSchool)
+шаблон<типово_име KEY, типово_име T> безтипов menuRemoveAdditionalPrep(константен KEY псевдоним key,
+																	   константен T псевдоним element,
+																	   SCHOOL псевдоним parentSchool)
 {
 	// Dummy function
 }
 
-template <typename KEY, typename T>
-void menuRemove(std::unordered_map<KEY, T> &m, SCHOOL &parentSchool)
+шаблон<типово_име KEY, типово_име T> безтипов menuRemove(стандартен::unordered_map<KEY, T> псевдоним m,
+														 SCHOOL псевдоним parentSchool)
 {
-	std::vector<const KEY *> keys;
+	стандартен::vector<константен KEY указател> keys;
 
 	size_t choice;
 
-	if (!hasValidRecords(m)) {
-		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to remove." << std::endl;
-		return;
+	ако(не hasValidRecords(m))
+	{
+		стандартен::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to remove."
+						 << стандартен::край_на_ред;
+		върни;
 	}
 
 	listTable(m, parentSchool);
 
 	keys.reserve(m.size());
-	for (auto it = m.begin(); it != m.end(); it++) {
-		if (isValidKey(it->first)) keys.push_back(&it->first);
+	за(auto it е m.begin(); it не_е_равно_на m.end(); it плюс_плюс)
+	{
+		ако(isValidKey(it->first)) keys.push_back(адрес_на it->first);
 	}
 
-	getMenuChoice(choice, m.size() - 1);
+	getMenuChoice(choice, m.size() минус 1);
 
-	menuRemoveAdditionalPrep(*keys[choice - 1], m.begin()->second, parentSchool);
-	deleteElement(m, *keys[choice - 1]);
+	menuRemoveAdditionalPrep(достъпи_стойността_на keys[choice минус 1], m.begin()->second, parentSchool);
+	deleteElement(m, достъпи_стойността_на keys[choice минус 1]);
 
 	clearConsole();
 }
 
-template <typename T>
-void menuRemove(std::vector<T> &v, const SCHOOL &parentSchool)
+шаблон<типово_име T> безтипов menuRemove(стандартен::vector<T> псевдоним v, константен SCHOOL псевдоним parentSchool)
 {
-	using std::cout, std::endl;
+	използвайки стандартен::cout, стандартен::край_на_ред;
 
 	size_t choice;
 
-	if (v.empty()) {
-		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to remove." << std::endl;
-		return;
+	ако(v.empty())
+	{
+		стандартен::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to remove."
+						 << стандартен::край_на_ред;
+		върни;
 	}
 
 	listTable(v, parentSchool);
 
 	getMenuChoice(choice, v.size());
 
-	deleteElement(v, choice - 1);
+	deleteElement(v, choice минус 1);
 
 	clearConsole();
 }
 
-template <typename KEY, typename T>
-void menuLink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, T> &allElements,
-			  const SCHOOL &parentSchool)
+шаблон<типово_име KEY, типово_име T> безтипов
+menuLink(стандартен::vector<KEY> псевдоним linkedElements,
+		 константен стандартен::unordered_map<KEY, T> псевдоним allElements, константен SCHOOL псевдоним parentSchool)
 {
-	std::vector<const KEY *> keys;
+	стандартен::vector<константен KEY указател> keys;
 
-	using std::cout, std::endl;
+	използвайки стандартен::cout, стандартен::край_на_ред;
 
 	size_t choice;
 
-	if (!hasValidRecords(allElements)) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << endl;
-		return;
+	ако(не hasValidRecords(allElements))
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << край_на_ред;
+		върни;
 	}
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Choose from the list: " << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Choose from the list: " << край_на_ред;
 	printNewlines(1);
 
 	listTable(allElements, parentSchool);
 
 	keys.reserve(allElements.size());
-	for (auto it = allElements.begin(); it != allElements.end(); it++) {
-		if (isValidKey(it->first)) keys.push_back(&it->first);
+	за(auto it е allElements.begin(); it не_е_равно_на allElements.end(); it плюс_плюс)
+	{
+		ако(isValidKey(it->first)) keys.push_back(адрес_на it->first);
 	}
 
-	getMenuChoice(choice, allElements.size() - 1);
+	getMenuChoice(choice, allElements.size() минус 1);
 
 	clearConsole();
 
-	if (!addElement(linkedElements, *keys[choice - 1])) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to link!" << endl;
-		return;
+	ако(не addElement(linkedElements, достъпи_стойността_на keys[choice минус 1]))
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to link!" << край_на_ред;
+		върни;
 	}
 }
 
-template <typename KEY, typename T>
-void menuUnlink(std::vector<KEY> &linkedElements, const std::unordered_map<KEY, T> &allElements,
-				const SCHOOL &parentSchool)
+шаблон<типово_име KEY, типово_име T> безтипов
+menuUnlink(стандартен::vector<KEY> псевдоним linkedElements,
+		   константен стандартен::unordered_map<KEY, T> псевдоним allElements, константен SCHOOL псевдоним parentSchool)
 {
-	std::vector<const KEY *> keys;
+	стандартен::vector<константен KEY указател> keys;
 
-	using std::cout, std::endl;
+	използвайки стандартен::cout, стандартен::край_на_ред;
 
 	size_t choice;
 
-	if (linkedElements.empty()) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << endl;
-		return;
+	ако(linkedElements.empty())
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << край_на_ред;
+		върни;
 	}
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Choose from the list: " << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Choose from the list: " << край_на_ред;
 	printNewlines(1);
 
 	listTable(linkedElements, allElements, parentSchool);
 
 	keys.reserve(linkedElements.size());
-	for (auto it = linkedElements.begin(); it != linkedElements.end(); it++) {
-		keys.push_back(&*it);
+	за(auto it е linkedElements.begin(); it не_е_равно_на linkedElements.end(); it плюс_плюс)
+	{
+		keys.push_back(адрес_на достъпи_стойността_на it);
 	}
 
 	getMenuChoice(choice, linkedElements.size());
 
 	clearConsole();
 
-	if (!deleteElement(linkedElements, choice - 1)) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to unlink!" << endl;
-		return;
+	ако(не deleteElement(linkedElements, choice минус 1))
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to unlink!" << край_на_ред;
+		върни;
 	}
 }
