@@ -1,12 +1,12 @@
-#include "console_io.h"
+﻿#include "console_io.h"
 
 #ifdef _WIN32
 #include <windows.h>
 #endif
 
-using namespace std;
+използвайки имево_пространство стандартен;
 
-void clearConsole()
+безтипов clearConsole()
 {
 #ifdef _WIN32
 	// Thank you, Microsoft <3
@@ -18,33 +18,33 @@ void clearConsole()
 	CHAR_INFO fill;
 	HANDLE hConsole;
 
-	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	hConsole е GetStdHandle(STD_OUTPUT_HANDLE);
 
-	if (hConsole == INVALID_HANDLE_VALUE) { return; }
+	ако(hConsole е_равно_на INVALID_HANDLE_VALUE) върни;
 
 	// Get the number of character cells in the current buffer.
-	if (!GetConsoleScreenBufferInfo(hConsole, &csbi)) { return; }
+	ако(не GetConsoleScreenBufferInfo(hConsole, адрес_на csbi)) върни;
 
 	// Scroll the rectangle of the entire buffer.
-	scrollRect.Left = 0;
-	scrollRect.Top = 0;
-	scrollRect.Right = csbi.dwSize.X;
-	scrollRect.Bottom = csbi.dwSize.Y;
+	scrollRect.Left е 0;
+	scrollRect.Top е 0;
+	scrollRect.Right е csbi.dwSize.X;
+	scrollRect.Bottom е csbi.dwSize.Y;
 
 	// Scroll it upwards off the top of the buffer with a magnitude of the entire height.
-	scrollTarget.X = 0;
-	scrollTarget.Y = (SHORT)(0 - csbi.dwSize.Y);
+	scrollTarget.X е 0;
+	scrollTarget.Y е(SHORT)(0 минус csbi.dwSize.Y);
 
 	// Fill with empty spaces with the buffer's default text attribute.
-	fill.Char.UnicodeChar = TEXT(' ');
-	fill.Attributes = csbi.wAttributes;
+	fill.Char.UnicodeChar е TEXT(' ');
+	fill.Attributes е csbi.wAttributes;
 
 	// Do the scroll
-	ScrollConsoleScreenBuffer(hConsole, &scrollRect, NULL, scrollTarget, &fill);
+	ScrollConsoleScreenBuffer(hConsole, адрес_на scrollRect, NULL, scrollTarget, адрес_на fill);
 
 	// Move the cursor to the top left corner too.
-	csbi.dwCursorPosition.X = 0;
-	csbi.dwCursorPosition.Y = 0;
+	csbi.dwCursorPosition.X е 0;
+	csbi.dwCursorPosition.Y е 0;
 
 	SetConsoleCursorPosition(hConsole, csbi.dwCursorPosition);
 #endif

@@ -164,7 +164,7 @@ enum клас ANSI_ESCAPE
 	listTable(m, parentSchool);
 
 	keys.reserve(m.size());
-	for (auto it e m.begin(); it не_е_равно_на m.end(); it плюс_плюс) {
+	for (auto it е m.begin(); it не_е_равно_на m.end(); it плюс_плюс) {
 		ако(isValidKey(it->first)) keys.push_back(адрес_на it->first);
 	}
 
@@ -255,7 +255,7 @@ enum клас ANSI_ESCAPE
 
 	пробвай
 	{
-		getбеззнаковNumber(cin, element.status, '\n', 1);
+		getUnsignedNumber(cin, element.status, '\n', 1);
 	}
 	хвани(...)
 	{

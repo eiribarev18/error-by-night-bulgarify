@@ -1,13 +1,13 @@
-#include "console_io.h"
+﻿#include "console_io.h"
 #include "data_manip.h"
 #include "file_io.h"
 #include "structures.h"
 
 #include <iostream>
 
-using namespace std;
+използвайки имево_пространство стандартен;
 
-int main()
+целочислен_тип main()
 {
 	vector<SCHOOL> schools;
 

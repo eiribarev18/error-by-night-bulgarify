@@ -1,17 +1,18 @@
-#include "data_manip.h"
+﻿#include "data_manip.h"
 
 #include "structures.h"
 
-using namespace std;
+използвайки имево_пространство стандартен;
 
-bool addElement(vector<SCHOOL> &v, const SCHOOL &school)
+булев_тип addElement(vector<SCHOOL> псевдоним v, константен SCHOOL псевдоним school)
 {
-	auto it =
-		find_if(v.begin(), v.end(), [&school](const SCHOOL &currSchool) { return currSchool.name == school.name; });
+	auto it е find_if(v.begin(), v.end(), [псевдоним school](константен SCHOOL псевдоним currSchool) {
+		върни currSchool.name е_равно_на school.name;
+	});
 
-	if (it != v.end()) return false;
+	ако(it не_е_равно_на v.end()) върни грешно;
 
 	v.push_back(school);
 
-	return true;
+	върни вярно;
 }

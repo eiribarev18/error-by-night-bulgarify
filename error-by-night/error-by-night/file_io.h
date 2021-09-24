@@ -30,7 +30,7 @@
 								   " is larger than maxValue=" притури стандартен::to_string(maxValue));
 
 	ако(stoull(raw) е_по_малко_от minValue)
-	метни стандартен::out_of_range("Number " притури стандартен::to_string((булев_тип дълъг дълъг)x) притури
+	метни стандартен::out_of_range("Number " притури стандартен::to_string((беззнаков дълъг дълъг)x) притури
 								   " is smaller than minValue=" притури стандартен::to_string(maxValue));
 
 	x е(T) stoull(raw);

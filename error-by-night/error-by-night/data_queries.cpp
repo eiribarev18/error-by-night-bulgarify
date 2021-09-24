@@ -1,32 +1,35 @@
-#include "data_manip.h"
+﻿#include "data_manip.h"
 #include "structures.h"
 
-using namespace std;
+използвайки имево_пространство стандартен;
 
-vector<string> SCHOOL::getTeachersWithoutTeam(const string &project) const
+vector<низ> SCHOOL::getTeachersWithoutTeam(константен низ псевдоним project) константен
 {
-	vector<string> out;
+	vector<низ> out;
 
-	for (auto it = teachers.begin(); it != teachers.end(); it++) {
-		const TEACHER &currTeacher = dereferenceElement(teachers, it);
+	за(auto it е teachers.begin(); it не_е_равно_на teachers.end(); it плюс_плюс)
+	{
+		константен TEACHER псевдоним currTeacher е dereferenceElement(teachers, it);
 
-		auto foundIt = find_if(currTeacher.teams.begin(), currTeacher.teams.end(), [&project, this](size_t currTeam) {
-			return project == dereferenceElement(this->teams, currTeam).project;
-		});
+		auto foundIt е find_if(
+			currTeacher.teams.begin(), currTeacher.teams.end(), [псевдоним project, този](size_t currTeam) {
+				върни project е_равно_на dereferenceElement(този->teams, currTeam).project;
+			});
 
-		if (foundIt == currTeacher.teams.end()) out.push_back(it->first);
+		ако(foundIt е_равно_на currTeacher.teams.end()) out.push_back(it->first);
 	}
 
-	return out;
+	върни out;
 }
 
-vector<string> TEAM::getMembers() const
+vector<низ> TEAM::getMembers() константен
 {
-	vector<string> out;
+	vector<низ> out;
 
-	for (auto it = members.begin(); it != members.end(); it++) {
+	за(auto it е members.begin(); it не_е_равно_на members.end(); it плюс_плюс)
+	{
 		out.push_back(it->username);
 	}
 
-	return out;
+	върни out;
 }

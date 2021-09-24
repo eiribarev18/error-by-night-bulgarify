@@ -1,44 +1,44 @@
-#include "console_io.h"
+﻿#include "console_io.h"
 #include "data_manip.h"
 #include "structures.h"
 
-using namespace std;
+използвайки имево_пространство стандартен;
 
-bool operator==(const TEAM_MEMBER &lhs, const TEAM_MEMBER &rhs)
+булев_тип operator==(константен TEAM_MEMBER псевдоним lhs, константен TEAM_MEMBER псевдоним rhs)
 {
-	return lhs.username == rhs.username and lhs.role == rhs.role;
+	return lhs.username е_равно_на rhs.username и lhs.role е_равно_на rhs.role;
 }
 
-string toString(STATUS status)
+низ toString(STATUS status)
 {
-	vector<const char *> translation = {"ACTIVE", "ARCHIVED"};
+	vector<константен символ указател> translation е{"ACTIVE", "ARCHIVED"};
 
-	return translation[(size_t)status];
+	върни translation[(size_t)status];
 }
 
-string toString(TEAM_MEMBER::ROLE role)
+низ toString(TEAM_MEMBER::ROLE role)
 {
-	vector<const char *> translation = {"SCRUM MASTER", "QA ENGINEER", "BACKEND DEV", "FRONTEND DEV"};
+	vector<константен символ указател> translation е{"SCRUM MASTER", "QA ENGINEER", "BACKEND DEV", "FRONTEND DEV"};
 
-	return translation[(size_t)role];
+	върни translation[(size_t)role];
 }
 
-string getAnsiEscape(ANSI_ESCAPE colour)
+низ getAnsiEscape(ANSI_ESCAPE colour)
 {
-	string out = "\033[";
+	низ out е "\033[";
 
 	out += to_string((int)colour);
 	out += "m";
 
-	return out;
+	върни out;
 }
 
-bool isValidKey(const string &key)
+булев_тип isValidKey(константен низ псевдоним key)
 {
-	return key != "INVALID";
+	върни key не_е_равно_на "INVALID";
 }
 
-bool isValidKey(size_t key)
+булев_тип isValidKey(size_t key)
 {
-	return key != 0;
+	върни key не_е_равно_на 0;
 }
