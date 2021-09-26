@@ -1,4 +1,4 @@
-#include "console_io.h"
+﻿#include "console_io.h"
 
 #include "data_manip.h"
 #include "file_io.h"
@@ -8,55 +8,61 @@
 #include <iomanip>
 #include <sstream>
 
-using namespace std;
+използвайки имево_пространство стандартен;
 
-void printNewlines(size_t n)
+безтипов printNewlines(size_t n)
 {
-	for (size_t i = 0; i < n; i++) {
+	за(size_t i е 0; i е_по_малко_от n; i плюс_плюс)
+	{
 		cout << endl;
 	}
 }
 
-bool getKey(size_t &key)
+булев_тип getKey(size_t псевдоним key)
 {
-	try {
+	пробвай
+	{
 		getUnsignedNumber(cin, key);
 	}
-	catch (...) {
-		return false;
+	хвани(...)
+	{
+		върни грешно;
 	}
 
-	return true;
+	върни вярно;
 }
 
-bool getKey(string &key)
+булев_тип getKey(низ псевдоним key)
 {
 	getline(cin, key);
 
-	return true;
+	върни вярно;
 }
 
-void displayMenuOptions(const vector<const char *> &options)
+безтипов displayMenuOptions(константен vector<константен символ указател> псевдоним options)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN);
 
-	for (size_t i = 0; i < options.size(); i++) {
-		cout << i + 1 << ". " << options[i] << endl;
+	за(size_t i е 0; i е_по_малко_от options.size(); i плюс_плюс)
+	{
+		cout << i плюс 1 << ". " << options[i] << endl;
 	}
 
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-void getMenuChoice(size_t &choice, size_t maxValue, size_t minValue)
+безтипов getMenuChoice(size_t псевдоним choice, size_t maxValue, size_t minValue)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW);
 
-	while (true) {
+	while (вярно) {
 		cout << "Enter choice (" << minValue << " - " << maxValue << "): " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
-		try {
+		пробвай
+		{
 			getUnsignedNumber(cin, choice, '\n', maxValue, minValue);
 		}
-		catch (...) {
+		хвани(...)
+		{
 			cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Invalid input!" << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW)
 				 << endl;
 			continue;
@@ -67,16 +73,16 @@ void getMenuChoice(size_t &choice, size_t maxValue, size_t minValue)
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-bool menu(vector<SCHOOL> &schools)
+булев_тип menu(vector<SCHOOL> псевдоним schools)
 {
 	size_t choice;
-	vector<const char *> options = {"Select school",
-									"List schools",
-									"Add school",
-									"Remove school",
-									"Restore from backup",
-									"Store to backup",
-									"Quit"};
+	vector<константен символ указател> options е{"Select school",
+												 "List schools",
+												 "Add school",
+												 "Remove school",
+												 "Restore from backup",
+												 "Store to backup",
+												 "Quit"};
 
 	displayMenuOptions(options);
 	getMenuChoice(choice, options.size());
@@ -103,18 +109,18 @@ bool menu(vector<SCHOOL> &schools)
 			menuStore(schools);
 			break;
 		case 7:
-			return false;
+			върни грешно;
 	}
 
 	printNewlines(1);
 
-	return true;
+	върни вярно;
 }
 
-bool menu(SCHOOL &school)
+булев_тип menu(SCHOOL псевдоним school)
 {
 	size_t choice;
-	vector<const char *> options = {
+	vector<константен символ указател> options е{
 		"Edit name",	  "Edit city",	   "Edit address",	 "Select student", "Select teacher", "Select team",
 		"Select project", "List students", "List teachers",	 "List teams",	   "List projects",	 "Add student",
 		"Add teacher",	  "Add team",	   "Add project",	 "Remove student", "Remove teacher", "Remove team",
@@ -190,18 +196,19 @@ bool menu(SCHOOL &school)
 			while (menuQueries(school)) {};
 			break;
 		case 21:
-			return false;
+			върни грешно;
 	}
 
 	printNewlines(1);
 
-	return true;
+	върни вярно;
 }
 
-bool menu(STUDENT &student, const SCHOOL &parentSchool)
+булев_тип menu(STUDENT псевдоним student, константен SCHOOL псевдоним parentSchool)
 {
 	size_t choice;
-	vector<const char *> options = {"Edit first name", "Edit last name", "Edit email", "Edit class", "Back to school"};
+	vector<константен символ указател> options е{
+		"Edit first name", "Edit last name", "Edit email", "Edit class", "Back to school"};
 
 	displayDetails(student);
 	printNewlines(1);
@@ -225,24 +232,24 @@ bool menu(STUDENT &student, const SCHOOL &parentSchool)
 			menuEditClass(student);
 			break;
 		case 5:
-			return false;
+			върни грешно;
 	}
 
 	printNewlines(1);
 
-	return true;
+	върни вярно;
 }
 
-bool menu(TEACHER &teacher, const SCHOOL &parentSchool)
+булев_тип menu(TEACHER псевдоним teacher, константен SCHOOL псевдоним parentSchool)
 {
 	size_t choice;
-	vector<const char *> options = {"Edit first name",
-									"Edit last name",
-									"Edit email",
-									"List teams",
-									"Assign team",
-									"Dismiss team",
-									"Back to school"};
+	vector<константен символ указател> options е{"Edit first name",
+												 "Edit last name",
+												 "Edit email",
+												 "List teams",
+												 "Assign team",
+												 "Dismiss team",
+												 "Back to school"};
 
 	displayDetails(teacher);
 	printNewlines(1);
@@ -272,26 +279,26 @@ bool menu(TEACHER &teacher, const SCHOOL &parentSchool)
 			menuUnlink(teacher.teams, parentSchool.teams, parentSchool);
 			break;
 		case 7:
-			return false;
+			върни грешно;
 	}
 
 	printNewlines(1);
 
-	return true;
+	върни вярно;
 }
 
-bool menu(TEAM &team, const SCHOOL &parentSchool)
+булев_тип menu(TEAM псевдоним team, константен SCHOOL псевдоним parentSchool)
 {
 	size_t choice;
-	vector<const char *> options = {"Edit name",
-									"Edit description",
-									"Edit status",
-									"Change project",
-									"Select member",
-									"List members",
-									"Add member",
-									"Delete member",
-									"Back to school"};
+	vector<константен символ указател> options е{"Edit name",
+												 "Edit description",
+												 "Edit status",
+												 "Change project",
+												 "Select member",
+												 "List members",
+												 "Add member",
+												 "Delete member",
+												 "Back to school"};
 
 	displayDetails(team, parentSchool);
 	printNewlines(1);
@@ -327,18 +334,18 @@ bool menu(TEAM &team, const SCHOOL &parentSchool)
 			menuRemove(team.members, parentSchool);
 			break;
 		case 9:
-			return false;
+			върни грешно;
 	}
 
 	printNewlines(1);
 
-	return true;
+	върни вярно;
 }
 
-bool menu(PROJECT &project, const SCHOOL &parentSchool)
+булев_тип menu(PROJECT псевдоним project, константен SCHOOL псевдоним parentSchool)
 {
 	size_t choice;
-	vector<const char *> options = {
+	vector<константен символ указател> options е{
 		"Edit name", "Edit description", "Edit status", "List teams", "Assign team", "Dismiss team", "Back to school"};
 
 	displayDetails(project);
@@ -369,18 +376,18 @@ bool menu(PROJECT &project, const SCHOOL &parentSchool)
 			menuUnlink(project.teams, parentSchool.teams, parentSchool);
 			break;
 		case 7:
-			return false;
+			върни грешно;
 	}
 
 	printNewlines(1);
 
-	return true;
+	върни вярно;
 }
 
-bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool)
+булев_тип menu(TEAM_MEMBER псевдоним member, константен SCHOOL псевдоним parentSchool)
 {
 	size_t choice;
-	vector<const char *> options = {"Change student", "Edit role", "Back to team"};
+	vector<константен символ указател> options е{"Change student", "Edit role", "Back to team"};
 
 	displayDetails(member, parentSchool);
 	printNewlines(1);
@@ -398,69 +405,73 @@ bool menu(TEAM_MEMBER &member, const SCHOOL &parentSchool)
 			menuEditRole(member);
 			break;
 		case 3:
-			return false;
+			върни грешно;
 	}
 
 	printNewlines(1);
 
-	return true;
+	върни вярно;
 }
 
-void menuSelect(vector<SCHOOL> &schools)
+безтипов menuSelect(vector<SCHOOL> псевдоним schools)
 {
 	size_t choice;
 
 	clearConsole();
 
-	if (schools.empty()) {
+	ако(schools.empty())
+	{
 		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There is currently nothing to select." << std::endl;
-		return;
+		върни;
 	}
 
 	listTable(schools);
 
 	getMenuChoice(choice, schools.size());
 
-	menuDriver(dereferenceElement(schools, schools.begin() + (choice - 1)));
+	menuDriver(dereferenceElement(schools, schools.begin() плюс(choice минус 1)));
 }
 
-void menuAdd(vector<SCHOOL> &schools)
+безтипов menuAdd(vector<SCHOOL> псевдоним schools)
 {
 	SCHOOL newSchool;
 
 	menuAddAdditionalPrep(newSchool);
 
-	if (!addElement(schools, newSchool)) {
+	ако(!addElement(schools, newSchool))
+	{
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Failed to create school: Name already exists!" << endl;
-		return;
+		върни;
 	}
 
-	menuDriver(dereferenceElement(schools, schools.begin() + (schools.size() - 1)));
+	menuDriver(dereferenceElement(schools, schools.begin() плюс(schools.size() минус 1)));
 }
 
-void menuRemove(vector<SCHOOL> &schools)
+безтипов menuRemove(vector<SCHOOL> псевдоним schools)
 {
 	size_t choice;
 
-	if (schools.empty()) {
+	ако(schools.empty())
+	{
 		std::cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no schools." << std::endl;
-		return;
+		върни;
 	}
 
 	listTable(schools);
 
 	getMenuChoice(choice, schools.size());
 
-	deleteElement(schools, choice - 1);
+	deleteElement(schools, choice минус 1);
 
 	clearConsole();
 }
 
-void menuRestore(vector<SCHOOL> &schools)
+безтипов menuRestore(vector<SCHOOL> псевдоним schools)
 {
-	string choice;
+	низ choice;
 
-	if (!schools.empty()) {
+	ако(!schools.empty())
+	{
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW)
 			 << "WARNING: This operation will override your existing schools and you will not be able to recover them."
 			 << endl
@@ -470,15 +481,15 @@ void menuRestore(vector<SCHOOL> &schools)
 		getline(cin, choice);
 		clearConsole();
 
-		if (choice[0] != 'y' and choice[0] != 'Y') return;
+		ако(choice[0] не_е_равно_на 'y' and choice[0] не_е_равно_на 'Y') върни;
 	}
 
 	restoreSchools(schools, "backup");
 }
 
-void menuStore(const vector<SCHOOL> &schools)
+безтипов menuStore(константен vector<SCHOOL> псевдоним schools)
 {
-	string choice;
+	низ choice;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW)
 		 << "WARNING: This operation will override your existing backup and you will no longer be able to access it."
@@ -489,87 +500,94 @@ void menuStore(const vector<SCHOOL> &schools)
 	getline(cin, choice);
 	clearConsole();
 
-	if (choice[0] != 'y' and choice[0] != 'Y') return;
+	ако(choice[0] не_е_равно_на 'y' and choice[0] не_е_равно_на 'Y') върни;
 
 	storeSchools(schools, "backup");
 }
 
-void menuAddAdditionalPrep(SCHOOL &school)
+безтипов menuAddAdditionalPrep(SCHOOL псевдоним school)
 {
-	addElement(school.students, string("INVALID"), {});
-	addElement(school.teachers, string("INVALID"), {});
+	addElement(school.students, низ("INVALID"), {});
+	addElement(school.teachers, низ("INVALID"), {});
 	addElement(school.teams, 0ull, {"", "", "", {}, STATUS::ARCHIVED, "INVALID"});
-	addElement(school.projects, string("INVALID"), {"", "", {}, STATUS::ARCHIVED});
+	addElement(school.projects, низ("INVALID"), {"", "", {}, STATUS::ARCHIVED});
 }
 
-void menuAddAdditionalPrep(TEAM &team)
+безтипов menuAddAdditionalPrep(TEAM псевдоним team)
 {
-	team.project = "INVALID";
+	team.project е "INVALID";
 
-	char *tempBuffer = new char[sizeof("YYYY-MM-DD")];
+	символ указател tempBuffer е нов символ[sizeof("YYYY-MM-DD")];
 	time_t currTime;
 	tm tm_;
 
-	time(&currTime);
+	time(адрес_на currTime);
 
 	// MS localtime_s
-	localtime_s(&tm_, &currTime);
+	localtime_s(адрес_на tm_, адрес_на currTime);
 
-	strftime(tempBuffer, sizeof("YYYY-MM-DD"), "%F", &tm_);
+	strftime(tempBuffer, sizeof("YYYY-MM-DD"), "%F", адрес_на tm_);
 
-	team.setupDate = tempBuffer;
+	team.setupDate е tempBuffer;
 
-	delete[] tempBuffer;
+	изтрий[] tempBuffer;
 }
 
-void menuAddAdditionalPrep(TEAM_MEMBER &member)
+безтипов menuAddAdditionalPrep(TEAM_MEMBER псевдоним member)
 {
-	member.username = "INVALID";
+	member.username е "INVALID";
 }
 
-void menuRemoveAdditionalPrep(size_t key, const TEAM &team, SCHOOL &parentSchool)
+безтипов menuRemoveAdditionalPrep(size_t key, константен TEAM псевдоним team, SCHOOL псевдоним parentSchool)
 {
 	vector<size_t>::iterator tempIt;
 
-	for (auto it = parentSchool.teachers.begin(); it != parentSchool.teachers.end(); it++) {
-		TEACHER &currTeacher = dereferenceElement(parentSchool.teachers, it);
-		tempIt = find(currTeacher.teams.begin(), currTeacher.teams.end(), key);
+	за(auto it е parentSchool.teachers.begin(); it не_е_равно_на parentSchool.teachers.end(); it плюс_плюс)
+	{
+		TEACHER псевдоним currTeacher е dereferenceElement(parentSchool.teachers, it);
+		tempIt е find(currTeacher.teams.begin(), currTeacher.teams.end(), key);
 
-		deleteElement(currTeacher.teams, tempIt - currTeacher.teams.begin());
+		deleteElement(currTeacher.teams, tempIt минус currTeacher.teams.begin());
 	}
 
-	for (auto it = parentSchool.projects.begin(); it != parentSchool.projects.end(); it++) {
-		PROJECT &currProject = dereferenceElement(parentSchool.projects, it);
-		tempIt = find(currProject.teams.begin(), currProject.teams.end(), key);
+	за(auto it е parentSchool.projects.begin(); it не_е_равно_на parentSchool.projects.end(); it плюс_плюс)
+	{
+		PROJECT псевдоним currProject е dereferenceElement(parentSchool.projects, it);
+		tempIt е find(currProject.teams.begin(), currProject.teams.end(), key);
 
-		deleteElement(currProject.teams, tempIt - currProject.teams.begin());
+		deleteElement(currProject.teams, tempIt минус currProject.teams.begin());
 	}
 }
 
-void menuRemoveAdditionalPrep(const string &key, const PROJECT &project, SCHOOL &parentSchool)
+безтипов menuRemoveAdditionalPrep(константен низ псевдоним key, константен PROJECT псевдоним project,
+								  SCHOOL псевдоним parentSchool)
 {
-	for (auto it = parentSchool.teams.begin(); it != parentSchool.teams.end(); it++) {
-		TEAM &currTeam = dereferenceElement(parentSchool.teams, it);
+	за(auto it е parentSchool.teams.begin(); it не_е_равно_на parentSchool.teams.end(); it плюс_плюс)
+	{
+		TEAM псевдоним currTeam е dereferenceElement(parentSchool.teams, it);
 
-		if (currTeam.project == key) currTeam.project = "INVALID";
+		ако(currTeam.project е_равно_на key) currTeam.project е "INVALID";
 	}
 }
 
-void menuRemoveAdditionalPrep(const string &key, const STUDENT &student, SCHOOL &parentSchool)
+безтипов menuRemoveAdditionalPrep(константен низ псевдоним key, константен STUDENT псевдоним student,
+								  SCHOOL псевдоним parentSchool)
 {
 	vector<TEAM_MEMBER>::iterator tempIt;
 
-	for (auto it = parentSchool.teams.begin(); it != parentSchool.teams.end(); it++) {
-		TEAM &currTeam = dereferenceElement(parentSchool.teams, it);
-		tempIt = find_if(currTeam.members.begin(), currTeam.members.end(), [&key](const TEAM_MEMBER &currMember) {
-			return currMember.username == key;
-		});
+	за(auto it е parentSchool.teams.begin(); it не_е_равно_на parentSchool.teams.end(); it плюс_плюс)
+	{
+		TEAM псевдоним currTeam е dereferenceElement(parentSchool.teams, it);
+		tempIt е find_if(
+			currTeam.members.begin(),
+			currTeam.members.end(),
+			[псевдоним key](константен TEAM_MEMBER псевдоним currMember) { върни currMember.username е_равно_на key; });
 
-		deleteElement(currTeam.members, tempIt - currTeam.members.begin());
+		deleteElement(currTeam.members, tempIt минус currTeam.members.begin());
 	}
 }
 
-void menuEditCity(SCHOOL &school)
+безтипов menuEditCity(SCHOOL псевдоним school)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current city: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
 		 << school.city << endl;
@@ -580,7 +598,7 @@ void menuEditCity(SCHOOL &school)
 	clearConsole();
 }
 
-void menuEditAddress(SCHOOL &school)
+безтипов menuEditAddress(SCHOOL псевдоним school)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current address: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
 		 << school.address << endl;
@@ -591,125 +609,135 @@ void menuEditAddress(SCHOOL &school)
 	clearConsole();
 }
 
-void menuEditClass(STUDENT &student)
+безтипов menuEditClass(STUDENT псевдоним student)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current class: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
 		 << student.grade << ' ' << student.classLetter << endl;
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new class: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 
-	if (!getStudentClass(student.grade, student.classLetter)) {
+	ако(!getStudentClass(student.grade, student.classLetter))
+	{
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Invalid input!" << endl;
-		return;
+		върни;
 	}
 
 	clearConsole();
 }
 
-bool getStudentClass(unsigned &grade, char &classLetter)
+булев_тип getStudentClass(беззнаков псевдоним grade, символ псевдоним classLetter)
 {
-	string stemp;
-	unsigned utemp;
-	char ctemp;
+	низ stemp;
+	беззнаков utemp;
+	символ ctemp;
 
 	getline(cin, stemp);
 
 	stringstream line(stemp);
 	line.exceptions(ios::failbit | ios::badbit);
 
-	try {
+	пробвай
+	{
 		getUnsignedNumber(line, utemp, ' ', 12, 1);
-		if (line.str().empty()) return false;
+		ако(line.str().empty()) върни грешно;
 		getline(line, stemp);
-		ctemp = stemp[0];
+		ctemp е stemp[0];
 	}
-	catch (...) {
-		return false;
+	хвани(...)
+	{
+		върни грешно;
 	}
 
-	grade = utemp;
-	classLetter = ctemp;
+	grade е utemp;
+	classLetter е ctemp;
 
-	return true;
+	върни вярно;
 }
 
-void menuEditUsername(TEAM_MEMBER &member, const SCHOOL &parentSchool)
+безтипов menuEditUsername(TEAM_MEMBER псевдоним member, константен SCHOOL псевдоним parentSchool)
 {
-	vector<const string *> keys;
+	vector<константен низ указател> keys;
 
 	size_t choice;
 
-	if (parentSchool.students.empty()) {
+	ако(parentSchool.students.empty())
+	{
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "No students!" << endl;
-		return;
+		върни;
 	}
 
 	listTable(parentSchool.students, parentSchool);
 
 	keys.reserve(parentSchool.students.size());
-	for (auto it = parentSchool.students.begin(); it != parentSchool.students.end(); it++) {
-		if (isValidKey(it->first)) keys.push_back(&it->first);
+	за(auto it е parentSchool.students.begin(); it не_е_равно_на parentSchool.students.end(); it плюс_плюс)
+	{
+		ако(isValidKey(it->first)) keys.push_back(адрес_на it->first);
 	}
 
-	getMenuChoice(choice, parentSchool.students.size() - 1);
+	getMenuChoice(choice, parentSchool.students.size() минус 1);
 
-	member.username = *keys[choice - 1];
+	member.username е достъпи_стойността_на keys[choice минус 1];
 
 	clearConsole();
 }
 
-void menuEditRole(TEAM_MEMBER &member)
+безтипов menuEditRole(TEAM_MEMBER псевдоним member)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Legend:" << endl;
-	for (int i = 0; i <= 3; i++) {
+	за(int i е 0; i е_по_малко_или_равно_на 3; i плюс_плюс)
+	{
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << '(' << i << ") " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
 			 << toString((TEAM_MEMBER::ROLE)i) << endl;
 	}
 	cout << endl;
 
-	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current role: " << (unsigned)member.role << endl;
+	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Current role: " << (беззнаков)member.role << endl;
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_YELLOW) << "Enter new role: " << getAnsiEscape(ANSI_ESCAPE::FG_B_YELLOW);
 
-	try {
+	пробвай
+	{
 		getUnsignedNumber(cin, member.role, '\n', 3);
 	}
-	catch (...) {
+	хвани(...)
+	{
 		clearConsole();
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "Invalid input!" << endl;
-		return;
+		върни;
 	}
 
 	clearConsole();
 }
 
-void menuEditProject(TEAM &team, const SCHOOL &parentSchool)
+безтипов menuEditProject(TEAM псевдоним team, константен SCHOOL псевдоним parentSchool)
 {
-	vector<const string *> keys;
+	vector<константен низ указател> keys;
 
 	size_t choice;
 
-	if (parentSchool.projects.empty()) {
+	ако(parentSchool.projects.empty())
+	{
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "No projects!" << endl;
-		return;
+		върни;
 	}
 
 	listTable(parentSchool.projects, parentSchool);
 
 	keys.reserve(parentSchool.projects.size());
-	for (auto it = parentSchool.projects.begin(); it != parentSchool.projects.end(); it++) {
-		if (isValidKey(it->first)) keys.push_back(&it->first);
+	за(auto it е parentSchool.projects.begin(); it не_е_равно_на parentSchool.projects.end(); it плюс_плюс)
+	{
+		ако(isValidKey(it->first)) keys.push_back(адрес_на it->first);
 	}
 
-	getMenuChoice(choice, parentSchool.projects.size() - 1);
+	getMenuChoice(choice, parentSchool.projects.size() минус 1);
 
-	team.project = *keys[choice - 1];
+	team.project е достъпи_стойността_на keys[choice минус 1];
 
 	clearConsole();
 }
 
-bool menuQueries(const SCHOOL &school)
+булев_тип menuQueries(константен SCHOOL псевдоним school)
 {
 	size_t choice;
-	vector<const char *> options = {"Get teachers wihout teams", "Back to school"};
+	vector<константен символ указател> options е{"Get teachers wihout teams", "Back to school"};
 
 	printNewlines(1);
 
@@ -723,20 +751,21 @@ bool menuQueries(const SCHOOL &school)
 			menuQueryTeachersWithoutTeam(school);
 			break;
 		case 2:
-			return false;
+			върни грешно;
 	}
 
-	return true;
+	върни вярно;
 }
 
-void menuQueryTeachersWithoutTeam(const SCHOOL &school)
+безтипов menuQueryTeachersWithoutTeam(константен SCHOOL псевдоним school)
 {
-	vector<const string *> keys;
+	vector<константен низ указател> keys;
 	size_t choice;
 
-	if (school.projects.empty()) {
+	ако(school.projects.empty())
+	{
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "No projects!" << endl;
-		return;
+		върни;
 	}
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Select project:" << endl;
@@ -745,17 +774,18 @@ void menuQueryTeachersWithoutTeam(const SCHOOL &school)
 	listTable(school.projects, school);
 
 	keys.reserve(school.projects.size());
-	for (auto it = school.projects.begin(); it != school.projects.end(); it++) {
-		if (isValidKey(it->first)) keys.push_back(&it->first);
+	за(auto it е school.projects.begin(); it не_е_равно_на school.projects.end(); it плюс_плюс)
+	{
+		ако(isValidKey(it->first)) keys.push_back(адрес_на it->first);
 	}
 
-	getMenuChoice(choice, school.projects.size() - 1);
+	getMenuChoice(choice, school.projects.size() минус 1);
 
 	clearConsole();
-	listTable(school.getTeachersWithoutTeam(*keys[choice - 1]), school.teachers, school);
+	listTable(school.getTeachersWithoutTeam(достъпи_стойността_на keys[choice минус 1]), school.teachers, school);
 }
 
-void displayDetails(const STUDENT &student)
+безтипов displayDetails(константен STUDENT псевдоним student)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "First name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
 		 << student.firstName << endl
@@ -769,7 +799,7 @@ void displayDetails(const STUDENT &student)
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-void displayDetails(const TEACHER &teacher)
+безтипов displayDetails(константен TEACHER псевдоним teacher)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "First name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
 		 << teacher.firstName << endl
@@ -783,9 +813,9 @@ void displayDetails(const TEACHER &teacher)
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-void displayDetails(const TEAM_MEMBER &member, const SCHOOL &parentSchool)
+безтипов displayDetails(константен TEAM_MEMBER псевдоним member, константен SCHOOL псевдоним parentSchool)
 {
-	const STUDENT &student = dereferenceElement(parentSchool.students, member.username);
+	константен STUDENT псевдоним student е dereferenceElement(parentSchool.students, member.username);
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Student: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
 		 << student.firstName << ' ' << student.lastName << endl
@@ -795,7 +825,7 @@ void displayDetails(const TEAM_MEMBER &member, const SCHOOL &parentSchool)
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-void displayDetails(const TEAM &team, const SCHOOL &parentSchool)
+безтипов displayDetails(константен TEAM псевдоним team, константен SCHOOL псевдоним parentSchool)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << team.name << endl
 		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Setup date: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
@@ -810,7 +840,7 @@ void displayDetails(const TEAM &team, const SCHOOL &parentSchool)
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-void displayDetails(const PROJECT &project)
+безтипов displayDetails(константен PROJECT псевдоним project)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << project.name
 		 << endl
@@ -824,7 +854,7 @@ void displayDetails(const PROJECT &project)
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-void displayDetails(const SCHOOL &school)
+безтипов displayDetails(константен SCHOOL псевдоним school)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Name: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.name
 		 << endl
@@ -833,13 +863,13 @@ void displayDetails(const SCHOOL &school)
 		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Address: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << school.address
 		 << endl
 		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of students: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
-		 << school.students.size() - 1 << endl
+		 << school.students.size() минус 1 << endl
 		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of teachers: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
-		 << school.teachers.size() - 1 << endl
+		 << school.teachers.size() минус 1 << endl
 		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of teams: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
-		 << school.teams.size() - 1 << endl
+		 << school.teams.size() минус 1 << endl
 		 << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Number of projects: " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
-		 << school.projects.size() - 1 << endl;
+		 << school.projects.size() минус 1 << endl;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
