@@ -1,21 +1,22 @@
-#include "data_manip.h"
+﻿#include "data_manip.h"
 #include "file_io.h"
 #include "structures.h"
 
 #include <iostream>
 
-using namespace std;
+използвайки имево_пространство стандартен;
 
-bool restoreSchools(vector<SCHOOL> &schools, const string &filename)
+булев_тип restoreSchools(vector<SCHOOL> псевдоним schools, const string псевдоним filename)
 {
-	try {
+	пробвай
+	{
 		ifstream file(filename);
 		size_t schoolsSize;
 		SCHOOL currSchool;
 
-		file.exceptions(ios::failbit | ios::badbit);
+		file.exceptions(ios::failbit побитово_или ios::badbit);
 
-		if (!file.good()) return false;
+		ако(не file.good()) върни грешно;
 
 		schools.clear();
 
@@ -23,24 +24,26 @@ bool restoreSchools(vector<SCHOOL> &schools, const string &filename)
 
 		schools.reserve(schoolsSize);
 
-		for (size_t i = 0; i < schoolsSize; i++) {
+		за(size_t i е 0; i е_по_малко_от schoolsSize; i плюс_плюс)
+		{
 			currSchool.restore(file);
 			addElement(schools, currSchool);
 		}
 	}
-	catch (exception &e) {
-		cerr << "Master restore encountered exception: " << e.what() << endl;
+	хвани(exception псевдоним e)
+	{
+		cerr << "Master restore encountered exception: " << e.what() << край_на_ред;
 
-		return false;
+		върни грешно;
 	}
 
-	return true;
+	върни вярно;
 }
 
-bool SCHOOL::restore(istream &file)
+булев_тип SCHOOL::restore(istream псевдоним file)
 {
 	size_t mapSize;
-	string temp, currKey;
+	низ temp, currKey;
 	STUDENT currStudent;
 	TEACHER currTeacher;
 	TEAM currTeam;
@@ -54,7 +57,8 @@ bool SCHOOL::restore(istream &file)
 	// students
 	students.clear();
 	getUnsignedNumber(file, mapSize);
-	for (size_t i = 0; i < mapSize; i++) {
+	за(size_t i е 0; i е_по_малко_от mapSize; i плюс_плюс)
+	{
 		getline(file, currKey);
 		currStudent.restore(file);
 
@@ -64,7 +68,8 @@ bool SCHOOL::restore(istream &file)
 	// teachers
 	teachers.clear();
 	getUnsignedNumber(file, mapSize);
-	for (size_t i = 0; i < mapSize; i++) {
+	за(size_t i е 0; i е_по_малко_от mapSize; i плюс_плюс)
+	{
 		getline(file, currKey);
 		currTeacher.restore(file);
 
@@ -74,7 +79,8 @@ bool SCHOOL::restore(istream &file)
 	// teams
 	teams.clear();
 	getUnsignedNumber(file, mapSize);
-	for (size_t i = 0; i < mapSize; i++) {
+	за(size_t i е 0; i е_по_малко_от mapSize; i плюс_плюс)
+	{
 		getUnsignedNumber(file, ucurrKey);
 		currTeam.restore(file);
 
@@ -84,19 +90,20 @@ bool SCHOOL::restore(istream &file)
 	// projects
 	projects.clear();
 	getUnsignedNumber(file, mapSize);
-	for (size_t i = 0; i < mapSize; i++) {
+	за(size_t i е 0; i е_по_малко_от mapSize; i плюс_плюс)
+	{
 		getline(file, currKey);
 		currProject.restore(file);
 
 		addElement(projects, currKey, currProject);
 	}
 
-	return true;
+	върни вярно;
 }
 
-bool STUDENT::restore(istream &file)
+булев_тип STUDENT::restore(istream псевдоним file)
 {
-	string stemp;
+	низ stemp;
 
 	getline(file, firstName, ' ');
 	getline(file, lastName);
@@ -104,12 +111,12 @@ bool STUDENT::restore(istream &file)
 	getUnsignedNumber(file, grade, ' ');
 
 	getline(file, stemp);
-	classLetter = stemp[0];
+	classLetter е stemp[0];
 
-	return true;
+	върни вярно;
 }
 
-bool TEACHER::restore(istream &file)
+булев_тип TEACHER::restore(istream псевдоним file)
 {
 	size_t vectorSize, utemp;
 
@@ -119,16 +126,17 @@ bool TEACHER::restore(istream &file)
 
 	getUnsignedNumber(file, vectorSize);
 	teams.clear();
-	for (size_t i = 0; i < vectorSize; i++) {
+	за(size_t i е 0; i е_по_малко_от vectorSize; i плюс_плюс)
+	{
 		getUnsignedNumber(file, utemp);
 
 		addElement(teams, utemp);
 	}
 
-	return true;
+	върни вярно;
 }
 
-bool TEAM::restore(istream &file)
+булев_тип TEAM::restore(istream псевдоним file)
 {
 	size_t vectorSize;
 	TEAM_MEMBER currMember;
@@ -140,7 +148,8 @@ bool TEAM::restore(istream &file)
 
 	getUnsignedNumber(file, vectorSize);
 	members.clear();
-	for (size_t i = 0; i < vectorSize; i++) {
+	за(size_t i е 0; i е_по_малко_от vectorSize; i плюс_плюс)
+	{
 		getline(file, currMember.username, ' ');
 		getUnsignedNumber(file, currMember.role, '\n', 3);
 
@@ -150,10 +159,10 @@ bool TEAM::restore(istream &file)
 	getUnsignedNumber(file, status, '\n', 1);
 	getline(file, project);
 
-	return true;
+	върни вярно;
 }
 
-bool PROJECT::restore(istream &file)
+булев_тип PROJECT::restore(istream псевдоним file)
 {
 	size_t vectorSize, utemp;
 
@@ -164,11 +173,12 @@ bool PROJECT::restore(istream &file)
 
 	getUnsignedNumber(file, vectorSize);
 	teams.clear();
-	for (size_t i = 0; i < vectorSize; i++) {
+	за(size_t i е 0; i е_по_малко_от vectorSize; i плюс_плюс)
+	{
 		getUnsignedNumber(file, utemp);
 
 		addElement(teams, utemp);
 	}
 
-	return true;
+	върни вярно;
 }

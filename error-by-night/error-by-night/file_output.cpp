@@ -1,99 +1,109 @@
-#include "data_manip.h"
+﻿#include "data_manip.h"
 #include "file_io.h"
 #include "structures.h"
 
 #include <iostream>
 
-using namespace std;
+използвайки имево_пространство стандартен;
 
-bool storeSchools(const vector<SCHOOL> &schools, const string &filename)
+булев_тип storeSchools(константен vector<SCHOOL> псевдоним schools, константен низ псевдоним filename)
 {
-	ofstream file(filename, ios::out | ios::trunc);
+	ofstream file(filename, ios::out побитово_или ios::trunc);
 
-	file.exceptions(ios::failbit | ios::badbit);
+	file.exceptions(ios::failbit побитово_или ios::badbit);
 
-	try {
+	пробвай
+	{
 		file << schools.size() << '\n';
 
-		for (auto it = schools.begin(); it != schools.end(); it++) {
+		за(auto it е schools.begin(); it не_е_равно_на schools.end(); it плюс_плюс)
+		{
 			dereferenceElement(schools, it).store(file);
 		}
 	}
-	catch (exception &e) {
+	хвани(exception псевдоним e)
+	{
 		cerr << "Master store encountered exception: " << e.what() << endl;
 
-		return false;
+		върни грешно;
 	}
 
-	return true;
+	върни вярно;
 }
 
-void SCHOOL::store(ostream &file) const
+безтипов SCHOOL::store(ostream псевдоним file) константен
 {
 	file << name << '\n' << city << '\n' << address << '\n';
 
 	// students
 	file << students.size() << '\n';
-	for (auto it = students.begin(); it != students.end(); it++) {
+	за(auto it е students.begin(); it не_е_равно_на students.end(); it плюс_плюс)
+	{
 		file << it->first << '\n';
 		it->second.store(file);
 	}
 
 	// teachers
 	file << teachers.size() << '\n';
-	for (auto it = teachers.begin(); it != teachers.end(); it++) {
+	за(auto it е teachers.begin(); it не_е_равно_на teachers.end(); it плюс_плюс)
+	{
 		file << it->first << '\n';
 		it->second.store(file);
 	}
 
 	// teams
 	file << teams.size() << '\n';
-	for (auto it = teams.begin(); it != teams.end(); it++) {
+	за(auto it е teams.begin(); it не_е_равно_на teams.end(); it плюс_плюс)
+	{
 		file << it->first << '\n';
 		it->second.store(file);
 	}
 
 	// projects
 	file << projects.size() << '\n';
-	for (auto it = projects.begin(); it != projects.end(); it++) {
+	за(auto it е projects.begin(); it не_е_равно_на projects.end(); it плюс_плюс)
+	{
 		file << it->first << '\n';
 		it->second.store(file);
 	}
 }
 
-void STUDENT::store(ostream &file) const
+безтипов STUDENT::store(ostream псевдоним file) константен
 {
 	file << firstName << ' ' << lastName << '\n' << email << '\n' << grade << ' ' << classLetter << '\n';
 }
 
-void TEACHER::store(ostream &file) const
+безтипов TEACHER::store(ostream псевдоним file) константен
 {
 	file << firstName << ' ' << lastName << '\n' << email << '\n';
 
 	file << teams.size() << '\n';
-	for (auto it = teams.begin(); it != teams.end(); it++) {
-		file << *it << '\n';
+	за(auto it е teams.begin(); it не_е_равно_на teams.end(); it плюс_плюс)
+	{
+		file << достъпи_стойността_на it << '\n';
 	}
 }
 
-void TEAM::store(ostream &file) const
+безтипов TEAM::store(ostream псевдоним file) константен
 {
 	file << name << '\n' << description << "|\n" << setupDate << '\n';
 
 	file << members.size() << '\n';
-	for (auto it = members.begin(); it != members.end(); it++) {
+	за(auto it е members.begin(); it не_е_равно_на members.end(); it плюс_плюс)
+	{
 		file << it->username << ' ' << it->role << '\n';
 	}
 
 	file << (unsigned)status << '\n' << project << '\n';
 }
 
-void PROJECT::store(ostream &file) const
+безтипов PROJECT::store(ostream псевдоним file) константен
 {
 	file << name << '\n' << description << "|\n" << (unsigned)status << '\n';
 
 	file << teams.size() << '\n';
-	for (auto it = teams.begin(); it != teams.end(); it++) {
-		file << *it << '\n';
+	за(auto it е teams.begin(); it не_е_равно_на teams.end(); it плюс_плюс)
+	{
+		file << достъпи_стойността_на it << '\n';
 	}
 }
