@@ -1,384 +1,411 @@
-#include "console_io.h"
+﻿#include "console_io.h"
 #include "data_manip.h"
 
 #include <iomanip>
 
-using namespace std;
+използвайки имево_пространство стандартен;
 
-void listTable(const vector<SCHOOL> &schools)
+безтипов listTable(константен vector<SCHOOL> псевдоним schools)
 {
-	ios initialState(nullptr);
+	ios initialState(нулев_указател);
 
 	size_t colNoWidth, colNameWidth, colCityWidth, colAddressWidth, colStudentsWidth, colTeachersWidth, colTeamsWidth,
 		colProjectsWidth;
 	SCHOOL currSchool;
-	string labelNo, labelName, labelCity, labelAddress, labelStudents, labelTeachers, labelTeams, labelProjects;
+	низ labelNo, labelName, labelCity, labelAddress, labelStudents, labelTeachers, labelTeams, labelProjects;
 
-	if (schools.empty()) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no schools." << endl;
-		return;
+	ако(schools.empty())
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no schools." << край_на_ред;
+		върни;
 	}
 
 	initialState.copyfmt(cout);
 
-	labelNo = "No.";
-	labelName = "Name";
-	labelCity = "City";
-	labelAddress = "Address";
-	labelStudents = "Students";
-	labelTeachers = "Teachers";
-	labelTeams = "Teams";
-	labelProjects = "Projects";
+	labelNo е "No.";
+	labelName е "Name";
+	labelCity е "City";
+	labelAddress е "Address";
+	labelStudents е "Students";
+	labelTeachers е "Teachers";
+	labelTeams е "Teams";
+	labelProjects е "Projects";
 
-	colNoWidth = max((size_t)ceil(log10(schools.size())), labelNo.size()) + 2;
-	colNameWidth = labelName.size();
-	colCityWidth = labelCity.size();
-	colAddressWidth = labelAddress.size();
-	colStudentsWidth = labelStudents.size() + 2;
-	colTeachersWidth = labelTeachers.size() + 2;
-	colTeamsWidth = labelTeams.size() + 2;
-	colProjectsWidth = labelProjects.size() + 2;
+	colNoWidth е max((size_t)ceil(log10(schools.size())), labelNo.size()) плюс 2;
+	colNameWidth е labelName.size();
+	colCityWidth е labelCity.size();
+	colAddressWidth е labelAddress.size();
+	colStudentsWidth е labelStudents.size() плюс 2;
+	colTeachersWidth е labelTeachers.size() плюс 2;
+	colTeamsWidth е labelTeams.size() плюс 2;
+	colProjectsWidth е labelProjects.size() плюс 2;
 
-	for (auto it = schools.begin(); it != schools.end(); it++) {
-		currSchool = dereferenceElement(schools, it);
+	за(auto it е schools.begin(); it не_е_равно_на schools.end(); it плюс_плюс)
+	{
+		currSchool е dereferenceElement(schools, it);
 
-		colNameWidth = max(colNameWidth, currSchool.name.size());
-		colCityWidth = max(colCityWidth, currSchool.city.size());
-		colAddressWidth = max(colAddressWidth, currSchool.address.size());
+		colNameWidth е max(colNameWidth, currSchool.name.size());
+		colCityWidth е max(colCityWidth, currSchool.city.size());
+		colAddressWidth е max(colAddressWidth, currSchool.address.size());
 	}
 
-	colNameWidth += 2;
-	colCityWidth += 2;
-	colAddressWidth += 2;
+	colNameWidth плюс_равно 2;
+	colCityWidth плюс_равно 2;
+	colAddressWidth плюс_равно 2;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colNameWidth)
 		 << labelName << setw(colCityWidth) << labelCity << setw(colAddressWidth) << labelAddress
 		 << setw(colStudentsWidth) << labelStudents << setw(colTeachersWidth) << labelTeachers << setw(colTeamsWidth)
-		 << labelTeams << setw(colProjectsWidth) << labelProjects << endl;
+		 << labelTeams << setw(colProjectsWidth) << labelProjects << край_на_ред;
 
-	cout << string(colNoWidth + colNameWidth + colCityWidth + colAddressWidth + colStudentsWidth + colTeachersWidth +
-					   colTeamsWidth + colProjectsWidth,
-				   '-')
-		 << endl;
+	cout << низ(colNoWidth притури colNameWidth притури colCityWidth притури colAddressWidth притури colStudentsWidth
+					притури colTeachersWidth притури colTeamsWidth притури colProjectsWidth,
+				'-')
+		 << край_на_ред;
 
-	for (size_t i = 0; i < schools.size(); i++) {
-		const SCHOOL &currSchool = dereferenceElement(schools, schools.begin() + i);
+	за(size_t i е 0; i < schools.size(); i плюс_плюс)
+	{
+		константен SCHOOL псевдоним currSchool е dereferenceElement(schools, schools.begin() плюс i);
 
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << i + 1
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << i плюс 1
 			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colNameWidth) << currSchool.name << setw(colCityWidth)
 			 << currSchool.city << setw(colAddressWidth) << currSchool.address << setw(colStudentsWidth)
 			 << currSchool.students.size() - 1 << setw(colTeachersWidth) << currSchool.teachers.size() - 1
 			 << setw(colTeamsWidth) << currSchool.teams.size() - 1 << setw(colProjectsWidth)
-			 << currSchool.projects.size() - 1 << endl;
+			 << currSchool.projects.size() - 1 << край_на_ред;
 	}
 
 	cout.copyfmt(initialState);
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-void listTable(const unordered_map<string, STUDENT> &students, const SCHOOL &parentSchool)
+безтипов listTable(константен unordered_map<низ, STUDENT> псевдоним students, константен SCHOOL псевдоним parentSchool)
 {
-	ios initialState(nullptr);
+	ios initialState(нулев_указател);
 
 	size_t colNoWidth, colFirstNameWidth, colLastNameWidth, colEmailWidth, colClassWidth;
 	size_t loopCounter;
-	string labelNo, labelFirstName, labelLastName, labelEmail, labelClass;
+	низ labelNo, labelFirstName, labelLastName, labelEmail, labelClass;
 
-	if (!hasValidRecords(students)) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no students." << endl;
-		return;
+	ако(!hasValidRecords(students))
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no students." << край_на_ред;
+		върни;
 	}
 
 	initialState.copyfmt(cout);
 
-	labelNo = "No.";
-	labelFirstName = "First name";
-	labelLastName = "Last name";
-	labelEmail = "Email";
-	labelClass = "Class";
+	labelNo е "No.";
+	labelFirstName е "First name";
+	labelLastName е "Last name";
+	labelEmail е "Email";
+	labelClass е "Class";
 
-	colNoWidth = max((size_t)ceil(log10(students.size())), labelNo.size()) + 2;
-	colFirstNameWidth = labelFirstName.size();
-	colLastNameWidth = labelLastName.size();
-	colEmailWidth = labelEmail.size();
-	colClassWidth = labelClass.size() + 2;
+	colNoWidth е max((size_t)ceil(log10(students.size())), labelNo.size()) плюс 2;
+	colFirstNameWidth е labelFirstName.size();
+	colLastNameWidth е labelLastName.size();
+	colEmailWidth е labelEmail.size();
+	colClassWidth е labelClass.size() плюс 2;
 
-	for (auto it = students.begin(); it != students.end(); it++) {
-		const STUDENT &currStudent = dereferenceElement(students, it);
+	за(auto it е students.begin(); it не_е_равно_на students.end(); it плюс_плюс)
+	{
+		константен STUDENT псевдоним currStudent е dereferenceElement(students, it);
 
-		colFirstNameWidth = max(colFirstNameWidth, currStudent.firstName.size());
-		colLastNameWidth = max(colLastNameWidth, currStudent.lastName.size());
-		colEmailWidth = max(colEmailWidth, currStudent.email.size());
+		colFirstNameWidth е max(colFirstNameWidth, currStudent.firstName.size());
+		colLastNameWidth е max(colLastNameWidth, currStudent.lastName.size());
+		colEmailWidth е max(colEmailWidth, currStudent.email.size());
 	}
 
-	colFirstNameWidth += 2;
-	colLastNameWidth += 2;
-	colEmailWidth += 2;
+	colFirstNameWidth плюс_равно 2;
+	colLastNameWidth плюс_равно 2;
+	colEmailWidth плюс_равно 2;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colFirstNameWidth)
 		 << labelFirstName << setw(colLastNameWidth) << labelLastName << setw(colEmailWidth) << labelEmail
-		 << setw(colClassWidth) << labelClass << endl;
+		 << setw(colClassWidth) << labelClass << край_на_ред;
 
-	cout << string(colNoWidth + colFirstNameWidth + colLastNameWidth + colEmailWidth + colClassWidth, '-') << endl;
+	cout << низ(colNoWidth притури colFirstNameWidth притури colLastNameWidth притури colEmailWidth притури
+					colClassWidth,
+				'-')
+		 << край_на_ред;
 
-	loopCounter = 0;
-	for (auto it = students.begin(); it != students.end(); it++) {
-		if (!isValidKey(it->first)) continue;
+	loopCounter е 0;
+	за(auto it е students.begin(); it не_е_равно_на students.end(); it плюс_плюс)
+	{
+		ако(!isValidKey(it->first)) continue;
 
-		loopCounter++;
-		const STUDENT &currStudent = dereferenceElement(students, it);
+		loopCounter плюс_плюс;
+		константен STUDENT псевдоним currStudent е dereferenceElement(students, it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
 			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colFirstNameWidth) << currStudent.firstName
 			 << setw(colLastNameWidth) << currStudent.lastName << setw(colEmailWidth) << currStudent.email
-			 << currStudent.grade << ' ' << currStudent.classLetter << endl;
+			 << currStudent.grade << ' ' << currStudent.classLetter << край_на_ред;
 	}
 
 	cout.copyfmt(initialState);
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-void listTable(const unordered_map<string, TEACHER> &teachers, const SCHOOL &parentSchool)
+безтипов listTable(константен unordered_map<низ, TEACHER> псевдоним teachers, константен SCHOOL псевдоним parentSchool)
 {
-	ios initialState(nullptr);
+	ios initialState(нулев_указател);
 
 	size_t colNoWidth, colFirstNameWidth, colLastNameWidth, colEmailWidth, colTeamsWidth;
 	size_t loopCounter;
-	string labelNo, labelFirstName, labelLastName, labelEmail, labelTeams;
+	низ labelNo, labelFirstName, labelLastName, labelEmail, labelTeams;
 
-	if (!hasValidRecords(teachers)) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no teachers." << endl;
-		return;
+	ако(!hasValidRecords(teachers))
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no teachers." << край_на_ред;
+		върни;
 	}
 
 	initialState.copyfmt(cout);
 
-	labelNo = "No.";
-	labelFirstName = "First name";
-	labelLastName = "Last name";
-	labelEmail = "Email";
-	labelTeams = "Assigned teams";
+	labelNo е "No.";
+	labelFirstName е "First name";
+	labelLastName е "Last name";
+	labelEmail е "Email";
+	labelTeams е "Assigned teams";
 
-	colNoWidth = max((size_t)ceil(log10(teachers.size())), labelNo.size()) + 2;
-	colFirstNameWidth = labelFirstName.size();
-	colLastNameWidth = labelLastName.size();
-	colEmailWidth = labelEmail.size();
-	colTeamsWidth = labelTeams.size() + 2;
+	colNoWidth е max((size_t)ceil(log10(teachers.size())), labelNo.size()) плюс 2;
+	colFirstNameWidth е labelFirstName.size();
+	colLastNameWidth е labelLastName.size();
+	colEmailWidth е labelEmail.size();
+	colTeamsWidth е labelTeams.size() плюс 2;
 
-	for (auto it = teachers.begin(); it != teachers.end(); it++) {
-		const TEACHER &currTeacher = dereferenceElement(teachers, it);
+	за(auto it е teachers.begin(); it не_е_равно_на teachers.end(); it плюс_плюс)
+	{
+		константен TEACHER псевдоним currTeacher е dereferenceElement(teachers, it);
 
-		colFirstNameWidth = max(colFirstNameWidth, currTeacher.firstName.size());
-		colLastNameWidth = max(colLastNameWidth, currTeacher.lastName.size());
-		colEmailWidth = max(colEmailWidth, currTeacher.email.size());
+		colFirstNameWidth е max(colFirstNameWidth, currTeacher.firstName.size());
+		colLastNameWidth е max(colLastNameWidth, currTeacher.lastName.size());
+		colEmailWidth е max(colEmailWidth, currTeacher.email.size());
 	}
 
-	colFirstNameWidth += 2;
-	colLastNameWidth += 2;
-	colEmailWidth += 2;
+	colFirstNameWidth плюс_равно 2;
+	colLastNameWidth плюс_равно 2;
+	colEmailWidth плюс_равно 2;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colFirstNameWidth)
 		 << labelFirstName << setw(colLastNameWidth) << labelLastName << setw(colEmailWidth) << labelEmail
-		 << setw(colTeamsWidth) << labelTeams << endl;
+		 << setw(colTeamsWidth) << labelTeams << край_на_ред;
 
-	cout << string(colNoWidth + colFirstNameWidth + colLastNameWidth + colEmailWidth + colTeamsWidth, '-') << endl;
+	cout << низ(colNoWidth притури colFirstNameWidth притури colLastNameWidth притури colEmailWidth притури
+					colTeamsWidth,
+				'-')
+		 << край_на_ред;
 
-	loopCounter = 0;
-	for (auto it = teachers.begin(); it != teachers.end(); it++) {
-		if (!isValidKey(it->first)) continue;
+	loopCounter е 0;
+	за(auto it е teachers.begin(); it не_е_равно_на teachers.end(); it плюс_плюс)
+	{
+		ако(!isValidKey(it->first)) continue;
 
-		loopCounter++;
-		const TEACHER &currTeacher = dereferenceElement(teachers, it);
+		loopCounter плюс_плюс;
+		константен TEACHER псевдоним currTeacher е dereferenceElement(teachers, it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
 			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colFirstNameWidth) << currTeacher.firstName
 			 << setw(colLastNameWidth) << currTeacher.lastName << setw(colEmailWidth) << currTeacher.email
-			 << setw(colTeamsWidth) << currTeacher.teams.size() << endl;
+			 << setw(colTeamsWidth) << currTeacher.teams.size() << край_на_ред;
 	}
 
 	cout.copyfmt(initialState);
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-void listTable(const unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSchool)
+безтипов listTable(константен unordered_map<size_t, TEAM> псевдоним teams, константен SCHOOL псевдоним parentSchool)
 {
-	ios initialState(nullptr);
+	ios initialState(нулев_указател);
 
 	size_t colNoWidth, colNameWidth, colProjectWidth, colDateWidth, colMembersWidth, colStatusWidth;
 	size_t loopCounter;
-	string labelNo, labelName, labelProject, labelDate, labelMembers, labelStatus;
+	низ labelNo, labelName, labelProject, labelDate, labelMembers, labelStatus;
 
-	if (!hasValidRecords(teams)) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no teams." << endl;
-		return;
+	ако(!hasValidRecords(teams))
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no teams." << край_на_ред;
+		върни;
 	}
 
 	initialState.copyfmt(cout);
 
-	labelNo = "No.";
-	labelName = "Name";
-	labelProject = "Project";
-	labelDate = "Setup date";
-	labelMembers = "Members";
-	labelStatus = "Status";
+	labelNo е "No.";
+	labelName е "Name";
+	labelProject е "Project";
+	labelDate е "Setup date";
+	labelMembers е "Members";
+	labelStatus е "Status";
 
-	colNoWidth = max((size_t)ceil(log10(teams.size())), labelNo.size()) + 2;
-	colNameWidth = labelName.size();
-	colProjectWidth = labelProject.size();
-	colDateWidth = max(10ull + 2, labelDate.size());
-	colMembersWidth = labelMembers.size() + 2;
-	colStatusWidth = labelStatus.size();
+	colNoWidth е max((size_t)ceil(log10(teams.size())), labelNo.size()) плюс 2;
+	colNameWidth е labelName.size();
+	colProjectWidth е labelProject.size();
+	colDateWidth е max(10ull плюс 2, labelDate.size());
+	colMembersWidth е labelMembers.size() плюс 2;
+	colStatusWidth е labelStatus.size();
 
-	for (auto it = teams.begin(); it != teams.end(); it++) {
-		const TEAM &currTeam = dereferenceElement(teams, it);
+	за(auto it е teams.begin(); it не_е_равно_на teams.end(); it плюс_плюс)
+	{
+		константен TEAM псевдоним currTeam е dereferenceElement(teams, it);
 
-		colNameWidth = max(colNameWidth, currTeam.name.size());
-		colProjectWidth = max(colProjectWidth, dereferenceElement(parentSchool.projects, currTeam.project).name.size());
-		colStatusWidth = max(colStatusWidth, toString(currTeam.status).size());
+		colNameWidth е max(colNameWidth, currTeam.name.size());
+		colProjectWidth е max(colProjectWidth, dereferenceElement(parentSchool.projects, currTeam.project).name.size());
+		colStatusWidth е max(colStatusWidth, toString(currTeam.status).size());
 	}
 
-	colNameWidth += 2;
-	colProjectWidth += 2;
-	colStatusWidth += 2;
+	colNameWidth плюс_равно 2;
+	colProjectWidth плюс_равно 2;
+	colStatusWidth плюс_равно 2;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colNameWidth)
 		 << labelName << setw(colProjectWidth) << labelProject << setw(colDateWidth) << labelDate
-		 << setw(colMembersWidth) << labelMembers << setw(colStatusWidth) << labelStatus << endl;
+		 << setw(colMembersWidth) << labelMembers << setw(colStatusWidth) << labelStatus << край_на_ред;
 
-	cout << string(colNoWidth + colNameWidth + colProjectWidth + colDateWidth + colMembersWidth + colStatusWidth, '-')
-		 << endl;
+	cout << низ(colNoWidth притури colNameWidth притури colProjectWidth притури colDateWidth притури colMembersWidth
+					притури colStatusWidth,
+				'-')
+		 << край_на_ред;
 
-	loopCounter = 0;
-	for (auto it = teams.begin(); it != teams.end(); it++) {
-		if (!isValidKey(it->first)) continue;
+	loopCounter е 0;
+	за(auto it е teams.begin(); it не_е_равно_на teams.end(); it плюс_плюс)
+	{
+		ако(!isValidKey(it->first)) continue;
 
-		loopCounter++;
-		const TEAM &currTeam = dereferenceElement(teams, it);
+		loopCounter плюс_плюс;
+		константен TEAM псевдоним currTeam е dereferenceElement(teams, it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
 			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colNameWidth) << currTeam.name << setw(colProjectWidth)
 			 << dereferenceElement(parentSchool.projects, currTeam.project).name << setw(colDateWidth)
 			 << currTeam.setupDate << setw(colMembersWidth) << currTeam.members.size() << setw(colStatusWidth)
-			 << toString(currTeam.status) << endl;
+			 << toString(currTeam.status) << край_на_ред;
 	}
 
 	cout.copyfmt(initialState);
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-void listTable(const unordered_map<string, PROJECT> &projects, const SCHOOL &parentSchool)
+безтипов listTable(константен unordered_map<низ, PROJECT> псевдоним projects, константен SCHOOL псевдоним parentSchool)
 {
-	ios initialState(nullptr);
+	ios initialState(нулев_указател);
 
 	size_t colNoWidth, colNameWidth, colTeamsWidth, colStatusWidth;
 	size_t loopCounter;
-	string labelNo, labelName, labelTeams, labelStatus;
+	низ labelNo, labelName, labelTeams, labelStatus;
 
-	if (!hasValidRecords(projects)) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no projects." << endl;
-		return;
+	ако(!hasValidRecords(projects))
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no projects." << край_на_ред;
+		върни;
 	}
 
 	initialState.copyfmt(cout);
 
-	labelNo = "No.";
-	labelName = "Name";
-	labelTeams = "Teams";
-	labelStatus = "Status";
+	labelNo е "No.";
+	labelName е "Name";
+	labelTeams е "Teams";
+	labelStatus е "Status";
 
-	colNoWidth = max((size_t)ceil(log10(projects.size())), labelNo.size()) + 2;
-	colNameWidth = labelName.size();
-	colTeamsWidth = labelTeams.size() + 2;
-	colStatusWidth = labelStatus.size();
+	colNoWidth е max((size_t)ceil(log10(projects.size())), labelNo.size()) плюс 2;
+	colNameWidth е labelName.size();
+	colTeamsWidth е labelTeams.size() плюс 2;
+	colStatusWidth е labelStatus.size();
 
-	for (auto it = projects.begin(); it != projects.end(); it++) {
-		const PROJECT &currProject = dereferenceElement(projects, it);
+	за(auto it е projects.begin(); it не_е_равно_на projects.end(); it плюс_плюс)
+	{
+		константен PROJECT псевдоним currProject е dereferenceElement(projects, it);
 
-		colNameWidth = max(colNameWidth, currProject.name.size());
-		colStatusWidth = max(colStatusWidth, toString(currProject.status).size());
+		colNameWidth е max(colNameWidth, currProject.name.size());
+		colStatusWidth е max(colStatusWidth, toString(currProject.status).size());
 	}
 
-	colNameWidth += 2;
-	colStatusWidth += 2;
+	colNameWidth плюс_равно 2;
+	colStatusWidth плюс_равно 2;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colNameWidth)
-		 << labelName << setw(colTeamsWidth) << labelTeams << setw(colStatusWidth) << labelStatus << endl;
+		 << labelName << setw(colTeamsWidth) << labelTeams << setw(colStatusWidth) << labelStatus << край_на_ред;
 
-	cout << string(colNoWidth + colNameWidth + colTeamsWidth + colStatusWidth, '-') << endl;
+	cout << низ(colNoWidth притури colNameWidth притури colTeamsWidth притури colStatusWidth, '-') << край_на_ред;
 
-	loopCounter = 0;
-	for (auto it = projects.begin(); it != projects.end(); it++) {
-		if (!isValidKey(it->first)) continue;
+	loopCounter е 0;
+	за(auto it е projects.begin(); it не_е_равно_на projects.end(); it плюс_плюс)
+	{
+		ако(!isValidKey(it->first)) continue;
 
-		loopCounter++;
-		const PROJECT &currProject = dereferenceElement(projects, it);
+		loopCounter плюс_плюс;
+		константен PROJECT псевдоним currProject е dereferenceElement(projects, it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
 			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colNameWidth) << currProject.name << setw(colTeamsWidth)
-			 << currProject.teams.size() << setw(colStatusWidth) << toString(currProject.status) << endl;
+			 << currProject.teams.size() << setw(colStatusWidth) << toString(currProject.status) << край_на_ред;
 	}
 
 	cout.copyfmt(initialState);
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-void listTable(const vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool)
+безтипов listTable(константен vector<TEAM_MEMBER> псевдоним members, константен SCHOOL псевдоним parentSchool)
 {
-	ios initialState(nullptr);
+	ios initialState(нулев_указател);
 
 	size_t colNoWidth, colFirstNameWidth, colLastNameWidth, colEmailWidth, colClassWidth, colRoleWidth;
 	size_t loopCounter;
-	string labelNo, labelFirstName, labelLastName, labelEmail, labelClass, labelRole;
+	низ labelNo, labelFirstName, labelLastName, labelEmail, labelClass, labelRole;
 
-	if (members.empty()) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no students." << endl;
-		return;
+	ако(members.empty())
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no students." << край_на_ред;
+		върни;
 	}
 
 	initialState.copyfmt(cout);
 
-	labelNo = "No.";
-	labelFirstName = "First name";
-	labelLastName = "Last name";
-	labelEmail = "Email";
-	labelClass = "Class";
-	labelRole = "Role";
+	labelNo е "No.";
+	labelFirstName е "First name";
+	labelLastName е "Last name";
+	labelEmail е "Email";
+	labelClass е "Class";
+	labelRole е "Role";
 
-	colNoWidth = max((size_t)ceil(log10(members.size())), labelNo.size()) + 2;
-	colFirstNameWidth = labelFirstName.size();
-	colLastNameWidth = labelLastName.size();
-	colEmailWidth = labelEmail.size();
-	colClassWidth = labelClass.size() + 2;
-	colRoleWidth = labelRole.size();
+	colNoWidth е max((size_t)ceil(log10(members.size())), labelNo.size()) плюс 2;
+	colFirstNameWidth е labelFirstName.size();
+	colLastNameWidth е labelLastName.size();
+	colEmailWidth е labelEmail.size();
+	colClassWidth е labelClass.size() плюс 2;
+	colRoleWidth е labelRole.size();
 
-	for (auto it = members.begin(); it != members.end(); it++) {
-		const TEAM_MEMBER &currMember = dereferenceElement(members, it);
+	за(auto it е members.begin(); it не_е_равно_на members.end(); it плюс_плюс)
+	{
+		константен TEAM_MEMBER псевдоним currMember е dereferenceElement(members, it);
 
-		colFirstNameWidth =
-			max(colFirstNameWidth, dereferenceElement(parentSchool.students, currMember.username).firstName.size());
-		colLastNameWidth =
-			max(colLastNameWidth, dereferenceElement(parentSchool.students, currMember.username).lastName.size());
-		colEmailWidth = max(colEmailWidth, dereferenceElement(parentSchool.students, currMember.username).email.size());
-		colRoleWidth = max(colRoleWidth, toString(currMember.role).size());
+		colFirstNameWidth е max(colFirstNameWidth,
+								dereferenceElement(parentSchool.students, currMember.username).firstName.size());
+		colLastNameWidth е max(colLastNameWidth,
+							   dereferenceElement(parentSchool.students, currMember.username).lastName.size());
+		colEmailWidth е max(colEmailWidth, dereferenceElement(parentSchool.students, currMember.username).email.size());
+		colRoleWidth е max(colRoleWidth, toString(currMember.role).size());
 	}
 
-	colFirstNameWidth += 2;
-	colLastNameWidth += 2;
-	colEmailWidth += 2;
-	colRoleWidth += 2;
+	colFirstNameWidth плюс_равно 2;
+	colLastNameWidth плюс_равно 2;
+	colEmailWidth плюс_равно 2;
+	colRoleWidth плюс_равно 2;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colFirstNameWidth)
 		 << labelFirstName << setw(colLastNameWidth) << labelLastName << setw(colEmailWidth) << labelEmail
-		 << setw(colClassWidth) << labelClass << setw(colRoleWidth) << labelRole << endl;
+		 << setw(colClassWidth) << labelClass << setw(colRoleWidth) << labelRole << край_на_ред;
 
-	cout << string(colNoWidth + colFirstNameWidth + colLastNameWidth + colEmailWidth + colClassWidth + colRoleWidth,
-				   '-')
-		 << endl;
+	cout << низ(colNoWidth притури colFirstNameWidth притури colLastNameWidth притури colEmailWidth притури
+					colClassWidth притури colRoleWidth,
+				'-')
+		 << край_на_ред;
 
-	loopCounter = 0;
-	for (auto it = members.begin(); it != members.end(); it++) {
-		loopCounter++;
-		const TEAM_MEMBER &currMember = dereferenceElement(members, it);
+	loopCounter е 0;
+	за(auto it е members.begin(); it не_е_равно_на members.end(); it плюс_плюс)
+	{
+		loopCounter плюс_плюс;
+		константен TEAM_MEMBER псевдоним currMember е dereferenceElement(members, it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
 			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colFirstNameWidth)
@@ -387,131 +414,144 @@ void listTable(const vector<TEAM_MEMBER> &members, const SCHOOL &parentSchool)
 			 << dereferenceElement(parentSchool.students, currMember.username).email << right << setw(colClassWidth - 4)
 			 << dereferenceElement(parentSchool.students, currMember.username).grade << left << ' ' << setw(3)
 			 << dereferenceElement(parentSchool.students, currMember.username).classLetter << setw(colRoleWidth)
-			 << toString(currMember.role) << endl;
+			 << toString(currMember.role) << край_на_ред;
 	}
 
 	cout.copyfmt(initialState);
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-void listTable(const vector<size_t> &keys, const unordered_map<size_t, TEAM> &teams, const SCHOOL &parentSchool)
+безтипов listTable(константен vector<size_t> псевдоним keys, константен unordered_map<size_t, TEAM> псевдоним teams,
+				   константен SCHOOL псевдоним parentSchool)
 {
-	ios initialState(nullptr);
+	ios initialState(нулев_указател);
 
 	size_t colNoWidth, colNameWidth, colProjectWidth, colDateWidth, colMembersWidth, colStatusWidth;
 	size_t loopCounter;
-	string labelNo, labelName, labelProject, labelDate, labelMembers, labelStatus;
+	низ labelNo, labelName, labelProject, labelDate, labelMembers, labelStatus;
 
-	if (keys.empty()) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no teams." << endl;
-		return;
+	ако(keys.empty())
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no teams." << край_на_ред;
+		върни;
 	}
 
 	initialState.copyfmt(cout);
 
-	labelNo = "No.";
-	labelName = "Name";
-	labelProject = "Project";
-	labelDate = "Setup date";
-	labelMembers = "Members";
-	labelStatus = "Status";
+	labelNo е "No.";
+	labelName е "Name";
+	labelProject е "Project";
+	labelDate е "Setup date";
+	labelMembers е "Members";
+	labelStatus е "Status";
 
-	colNoWidth = max((size_t)ceil(log10(keys.size())), labelNo.size()) + 2;
-	colNameWidth = labelName.size();
-	colProjectWidth = labelProject.size();
-	colDateWidth = max(10ull + 2, labelDate.size());
-	colMembersWidth = labelMembers.size() + 2;
-	colStatusWidth = labelStatus.size();
+	colNoWidth е max((size_t)ceil(log10(keys.size())), labelNo.size()) плюс 2;
+	colNameWidth е labelName.size();
+	colProjectWidth е labelProject.size();
+	colDateWidth е max(10ull плюс 2, labelDate.size());
+	colMembersWidth е labelMembers.size() плюс 2;
+	colStatusWidth е labelStatus.size();
 
-	for (auto it = keys.begin(); it != keys.end(); it++) {
-		const TEAM &currTeam = dereferenceElement(teams, *it);
+	за(auto it е keys.begin(); it не_е_равно_на keys.end(); it плюс_плюс)
+	{
+		константен TEAM псевдоним currTeam е dereferenceElement(teams, *it);
 
-		colNameWidth = max(colNameWidth, currTeam.name.size());
-		colProjectWidth = max(colProjectWidth, dereferenceElement(parentSchool.projects, currTeam.project).name.size());
-		colStatusWidth = max(colStatusWidth, toString(currTeam.status).size());
+		colNameWidth е max(colNameWidth, currTeam.name.size());
+		colProjectWidth е max(colProjectWidth, dereferenceElement(parentSchool.projects, currTeam.project).name.size());
+		colStatusWidth е max(colStatusWidth, toString(currTeam.status).size());
 	}
 
-	colNameWidth += 2;
-	colProjectWidth += 2;
-	colStatusWidth += 2;
+	colNameWidth плюс_равно 2;
+	colProjectWidth плюс_равно 2;
+	colStatusWidth плюс_равно 2;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colNameWidth)
 		 << labelName << setw(colProjectWidth) << labelProject << setw(colDateWidth) << labelDate
-		 << setw(colMembersWidth) << labelMembers << setw(colStatusWidth) << labelStatus << endl;
+		 << setw(colMembersWidth) << labelMembers << setw(colStatusWidth) << labelStatus << край_на_ред;
 
-	cout << string(colNoWidth + colNameWidth + colProjectWidth + colDateWidth + colMembersWidth + colStatusWidth, '-')
-		 << endl;
+	cout << низ(colNoWidth притури colNameWidth притури colProjectWidth притури colDateWidth притури colMembersWidth
+					притури colStatusWidth,
+				'-')
+		 << край_на_ред;
 
-	loopCounter = 0;
-	for (auto it = keys.begin(); it != keys.end(); it++) {
-		loopCounter++;
-		const TEAM &currTeam = dereferenceElement(teams, *it);
+	loopCounter е 0;
+	за(auto it е keys.begin(); it не_е_равно_на keys.end(); it плюс_плюс)
+	{
+		loopCounter плюс_плюс;
+		константен TEAM псевдоним currTeam е dereferenceElement(teams, *it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
 			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colNameWidth) << currTeam.name << setw(colProjectWidth)
 			 << dereferenceElement(parentSchool.projects, currTeam.project).name << setw(colDateWidth)
 			 << currTeam.setupDate << setw(colMembersWidth) << currTeam.members.size() << setw(colStatusWidth)
-			 << toString(currTeam.status) << endl;
+			 << toString(currTeam.status) << край_на_ред;
 	}
 
 	cout.copyfmt(initialState);
 	cout << getAnsiEscape(ANSI_ESCAPE::RESET);
 }
 
-void listTable(const vector<string> &keys, const unordered_map<string, TEACHER> &teachers, const SCHOOL &parentSchool)
+безтипов listTable(константен vector<низ> псевдоним keys, константен unordered_map<низ, TEACHER> псевдоним teachers,
+				   константен SCHOOL псевдоним parentSchool)
 {
-	ios initialState(nullptr);
+	ios initialState(нулев_указател);
 
 	size_t colNoWidth, colFirstNameWidth, colLastNameWidth, colEmailWidth, colTeamsWidth;
 	size_t loopCounter;
-	string labelNo, labelFirstName, labelLastName, labelEmail, labelTeams;
+	низ labelNo, labelFirstName, labelLastName, labelEmail, labelTeams;
 
-	if (teachers.empty()) {
-		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no teachers." << endl;
-		return;
+	ако(teachers.empty())
+	{
+		cout << getAnsiEscape(ANSI_ESCAPE::FG_RED) << "There are currently no teachers." << край_на_ред;
+		върни;
 	}
 
 	initialState.copyfmt(cout);
 
-	labelNo = "No.";
-	labelFirstName = "First name";
-	labelLastName = "Last name";
-	labelEmail = "Email";
-	labelTeams = "Assigned teams";
+	labelNo е "No.";
+	labelFirstName е "First name";
+	labelLastName е "Last name";
+	labelEmail е "Email";
+	labelTeams е "Assigned teams";
 
-	colNoWidth = max((size_t)ceil(log10(teachers.size())), labelNo.size()) + 2;
-	colFirstNameWidth = labelFirstName.size();
-	colLastNameWidth = labelLastName.size();
-	colEmailWidth = labelEmail.size();
-	colTeamsWidth = labelTeams.size() + 2;
+	colNoWidth е max((size_t)ceil(log10(teachers.size())), labelNo.size()) плюс 2;
+	colFirstNameWidth е labelFirstName.size();
+	colLastNameWidth е labelLastName.size();
+	colEmailWidth е labelEmail.size();
+	colTeamsWidth е labelTeams.size() плюс 2;
 
-	for (auto it = keys.begin(); it != keys.end(); it++) {
-		const TEACHER &currTeacher = dereferenceElement(teachers, *it);
+	за(auto it е keys.begin(); it не_е_равно_на keys.end(); it плюс_плюс)
+	{
+		константен TEACHER псевдоним currTeacher е dereferenceElement(teachers, *it);
 
-		colFirstNameWidth = max(colFirstNameWidth, currTeacher.firstName.size());
-		colLastNameWidth = max(colLastNameWidth, currTeacher.lastName.size());
-		colEmailWidth = max(colEmailWidth, currTeacher.email.size());
+		colFirstNameWidth е max(colFirstNameWidth, currTeacher.firstName.size());
+		colLastNameWidth е max(colLastNameWidth, currTeacher.lastName.size());
+		colEmailWidth е max(colEmailWidth, currTeacher.email.size());
 	}
 
-	colFirstNameWidth += 2;
-	colLastNameWidth += 2;
-	colEmailWidth += 2;
+	colFirstNameWidth плюс_равно 2;
+	colLastNameWidth плюс_равно 2;
+	colEmailWidth плюс_равно 2;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << labelNo << setw(colFirstNameWidth)
 		 << labelFirstName << setw(colLastNameWidth) << labelLastName << setw(colEmailWidth) << labelEmail
-		 << setw(colTeamsWidth) << labelTeams << endl;
+		 << setw(colTeamsWidth) << labelTeams << край_на_ред;
 
-	cout << string(colNoWidth + colFirstNameWidth + colLastNameWidth + colEmailWidth + colTeamsWidth, '-') << endl;
+	cout << низ(colNoWidth притури colFirstNameWidth притури colLastNameWidth притури colEmailWidth притури
+					colTeamsWidth,
+				'-')
+		 << край_на_ред;
 
-	loopCounter = 0;
-	for (auto it = keys.begin(); it != keys.end(); it++) {
-		loopCounter++;
-		const TEACHER &currTeacher = dereferenceElement(teachers, *it);
+	loopCounter е 0;
+	за(auto it е keys.begin(); it не_е_равно_на keys.end(); it плюс_плюс)
+	{
+		loopCounter плюс_плюс;
+		константен TEACHER псевдоним currTeacher е dereferenceElement(teachers, *it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
 			 << getAnsiEscape(ANSI_ESCAPE::FG_GREEN) << setw(colFirstNameWidth) << currTeacher.firstName
 			 << setw(colLastNameWidth) << currTeacher.lastName << setw(colEmailWidth) << currTeacher.email
-			 << setw(colTeamsWidth) << currTeacher.teams.size() << endl;
+			 << setw(colTeamsWidth) << currTeacher.teams.size() << край_на_ред;
 	}
 
 	cout.copyfmt(initialState);
