@@ -6,7 +6,7 @@
 
 булев_тип addElement(vector<SCHOOL> псевдоним v, константен SCHOOL псевдоним school)
 {
-	auto it е find_if(v.begin(), v.end(), [псевдоним school](константен SCHOOL псевдоним currSchool) {
+	авто it е find_if(v.begin(), v.end(), [псевдоним school](константен SCHOOL псевдоним currSchool) {
 		върни currSchool.name е_равно_на school.name;
 	});
 

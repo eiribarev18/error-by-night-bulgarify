@@ -40,7 +40,7 @@
 	colTeamsWidth е labelTeams.size() плюс 2;
 	colProjectsWidth е labelProjects.size() плюс 2;
 
-	за(auto it е schools.begin(); it не_е_равно_на schools.end(); it плюс_плюс)
+	за(авто it е schools.begin(); it не_е_равно_на schools.end(); it инкрементирай)
 	{
 		currSchool е dereferenceElement(schools, it);
 
@@ -63,7 +63,7 @@
 				'-')
 		 << край_на_ред;
 
-	за(size_t i е 0; i < schools.size(); i плюс_плюс)
+	за(size_t i е 0; i < schools.size(); i инкрементирай)
 	{
 		константен SCHOOL псевдоним currSchool е dereferenceElement(schools, schools.begin() плюс i);
 
@@ -107,7 +107,7 @@
 	colEmailWidth е labelEmail.size();
 	colClassWidth е labelClass.size() плюс 2;
 
-	за(auto it е students.begin(); it не_е_равно_на students.end(); it плюс_плюс)
+	за(авто it е students.begin(); it не_е_равно_на students.end(); it инкрементирай)
 	{
 		константен STUDENT псевдоним currStudent е dereferenceElement(students, it);
 
@@ -130,11 +130,11 @@
 		 << край_на_ред;
 
 	loopCounter е 0;
-	за(auto it е students.begin(); it не_е_равно_на students.end(); it плюс_плюс)
+	за(авто it е students.begin(); it не_е_равно_на students.end(); it инкрементирай)
 	{
 		ако(!isValidKey(it->first)) continue;
 
-		loopCounter плюс_плюс;
+		loopCounter инкрементирай;
 		константен STUDENT псевдоним currStudent е dereferenceElement(students, it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
@@ -175,7 +175,7 @@
 	colEmailWidth е labelEmail.size();
 	colTeamsWidth е labelTeams.size() плюс 2;
 
-	за(auto it е teachers.begin(); it не_е_равно_на teachers.end(); it плюс_плюс)
+	за(авто it е teachers.begin(); it не_е_равно_на teachers.end(); it инкрементирай)
 	{
 		константен TEACHER псевдоним currTeacher е dereferenceElement(teachers, it);
 
@@ -198,11 +198,11 @@
 		 << край_на_ред;
 
 	loopCounter е 0;
-	за(auto it е teachers.begin(); it не_е_равно_на teachers.end(); it плюс_плюс)
+	за(авто it е teachers.begin(); it не_е_равно_на teachers.end(); it инкрементирай)
 	{
 		ако(!isValidKey(it->first)) continue;
 
-		loopCounter плюс_плюс;
+		loopCounter инкрементирай;
 		константен TEACHER псевдоним currTeacher е dereferenceElement(teachers, it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
@@ -245,7 +245,7 @@
 	colMembersWidth е labelMembers.size() плюс 2;
 	colStatusWidth е labelStatus.size();
 
-	за(auto it е teams.begin(); it не_е_равно_на teams.end(); it плюс_плюс)
+	за(авто it е teams.begin(); it не_е_равно_на teams.end(); it инкрементирай)
 	{
 		константен TEAM псевдоним currTeam е dereferenceElement(teams, it);
 
@@ -268,11 +268,11 @@
 		 << край_на_ред;
 
 	loopCounter е 0;
-	за(auto it е teams.begin(); it не_е_равно_на teams.end(); it плюс_плюс)
+	за(авто it е teams.begin(); it не_е_равно_на teams.end(); it инкрементирай)
 	{
 		ако(!isValidKey(it->first)) continue;
 
-		loopCounter плюс_плюс;
+		loopCounter инкрементирай;
 		константен TEAM псевдоним currTeam е dereferenceElement(teams, it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
@@ -312,7 +312,7 @@
 	colTeamsWidth е labelTeams.size() плюс 2;
 	colStatusWidth е labelStatus.size();
 
-	за(auto it е projects.begin(); it не_е_равно_на projects.end(); it плюс_плюс)
+	за(авто it е projects.begin(); it не_е_равно_на projects.end(); it инкрементирай)
 	{
 		константен PROJECT псевдоним currProject е dereferenceElement(projects, it);
 
@@ -329,11 +329,11 @@
 	cout << низ(colNoWidth притури colNameWidth притури colTeamsWidth притури colStatusWidth, '-') << край_на_ред;
 
 	loopCounter е 0;
-	за(auto it е projects.begin(); it не_е_равно_на projects.end(); it плюс_плюс)
+	за(авто it е projects.begin(); it не_е_равно_на projects.end(); it инкрементирай)
 	{
 		ако(!isValidKey(it->first)) continue;
 
-		loopCounter плюс_плюс;
+		loopCounter инкрементирай;
 		константен PROJECT псевдоним currProject е dereferenceElement(projects, it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
@@ -375,7 +375,7 @@
 	colClassWidth е labelClass.size() плюс 2;
 	colRoleWidth е labelRole.size();
 
-	за(auto it е members.begin(); it не_е_равно_на members.end(); it плюс_плюс)
+	за(авто it е members.begin(); it не_е_равно_на members.end(); it инкрементирай)
 	{
 		константен TEAM_MEMBER псевдоним currMember е dereferenceElement(members, it);
 
@@ -402,9 +402,9 @@
 		 << край_на_ред;
 
 	loopCounter е 0;
-	за(auto it е members.begin(); it не_е_равно_на members.end(); it плюс_плюс)
+	за(авто it е members.begin(); it не_е_равно_на members.end(); it инкрементирай)
 	{
-		loopCounter плюс_плюс;
+		loopCounter инкрементирай;
 		константен TEAM_MEMBER псевдоним currMember е dereferenceElement(members, it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
@@ -452,7 +452,7 @@
 	colMembersWidth е labelMembers.size() плюс 2;
 	colStatusWidth е labelStatus.size();
 
-	за(auto it е keys.begin(); it не_е_равно_на keys.end(); it плюс_плюс)
+	за(авто it е keys.begin(); it не_е_равно_на keys.end(); it инкрементирай)
 	{
 		константен TEAM псевдоним currTeam е dereferenceElement(teams, *it);
 
@@ -475,9 +475,9 @@
 		 << край_на_ред;
 
 	loopCounter е 0;
-	за(auto it е keys.begin(); it не_е_равно_на keys.end(); it плюс_плюс)
+	за(авто it е keys.begin(); it не_е_равно_на keys.end(); it инкрементирай)
 	{
-		loopCounter плюс_плюс;
+		loopCounter инкрементирай;
 		константен TEAM псевдоним currTeam е dereferenceElement(teams, *it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter
@@ -520,7 +520,7 @@
 	colEmailWidth е labelEmail.size();
 	colTeamsWidth е labelTeams.size() плюс 2;
 
-	за(auto it е keys.begin(); it не_е_равно_на keys.end(); it плюс_плюс)
+	за(авто it е keys.begin(); it не_е_равно_на keys.end(); it инкрементирай)
 	{
 		константен TEACHER псевдоним currTeacher е dereferenceElement(teachers, *it);
 
@@ -543,9 +543,9 @@
 		 << край_на_ред;
 
 	loopCounter е 0;
-	за(auto it е keys.begin(); it не_е_равно_на keys.end(); it плюс_плюс)
+	за(авто it е keys.begin(); it не_е_равно_на keys.end(); it инкрементирай)
 	{
-		loopCounter плюс_плюс;
+		loopCounter инкрементирай;
 		константен TEACHER псевдоним currTeacher е dereferenceElement(teachers, *it);
 
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << left << setw(colNoWidth) << loopCounter

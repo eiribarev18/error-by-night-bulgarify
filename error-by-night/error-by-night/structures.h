@@ -7,11 +7,7 @@
 #include <unordered_map>
 #include <vector>
 
-enum клас STATUS
-{
-	ACTIVE,
-	ARCHIVED
-};
+изброим клас STATUS{ACTIVE, ARCHIVED};
 
 структура STUDENT
 {
@@ -38,13 +34,7 @@ enum клас STATUS
 
 структура TEAM_MEMBER
 {
-	enum ROLE
-	{
-		SCRUM_MASTER,
-		QA_ENGINEER,
-		DEV_BACKEND,
-		DEV_FRONTEND
-	};
+	изброим ROLE{SCRUM_MASTER, QA_ENGINEER, DEV_BACKEND, DEV_FRONTEND};
 
 	стандартен::низ username;
 	ROLE role;

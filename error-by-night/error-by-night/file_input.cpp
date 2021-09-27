@@ -6,7 +6,7 @@
 
 използвайки имево_пространство стандартен;
 
-булев_тип restoreSchools(vector<SCHOOL> псевдоним schools, const string псевдоним filename)
+булев_тип restoreSchools(vector<SCHOOL> псевдоним schools, константен string псевдоним filename)
 {
 	пробвай
 	{
@@ -24,7 +24,7 @@
 
 		schools.reserve(schoolsSize);
 
-		за(size_t i е 0; i е_по_малко_от schoolsSize; i плюс_плюс)
+		за(size_t i е 0; i е_по_малко_от schoolsSize; i инкрементирай)
 		{
 			currSchool.restore(file);
 			addElement(schools, currSchool);
@@ -57,7 +57,7 @@
 	// students
 	students.clear();
 	getUnsignedNumber(file, mapSize);
-	за(size_t i е 0; i е_по_малко_от mapSize; i плюс_плюс)
+	за(size_t i е 0; i е_по_малко_от mapSize; i инкрементирай)
 	{
 		getline(file, currKey);
 		currStudent.restore(file);
@@ -68,7 +68,7 @@
 	// teachers
 	teachers.clear();
 	getUnsignedNumber(file, mapSize);
-	за(size_t i е 0; i е_по_малко_от mapSize; i плюс_плюс)
+	за(size_t i е 0; i е_по_малко_от mapSize; i инкрементирай)
 	{
 		getline(file, currKey);
 		currTeacher.restore(file);
@@ -79,7 +79,7 @@
 	// teams
 	teams.clear();
 	getUnsignedNumber(file, mapSize);
-	за(size_t i е 0; i е_по_малко_от mapSize; i плюс_плюс)
+	за(size_t i е 0; i е_по_малко_от mapSize; i инкрементирай)
 	{
 		getUnsignedNumber(file, ucurrKey);
 		currTeam.restore(file);
@@ -90,7 +90,7 @@
 	// projects
 	projects.clear();
 	getUnsignedNumber(file, mapSize);
-	за(size_t i е 0; i е_по_малко_от mapSize; i плюс_плюс)
+	за(size_t i е 0; i е_по_малко_от mapSize; i инкрементирай)
 	{
 		getline(file, currKey);
 		currProject.restore(file);
@@ -126,7 +126,7 @@
 
 	getUnsignedNumber(file, vectorSize);
 	teams.clear();
-	за(size_t i е 0; i е_по_малко_от vectorSize; i плюс_плюс)
+	за(size_t i е 0; i е_по_малко_от vectorSize; i инкрементирай)
 	{
 		getUnsignedNumber(file, utemp);
 
@@ -148,7 +148,7 @@
 
 	getUnsignedNumber(file, vectorSize);
 	members.clear();
-	за(size_t i е 0; i е_по_малко_от vectorSize; i плюс_плюс)
+	за(size_t i е 0; i е_по_малко_от vectorSize; i инкрементирай)
 	{
 		getline(file, currMember.username, ' ');
 		getUnsignedNumber(file, currMember.role, '\n', 3);
@@ -173,7 +173,7 @@
 
 	getUnsignedNumber(file, vectorSize);
 	teams.clear();
-	за(size_t i е 0; i е_по_малко_от vectorSize; i плюс_плюс)
+	за(size_t i е 0; i е_по_малко_от vectorSize; i инкрементирай)
 	{
 		getUnsignedNumber(file, utemp);
 

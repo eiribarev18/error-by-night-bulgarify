@@ -5,42 +5,12 @@
 
 #include <iostream>
 
-enum клас ANSI_ESCAPE
-{
-	RESET е 0,
-	FG_BLACK е 30,
-	FG_RED,
-	FG_GREEN,
-	FG_YELLOW,
-	FG_BLUE,
-	FG_MAGENTA,
-	FG_CYAN,
-	FG_WHITE,
-	BG_BLACK е 40,
-	BG_RED,
-	BG_GREEN,
-	BG_YELLOW,
-	BG_BLUE,
-	BG_MAGENTA,
-	BG_CYAN,
-	BG_WHITE,
-	FG_B_BLACK е 90,
-	FG_B_RED,
-	FG_B_GREEN,
-	FG_B_YELLOW,
-	FG_B_BLUE,
-	FG_B_MAGENTA,
-	FG_B_CYAN,
-	FG_B_WHITE,
-	BG_B_BLACK е 100,
-	BG_B_RED,
-	BG_B_GREEN,
-	BG_B_YELLOW,
-	BG_B_BLUE,
-	BG_B_MAGENTA,
-	BG_B_CYAN,
-	BG_B_WHITE
-};
+изброим клас ANSI_ESCAPE{RESET е 0,	   FG_BLACK е 30,	 FG_RED,	  FG_GREEN,		 FG_YELLOW,	   FG_BLUE,
+						 FG_MAGENTA,   FG_CYAN,			 FG_WHITE,	  BG_BLACK е 40, BG_RED,	   BG_GREEN,
+						 BG_YELLOW,	   BG_BLUE,			 BG_MAGENTA,  BG_CYAN,		 BG_WHITE,	   FG_B_BLACK е 90,
+						 FG_B_RED,	   FG_B_GREEN,		 FG_B_YELLOW, FG_B_BLUE,	 FG_B_MAGENTA, FG_B_CYAN,
+						 FG_B_WHITE,   BG_B_BLACK е 100, BG_B_RED,	  BG_B_GREEN,	 BG_B_YELLOW,  BG_B_BLUE,
+						 BG_B_MAGENTA, BG_B_CYAN,		 BG_B_WHITE};
 
 безтипов listTable(константен стандартен::vector<SCHOOL> псевдоним schools);
 безтипов listTable(константен стандартен::unordered_map<стандартен::низ, STUDENT> псевдоним students,
@@ -164,7 +134,7 @@ enum клас ANSI_ESCAPE
 	listTable(m, parentSchool);
 
 	keys.reserve(m.size());
-	for (auto it е m.begin(); it не_е_равно_на m.end(); it плюс_плюс) {
+	for (авто it е m.begin(); it не_е_равно_на m.end(); it инкрементирай) {
 		ако(isValidKey(it->first)) keys.push_back(адрес_на it->first);
 	}
 
@@ -242,7 +212,7 @@ enum клас ANSI_ESCAPE
 	използвайки стандартен::cin, стандартен::cout, стандартен::край_на_ред;
 
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Legend:" << край_на_ред;
-	за(целочислен_тип i е 0; i е_по_малко_или_равно_на 1; i плюс_плюс)
+	за(целочислен_тип i е 0; i е_по_малко_или_равно_на 1; i инкрементирай)
 	{
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << '(' << i << ") " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
 			 << toString((STATUS)i) << край_на_ред;
@@ -338,7 +308,7 @@ enum клас ANSI_ESCAPE
 	listTable(m, parentSchool);
 
 	keys.reserve(m.size());
-	за(auto it е m.begin(); it не_е_равно_на m.end(); it плюс_плюс)
+	за(авто it е m.begin(); it не_е_равно_на m.end(); it инкрементирай)
 	{
 		ако(isValidKey(it->first)) keys.push_back(адрес_на it->first);
 	}
@@ -395,7 +365,7 @@ menuLink(стандартен::vector<KEY> псевдоним linkedElements,
 	listTable(allElements, parentSchool);
 
 	keys.reserve(allElements.size());
-	за(auto it е allElements.begin(); it не_е_равно_на allElements.end(); it плюс_плюс)
+	за(авто it е allElements.begin(); it не_е_равно_на allElements.end(); it инкрементирай)
 	{
 		ако(isValidKey(it->first)) keys.push_back(адрес_на it->first);
 	}
@@ -433,7 +403,7 @@ menuUnlink(стандартен::vector<KEY> псевдоним linkedElements,
 	listTable(linkedElements, allElements, parentSchool);
 
 	keys.reserve(linkedElements.size());
-	за(auto it е linkedElements.begin(); it не_е_равно_на linkedElements.end(); it плюс_плюс)
+	за(авто it е linkedElements.begin(); it не_е_равно_на linkedElements.end(); it инкрементирай)
 	{
 		keys.push_back(адрес_на достъпи_стойността_на it);
 	}

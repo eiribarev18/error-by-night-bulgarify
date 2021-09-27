@@ -7,11 +7,11 @@ vector<низ> SCHOOL::getTeachersWithoutTeam(константен низ псе
 {
 	vector<низ> out;
 
-	за(auto it е teachers.begin(); it не_е_равно_на teachers.end(); it плюс_плюс)
+	за(авто it е teachers.begin(); it не_е_равно_на teachers.end(); it инкрементирай)
 	{
 		константен TEACHER псевдоним currTeacher е dereferenceElement(teachers, it);
 
-		auto foundIt е find_if(
+		авто foundIt е find_if(
 			currTeacher.teams.begin(), currTeacher.teams.end(), [псевдоним project, този](size_t currTeam) {
 				върни project е_равно_на dereferenceElement(този->teams, currTeam).project;
 			});
@@ -26,7 +26,7 @@ vector<низ> TEAM::getMembers() константен
 {
 	vector<низ> out;
 
-	за(auto it е members.begin(); it не_е_равно_на members.end(); it плюс_плюс)
+	за(авто it е members.begin(); it не_е_равно_на members.end(); it инкрементирай)
 	{
 		out.push_back(it->username);
 	}

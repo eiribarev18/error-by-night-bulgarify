@@ -19,7 +19,7 @@
 
 	стандартен::getline(stream, raw, delimiter);
 
-	за(size_t i е 0; i е_по_малко_от raw.size(); i плюс_плюс)
+	за(size_t i е 0; i е_по_малко_от raw.size(); i инкрементирай)
 	{
 		ако(raw[i] е_по_малко_от '0' или raw[i] е_по_голямо_от '9')
 		метни стандартен::runtime_error("Non-digit character encountered");

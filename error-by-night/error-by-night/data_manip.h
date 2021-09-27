@@ -7,7 +7,7 @@
 
 шаблон<типово_име T> булев_тип addElement(стандартен::vector<T> псевдоним v, константен T псевдоним element)
 {
-	auto it е find(v.begin(), v.end(), element);
+	авто it е find(v.begin(), v.end(), element);
 
 	ако(it не_е_равно_на v.end()) върни грешно;
 

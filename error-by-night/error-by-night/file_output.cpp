@@ -16,7 +16,7 @@
 	{
 		file << schools.size() << '\n';
 
-		за(auto it е schools.begin(); it не_е_равно_на schools.end(); it плюс_плюс)
+		за(авто it е schools.begin(); it не_е_равно_на schools.end(); it инкрементирай)
 		{
 			dereferenceElement(schools, it).store(file);
 		}
@@ -37,7 +37,7 @@
 
 	// students
 	file << students.size() << '\n';
-	за(auto it е students.begin(); it не_е_равно_на students.end(); it плюс_плюс)
+	за(авто it е students.begin(); it не_е_равно_на students.end(); it инкрементирай)
 	{
 		file << it->first << '\n';
 		it->second.store(file);
@@ -45,7 +45,7 @@
 
 	// teachers
 	file << teachers.size() << '\n';
-	за(auto it е teachers.begin(); it не_е_равно_на teachers.end(); it плюс_плюс)
+	за(авто it е teachers.begin(); it не_е_равно_на teachers.end(); it инкрементирай)
 	{
 		file << it->first << '\n';
 		it->second.store(file);
@@ -53,7 +53,7 @@
 
 	// teams
 	file << teams.size() << '\n';
-	за(auto it е teams.begin(); it не_е_равно_на teams.end(); it плюс_плюс)
+	за(авто it е teams.begin(); it не_е_равно_на teams.end(); it инкрементирай)
 	{
 		file << it->first << '\n';
 		it->second.store(file);
@@ -61,7 +61,7 @@
 
 	// projects
 	file << projects.size() << '\n';
-	за(auto it е projects.begin(); it не_е_равно_на projects.end(); it плюс_плюс)
+	за(авто it е projects.begin(); it не_е_равно_на projects.end(); it инкрементирай)
 	{
 		file << it->first << '\n';
 		it->second.store(file);
@@ -78,7 +78,7 @@
 	file << firstName << ' ' << lastName << '\n' << email << '\n';
 
 	file << teams.size() << '\n';
-	за(auto it е teams.begin(); it не_е_равно_на teams.end(); it плюс_плюс)
+	за(авто it е teams.begin(); it не_е_равно_на teams.end(); it инкрементирай)
 	{
 		file << достъпи_стойността_на it << '\n';
 	}
@@ -89,7 +89,7 @@
 	file << name << '\n' << description << "|\n" << setupDate << '\n';
 
 	file << members.size() << '\n';
-	за(auto it е members.begin(); it не_е_равно_на members.end(); it плюс_плюс)
+	за(авто it е members.begin(); it не_е_равно_на members.end(); it инкрементирай)
 	{
 		file << it->username << ' ' << it->role << '\n';
 	}
@@ -102,7 +102,7 @@
 	file << name << '\n' << description << "|\n" << (unsigned)status << '\n';
 
 	file << teams.size() << '\n';
-	за(auto it е teams.begin(); it не_е_равно_на teams.end(); it плюс_плюс)
+	за(авто it е teams.begin(); it не_е_равно_на teams.end(); it инкрементирай)
 	{
 		file << достъпи_стойността_на it << '\n';
 	}

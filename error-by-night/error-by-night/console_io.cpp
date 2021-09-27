@@ -12,7 +12,7 @@
 
 безтипов printNewlines(size_t n)
 {
-	за(size_t i е 0; i е_по_малко_от n; i плюс_плюс)
+	за(size_t i е 0; i е_по_малко_от n; i инкрементирай)
 	{
 		cout << endl;
 	}
@@ -43,7 +43,7 @@
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN);
 
-	за(size_t i е 0; i е_по_малко_от options.size(); i плюс_плюс)
+	за(size_t i е 0; i е_по_малко_от options.size(); i инкрементирай)
 	{
 		cout << i плюс 1 << ". " << options[i] << endl;
 	}
@@ -89,27 +89,21 @@
 
 	clearConsole();
 
-	switch (choice) {
-		case 1:
-			menuSelect(schools);
-			break;
-		case 2:
-			listTable(schools);
-			break;
-		case 3:
-			menuAdd(schools);
-			break;
-		case 4:
-			menuRemove(schools);
-			break;
-		case 5:
-			menuRestore(schools);
-			break;
-		case 6:
-			menuStore(schools);
-			break;
-		case 7:
-			върни грешно;
+	превключвател(choice)
+	{
+		случай 1 : menuSelect(schools);
+		break;
+		случай 2 : listTable(schools);
+		break;
+		случай 3 : menuAdd(schools);
+		break;
+		случай 4 : menuRemove(schools);
+		break;
+		случай 5 : menuRestore(schools);
+		break;
+		случай 6 : menuStore(schools);
+		break;
+		случай 7 : върни грешно;
 	}
 
 	printNewlines(1);
@@ -134,69 +128,49 @@
 
 	clearConsole();
 
-	switch (choice) {
-		case 1:
-			menuEditName(school);
-			break;
-		case 2:
-			menuEditCity(school);
-			break;
-		case 3:
-			menuEditAddress(school);
-			break;
-		case 4:
-			menuSelect(school.students, school);
-			break;
-		case 5:
-			menuSelect(school.teachers, school);
-			break;
-		case 6:
-			menuSelect(school.teams, school);
-			break;
-		case 7:
-			menuSelect(school.projects, school);
-			break;
-		case 8:
-			listTable(school.students, school);
-			break;
-		case 9:
-			listTable(school.teachers, school);
-			break;
-		case 10:
-			listTable(school.teams, school);
-			break;
-		case 11:
-			listTable(school.projects, school);
-			break;
-		case 12:
-			menuAdd(school.students, school);
-			break;
-		case 13:
-			menuAdd(school.teachers, school);
-			break;
-		case 14:
-			menuAdd(school.teams, school);
-			break;
-		case 15:
-			menuAdd(school.projects, school);
-			break;
-		case 16:
-			menuRemove(school.students, school);
-			break;
-		case 17:
-			menuRemove(school.teachers, school);
-			break;
-		case 18:
-			menuRemove(school.teams, school);
-			break;
-		case 19:
-			menuRemove(school.projects, school);
-			break;
-		case 20:
-			while (menuQueries(school)) {};
-			break;
-		case 21:
-			върни грешно;
+	превключвател(choice)
+	{
+		случай 1 : menuEditName(school);
+		break;
+		случай 2 : menuEditCity(school);
+		break;
+		случай 3 : menuEditAddress(school);
+		break;
+		случай 4 : menuSelect(school.students, school);
+		break;
+		случай 5 : menuSelect(school.teachers, school);
+		break;
+		случай 6 : menuSelect(school.teams, school);
+		break;
+		случай 7 : menuSelect(school.projects, school);
+		break;
+		случай 8 : listTable(school.students, school);
+		break;
+		случай 9 : listTable(school.teachers, school);
+		break;
+		случай 10 : listTable(school.teams, school);
+		break;
+		случай 11 : listTable(school.projects, school);
+		break;
+		случай 12 : menuAdd(school.students, school);
+		break;
+		случай 13 : menuAdd(school.teachers, school);
+		break;
+		случай 14 : menuAdd(school.teams, school);
+		break;
+		случай 15 : menuAdd(school.projects, school);
+		break;
+		случай 16 : menuRemove(school.students, school);
+		break;
+		случай 17 : menuRemove(school.teachers, school);
+		break;
+		случай 18 : menuRemove(school.teams, school);
+		break;
+		случай 19 : menuRemove(school.projects, school);
+		break;
+		случай 20 : while (menuQueries(school)){};
+		break;
+		случай 21 : върни грешно;
 	}
 
 	printNewlines(1);
@@ -218,21 +192,17 @@
 
 	clearConsole();
 
-	switch (choice) {
-		case 1:
-			menuEditFirstName(student);
-			break;
-		case 2:
-			menuEditLastName(student);
-			break;
-		case 3:
-			menuEditEmail(student);
-			break;
-		case 4:
-			menuEditClass(student);
-			break;
-		case 5:
-			върни грешно;
+	превключвател(choice)
+	{
+		случай 1 : menuEditFirstName(student);
+		break;
+		случай 2 : menuEditLastName(student);
+		break;
+		случай 3 : menuEditEmail(student);
+		break;
+		случай 4 : menuEditClass(student);
+		break;
+		случай 5 : върни грешно;
 	}
 
 	printNewlines(1);
@@ -259,27 +229,21 @@
 
 	clearConsole();
 
-	switch (choice) {
-		case 1:
-			menuEditFirstName(teacher);
-			break;
-		case 2:
-			menuEditLastName(teacher);
-			break;
-		case 3:
-			menuEditEmail(teacher);
-			break;
-		case 4:
-			listTable(teacher.teams, parentSchool.teams, parentSchool);
-			break;
-		case 5:
-			menuLink(teacher.teams, parentSchool.teams, parentSchool);
-			break;
-		case 6:
-			menuUnlink(teacher.teams, parentSchool.teams, parentSchool);
-			break;
-		case 7:
-			върни грешно;
+	превключвател(choice)
+	{
+		случай 1 : menuEditFirstName(teacher);
+		break;
+		случай 2 : menuEditLastName(teacher);
+		break;
+		случай 3 : menuEditEmail(teacher);
+		break;
+		случай 4 : listTable(teacher.teams, parentSchool.teams, parentSchool);
+		break;
+		случай 5 : menuLink(teacher.teams, parentSchool.teams, parentSchool);
+		break;
+		случай 6 : menuUnlink(teacher.teams, parentSchool.teams, parentSchool);
+		break;
+		случай 7 : върни грешно;
 	}
 
 	printNewlines(1);
@@ -308,33 +272,25 @@
 
 	clearConsole();
 
-	switch (choice) {
-		case 1:
-			menuEditName(team);
-			break;
-		case 2:
-			menuEditDescription(team);
-			break;
-		case 3:
-			menuEditStatus(team);
-			break;
-		case 4:
-			menuEditProject(team, parentSchool);
-			break;
-		case 5:
-			menuSelect(team.members, parentSchool);
-			break;
-		case 6:
-			listTable(team.members, parentSchool);
-			break;
-		case 7:
-			menuAdd(team.members, parentSchool);
-			break;
-		case 8:
-			menuRemove(team.members, parentSchool);
-			break;
-		case 9:
-			върни грешно;
+	превключвател(choice)
+	{
+		случай 1 : menuEditName(team);
+		break;
+		случай 2 : menuEditDescription(team);
+		break;
+		случай 3 : menuEditStatus(team);
+		break;
+		случай 4 : menuEditProject(team, parentSchool);
+		break;
+		случай 5 : menuSelect(team.members, parentSchool);
+		break;
+		случай 6 : listTable(team.members, parentSchool);
+		break;
+		случай 7 : menuAdd(team.members, parentSchool);
+		break;
+		случай 8 : menuRemove(team.members, parentSchool);
+		break;
+		случай 9 : върни грешно;
 	}
 
 	printNewlines(1);
@@ -356,27 +312,21 @@
 
 	clearConsole();
 
-	switch (choice) {
-		case 1:
-			menuEditName(project);
-			break;
-		case 2:
-			menuEditDescription(project);
-			break;
-		case 3:
-			menuEditStatus(project);
-			break;
-		case 4:
-			listTable(project.teams, parentSchool.teams, parentSchool);
-			break;
-		case 5:
-			menuLink(project.teams, parentSchool.teams, parentSchool);
-			break;
-		case 6:
-			menuUnlink(project.teams, parentSchool.teams, parentSchool);
-			break;
-		case 7:
-			върни грешно;
+	превключвател(choice)
+	{
+		случай 1 : menuEditName(project);
+		break;
+		случай 2 : menuEditDescription(project);
+		break;
+		случай 3 : menuEditStatus(project);
+		break;
+		случай 4 : listTable(project.teams, parentSchool.teams, parentSchool);
+		break;
+		случай 5 : menuLink(project.teams, parentSchool.teams, parentSchool);
+		break;
+		случай 6 : menuUnlink(project.teams, parentSchool.teams, parentSchool);
+		break;
+		случай 7 : върни грешно;
 	}
 
 	printNewlines(1);
@@ -397,15 +347,13 @@
 
 	clearConsole();
 
-	switch (choice) {
-		case 1:
-			menuEditUsername(member, parentSchool);
-			break;
-		case 2:
-			menuEditRole(member);
-			break;
-		case 3:
-			върни грешно;
+	превключвател(choice)
+	{
+		случай 1 : menuEditUsername(member, parentSchool);
+		break;
+		случай 2 : menuEditRole(member);
+		break;
+		случай 3 : върни грешно;
 	}
 
 	printNewlines(1);
@@ -542,7 +490,7 @@
 {
 	vector<size_t>::iterator tempIt;
 
-	за(auto it е parentSchool.teachers.begin(); it не_е_равно_на parentSchool.teachers.end(); it плюс_плюс)
+	за(авто it е parentSchool.teachers.begin(); it не_е_равно_на parentSchool.teachers.end(); it инкрементирай)
 	{
 		TEACHER псевдоним currTeacher е dereferenceElement(parentSchool.teachers, it);
 		tempIt е find(currTeacher.teams.begin(), currTeacher.teams.end(), key);
@@ -550,7 +498,7 @@
 		deleteElement(currTeacher.teams, tempIt минус currTeacher.teams.begin());
 	}
 
-	за(auto it е parentSchool.projects.begin(); it не_е_равно_на parentSchool.projects.end(); it плюс_плюс)
+	за(авто it е parentSchool.projects.begin(); it не_е_равно_на parentSchool.projects.end(); it инкрементирай)
 	{
 		PROJECT псевдоним currProject е dereferenceElement(parentSchool.projects, it);
 		tempIt е find(currProject.teams.begin(), currProject.teams.end(), key);
@@ -562,7 +510,7 @@
 безтипов menuRemoveAdditionalPrep(константен низ псевдоним key, константен PROJECT псевдоним project,
 								  SCHOOL псевдоним parentSchool)
 {
-	за(auto it е parentSchool.teams.begin(); it не_е_равно_на parentSchool.teams.end(); it плюс_плюс)
+	за(авто it е parentSchool.teams.begin(); it не_е_равно_на parentSchool.teams.end(); it инкрементирай)
 	{
 		TEAM псевдоним currTeam е dereferenceElement(parentSchool.teams, it);
 
@@ -575,7 +523,7 @@
 {
 	vector<TEAM_MEMBER>::iterator tempIt;
 
-	за(auto it е parentSchool.teams.begin(); it не_е_равно_на parentSchool.teams.end(); it плюс_плюс)
+	за(авто it е parentSchool.teams.begin(); it не_е_равно_на parentSchool.teams.end(); it инкрементирай)
 	{
 		TEAM псевдоним currTeam е dereferenceElement(parentSchool.teams, it);
 		tempIt е find_if(
@@ -668,7 +616,7 @@
 	listTable(parentSchool.students, parentSchool);
 
 	keys.reserve(parentSchool.students.size());
-	за(auto it е parentSchool.students.begin(); it не_е_равно_на parentSchool.students.end(); it плюс_плюс)
+	за(авто it е parentSchool.students.begin(); it не_е_равно_на parentSchool.students.end(); it инкрементирай)
 	{
 		ако(isValidKey(it->first)) keys.push_back(адрес_на it->first);
 	}
@@ -683,7 +631,7 @@
 безтипов menuEditRole(TEAM_MEMBER псевдоним member)
 {
 	cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << "Legend:" << endl;
-	за(int i е 0; i е_по_малко_или_равно_на 3; i плюс_плюс)
+	за(int i е 0; i е_по_малко_или_равно_на 3; i инкрементирай)
 	{
 		cout << getAnsiEscape(ANSI_ESCAPE::FG_CYAN) << '(' << i << ") " << getAnsiEscape(ANSI_ESCAPE::FG_GREEN)
 			 << toString((TEAM_MEMBER::ROLE)i) << endl;
@@ -722,7 +670,7 @@
 	listTable(parentSchool.projects, parentSchool);
 
 	keys.reserve(parentSchool.projects.size());
-	за(auto it е parentSchool.projects.begin(); it не_е_равно_на parentSchool.projects.end(); it плюс_плюс)
+	за(авто it е parentSchool.projects.begin(); it не_е_равно_на parentSchool.projects.end(); it инкрементирай)
 	{
 		ако(isValidKey(it->first)) keys.push_back(адрес_на it->first);
 	}
@@ -746,12 +694,11 @@
 
 	clearConsole();
 
-	switch (choice) {
-		case 1:
-			menuQueryTeachersWithoutTeam(school);
-			break;
-		case 2:
-			върни грешно;
+	превключвател(choice)
+	{
+		случай 1 : menuQueryTeachersWithoutTeam(school);
+		break;
+		случай 2 : върни грешно;
 	}
 
 	върни вярно;
@@ -774,7 +721,7 @@
 	listTable(school.projects, school);
 
 	keys.reserve(school.projects.size());
-	за(auto it е school.projects.begin(); it не_е_равно_на school.projects.end(); it плюс_плюс)
+	за(авто it е school.projects.begin(); it не_е_равно_на school.projects.end(); it инкрементирай)
 	{
 		ако(isValidKey(it->first)) keys.push_back(адрес_на it->first);
 	}
